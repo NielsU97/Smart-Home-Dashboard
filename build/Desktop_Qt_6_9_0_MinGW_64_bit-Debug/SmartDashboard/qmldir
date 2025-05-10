@@ -2,13 +2,14 @@ module SmartDashboard
 typeinfo appSmartDashboard.qmltypes
 prefer :/SmartDashboard/
 Main 1.0 qml/Main.qml
+LeftPane 1.0 qml/pane/LeftPane.qml
+HomePane 1.0 qml/pane/HomePane.qml
 IconLabel 1.0 qml/components/IconLabel.qml
-LeftPane 1.0 qml/components/LeftPane.qml
-MiddlePane 1.0 qml/components/MiddlePane.qml
-RightPane 1.0 qml/components/RightPane.qml
-MiddlePaneWidget 1.0 qml/components/MiddlePaneWidget.qml
 Switch 1.0 qml/components/Switch.qml
 Progressbar 1.0 qml/components/Progressbar.qml
-RightPaneLightSwitchComponent 1.0 qml/components/RightPaneLightSwitchComponent.qml
+LightSwitch 1.0 qml/components/LightSwitch.qml
 CircularProgressBar 1.0 qml/components/CircularProgressBar.qml
+ClimatePane 1.0 qml/pane/ClimatePane.qml
+EnergyPane 1.0 qml/pane/EnergyPane.qml
+MusicPane 1.0 qml/pane/MusicPane.qml
 

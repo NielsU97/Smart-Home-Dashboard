@@ -422,7 +422,7 @@
 			{
 				"command" : 14,
 				"file" : 12,
-				"line" : 3471,
+				"line" : 3465,
 				"parent" : 63
 			},
 			{
@@ -430,6 +430,18 @@
 				"file" : 12,
 				"line" : 2870,
 				"parent" : 64
+			},
+			{
+				"command" : 14,
+				"file" : 12,
+				"line" : 3471,
+				"parent" : 63
+			},
+			{
+				"command" : 13,
+				"file" : 12,
+				"line" : 2870,
+				"parent" : 66
 			},
 			{
 				"file" : 1,
@@ -440,48 +452,36 @@
 				"command" : 20,
 				"file" : 23,
 				"line" : 1,
-				"parent" : 66
+				"parent" : 68
 			},
 			{
 				"command" : 19,
 				"file" : 0,
 				"line" : 816,
-				"parent" : 67
+				"parent" : 69
 			},
 			{
 				"command" : 18,
 				"file" : 0,
 				"line" : 738,
-				"parent" : 68
+				"parent" : 70
 			},
 			{
 				"command" : 17,
 				"file" : 0,
 				"line" : 738,
-				"parent" : 69
+				"parent" : 71
 			},
 			{
 				"command" : 16,
 				"file" : 12,
 				"line" : 4344,
-				"parent" : 70
+				"parent" : 72
 			},
 			{
 				"command" : 13,
 				"file" : 12,
 				"line" : 4119,
-				"parent" : 71
-			},
-			{
-				"command" : 14,
-				"file" : 12,
-				"line" : 3465,
-				"parent" : 63
-			},
-			{
-				"command" : 13,
-				"file" : 12,
-				"line" : 2870,
 				"parent" : 73
 			},
 			{
@@ -689,6 +689,18 @@
 				"parent" : 63
 			},
 			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3192,
+				"parent" : 63
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3385,
+				"parent" : 63
+			},
+			{
 				"command" : 28,
 				"file" : 12,
 				"line" : 3487,
@@ -698,31 +710,31 @@
 				"command" : 27,
 				"file" : 0,
 				"line" : 401,
-				"parent" : 109
+				"parent" : 111
 			},
 			{
 				"command" : 26,
 				"file" : 0,
 				"line" : 2530,
-				"parent" : 110
+				"parent" : 112
 			},
 			{
 				"command" : 23,
 				"file" : 0,
 				"line" : 2074,
-				"parent" : 111
+				"parent" : 113
 			},
 			{
 				"command" : 30,
 				"file" : 0,
 				"line" : 810,
-				"parent" : 67
+				"parent" : 69
 			},
 			{
 				"command" : 23,
 				"file" : 0,
 				"line" : 2199,
-				"parent" : 113
+				"parent" : 115
 			}
 		]
 	},
@@ -928,7 +940,8 @@
 				23,
 				25,
 				27,
-				28
+				29,
+				30
 			]
 		},
 		{
@@ -1127,19 +1140,19 @@
 	"dependencies" : 
 	[
 		{
-			"backtrace" : 65,
-			"id" : "appSmartDashboard_copy_res::@6890427a1f51a3e7e1df"
-		},
-		{
-			"backtrace" : 72,
-			"id" : "appSmartDashboard_qmlimportscan::@6890427a1f51a3e7e1df"
-		},
-		{
 			"id" : "appSmartDashboard_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 74,
+			"backtrace" : 65,
 			"id" : "appSmartDashboard_copy_qml::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 67,
+			"id" : "appSmartDashboard_copy_res::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 74,
+			"id" : "appSmartDashboard_qmlimportscan::@6890427a1f51a3e7e1df"
 		},
 		{
 			"backtrace" : 0,
@@ -1299,17 +1312,17 @@
 			"sourceIndexes" : 
 			[
 				0,
-				35,
-				53,
-				54,
-				55,
+				37,
 				56,
 				57,
 				58,
 				59,
 				60,
 				61,
-				62
+				62,
+				63,
+				64,
+				65
 			]
 		},
 		{
@@ -1331,7 +1344,8 @@
 				23,
 				25,
 				27,
-				28
+				29,
+				30
 			]
 		},
 		{
@@ -1349,10 +1363,11 @@
 				22,
 				24,
 				26,
-				30,
+				28,
 				32,
-				33,
-				34
+				34,
+				35,
+				36
 			]
 		},
 		{
@@ -1366,16 +1381,14 @@
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				29,
-				31
+				31,
+				33
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				36,
-				37,
 				38,
 				39,
 				40,
@@ -1390,7 +1403,10 @@
 				49,
 				50,
 				51,
-				52
+				52,
+				53,
+				54,
+				55
 			]
 		}
 	],
@@ -1461,149 +1477,161 @@
 		},
 		{
 			"backtrace" : 91,
-			"path" : "qml/components/IconLabel.qml",
+			"path" : "qml/pane/LeftPane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 92,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/IconLabel_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/LeftPane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 93,
-			"path" : "qml/components/LeftPane.qml",
+			"path" : "qml/pane/HomePane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 94,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/LeftPane_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/HomePane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 95,
-			"path" : "qml/components/MiddlePane.qml",
+			"path" : "qml/components/IconLabel.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 96,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/MiddlePane_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/IconLabel_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 97,
-			"path" : "qml/components/RightPane.qml",
+			"path" : "qml/components/Switch.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 98,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/RightPane_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/Switch_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 99,
-			"path" : "qml/components/MiddlePaneWidget.qml",
+			"path" : "qml/components/Progressbar.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 100,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/MiddlePaneWidget_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/Progressbar_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 101,
-			"path" : "qml/components/Switch.qml",
+			"path" : "qml/components/LightSwitch.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 102,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/Switch_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/LightSwitch_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 103,
-			"path" : "qml/components/Progressbar.qml",
+			"path" : "qml/components/CircularProgressBar.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 104,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/Progressbar_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/CircularProgressBar_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 105,
-			"path" : "qml/components/RightPaneLightSwitchComponent.qml",
+			"path" : "qml/pane/ClimatePane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 106,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/RightPaneLightSwitchComponent_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/ClimatePane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 107,
-			"path" : "qml/components/CircularProgressBar.qml",
+			"path" : "qml/pane/EnergyPane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 108,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/CircularProgressBar_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/EnergyPane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 112,
+			"backtrace" : 109,
+			"path" : "qml/pane/MusicPane.qml",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 110,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/MusicPane_qml.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 114,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.qt/rcc/qrc_appSmartDashboard_raw_qml_0.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 116,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.qt/rcc/qmake_SmartDashboard.qrc",
 			"sourceGroupIndex" : 4
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 116,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qmldir",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 116,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.qt/rcc/appSmartDashboard_raw_qml_0.qrc",
 			"sourceGroupIndex" : 4
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 116,
 			"path" : "assets/fonts/CodecPro-Italic.ttf",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 116,
 			"path" : "assets/fonts/CodecPro-Regular.ttf",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 116,
 			"path" : "assets/fonts/fontawesome.otf",
 			"sourceGroupIndex" : 2
 		},
@@ -1646,31 +1674,19 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/LeftPane_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/HomePane_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/IconLabel_qml.cpp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/LeftPane_qml.cpp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/MiddlePane_qml.cpp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/RightPane_qml.cpp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/MiddlePaneWidget_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{
@@ -1688,13 +1704,31 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/RightPaneLightSwitchComponent_qml.cpp.rule",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/LightSwitch_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/CircularProgressBar_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/ClimatePane_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/EnergyPane_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/MusicPane_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{

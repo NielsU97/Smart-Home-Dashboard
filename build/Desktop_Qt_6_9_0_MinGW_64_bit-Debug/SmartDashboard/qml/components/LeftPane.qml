@@ -1,6 +1,5 @@
 import QtQuick
 
-
 Item {
     id: leftItem
     width: 240
@@ -13,23 +12,28 @@ Item {
         width: parent.width
         anchors.top: parent.top
 
-        Text {
-            text: Qt.formatDate(currentTime, 'dd-MM-yyyy')
-            font.pixelSize: 16
-            color: textColor
+        Column {
             anchors.top: parent.top
             anchors.left: parent.left
-            anchors.leftMargin: 24
-            anchors.topMargin: 24
-        }
+            anchors.right: parent.right
+            anchors.margins: 24
+            spacing: 8
 
-        Text {     
-            text: new Date().toLocaleDateString(Qt.locale("nl_NL"), "dddd")
-            font.pixelSize: 16
-            color: textColor
-            anchors.top: parent.top
-            anchors.right: ampmtxt.right
-            anchors.topMargin: 24
+            Row {
+                spacing: 12
+
+                Text {
+                    text: Qt.formatDate(currentTime, 'dd-MM-yyyy')
+                    font.pixelSize: 16
+                    color: textColor
+                }
+
+                Text {
+                    text: new Date().toLocaleDateString(Qt.locale("nl_NL"), "dddd")
+                    font.pixelSize: 16
+                    color: textColor
+                }
+            }
         }
 
         Text {
@@ -37,9 +41,9 @@ Item {
             text: Qt.formatTime(currentTime, 'hh:mm')
             font.pixelSize: 48
             color: textColor
-            anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.leftMargin: 24
+            anchors.bottom: parent.bottom
             anchors.bottomMargin: 24
         }
 
@@ -55,7 +59,6 @@ Item {
 
         Text {
             id: ampmtxt
-            text: Qt.formatTime(currentTime, 'AP')
             font.pixelSize: 12
             color: textColor
             anchors.baseline: timetxt.baseline
@@ -74,59 +77,55 @@ Item {
         anchors.topMargin: 17
         anchors.bottomMargin: 17
 
-        Text {
-            text: qsTr('Vandaag')
-            font.pixelSize: 14
-            color: textColor
-            anchors.top: parent.top
-            anchors.left: parent.left
-            anchors.margins: 24
-        }
-
         Column {
             anchors.centerIn: parent
-            spacing: 24
+            spacing: 16
 
             Row {
-                spacing: 24
-                height: tmptxt.height
+                spacing: 16
                 anchors.horizontalCenter: parent.horizontalCenter
+                height: Math.max(cloudicon.height, tempgroup.height, humtxt.height)
 
                 IconLabel {
                     id: cloudicon
                     icon: weatherIcon
                     size: 24
                     color: textColor
-                    anchors.baseline: tmptxt.baseline
+                    anchors.verticalCenter: parent.verticalCenter
                 }
 
-                Text {
-                    id: tmptxt
-                    text: ambientTemperature
-                    font.pixelSize: 40
-                    color: textColor
+                Row {
+                    id: tempgroup
+                    spacing: 4
+                    anchors.verticalCenter: parent.verticalCenter
 
                     Text {
-                        text: qsTr('°C')
-                        font.pixelSize: 12
+                        id: tmptxt
+                        text: (ambientTemperature !== undefined && ambientTemperature !== null) ? ambientTemperature : "--"
+                        font.pixelSize: 40
                         color: textColor
-                        anchors.top: parent.top
-                        anchors.left: parent.right
+                    }
+
+                    Text {
+                        text: "°C"
+                        font.pixelSize: 14
+                        color: textColor
+                        anchors.bottom: tmptxt.bottom
                     }
                 }
 
                 Text {
-                    id: minmaxtxt
-                    text: maxTemp + "/" + minTemp
+                    id: humtxt
+                    text: (ambientHumidity !== undefined && ambientHumidity !== null) ? ambientHumidity + "%" : "--%"
                     font.pixelSize: 14
                     color: textColor
-                    anchors.baseline: tmptxt.baseline
+                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
 
             Text {
                 id: weathercommentxt
-                text: weatherCondition
+                text: weatherCondition ?? ""
                 font.pixelSize: 16
                 color: textColor
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -157,7 +156,7 @@ Item {
                     width: locationitempadded.width / locationrepeater.model.count
 
                     property string label
-                    property bool isActive: label===activeRoomLabel
+                    property bool isActive: label === activeRoomLabel
                     property alias icon: iconlabel.icon
                     property alias size: iconlabel.size
 
@@ -166,7 +165,7 @@ Item {
                     label: model.label
                     icon: model.icon
                     size: model.size
-                    onClicked: activeRoomLabel=label
+                    onClicked: activeRoomLabel = label
 
                     Column {
                         anchors.fill: parent
@@ -181,7 +180,7 @@ Item {
                             verticalAlignment: IconLabel.AlignVCenter
                             opacity: roomdelegateitem.isActive ? 1 : 0.5
 
-                            Behavior on opacity { NumberAnimation { duration: 300 }}
+                            Behavior on opacity { NumberAnimation { duration: 300 } }
                         }
 
                         Text {
@@ -191,7 +190,7 @@ Item {
                             anchors.horizontalCenter: parent.horizontalCenter
                             opacity: roomdelegateitem.isActive ? 1 : 0.5
 
-                            Behavior on opacity { NumberAnimation { duration: 300 }}
+                            Behavior on opacity { NumberAnimation { duration: 300 } }
 
                             Rectangle {
                                 width: parent.parent.width * 0.8
@@ -203,7 +202,7 @@ Item {
                                 anchors.bottomMargin: -8
                                 opacity: roomdelegateitem.isActive ? 1 : 0.5
 
-                                Behavior on opacity { NumberAnimation { duration: 300 }}
+                                Behavior on opacity { NumberAnimation { duration: 300 } }
                             }
                         }
                     }

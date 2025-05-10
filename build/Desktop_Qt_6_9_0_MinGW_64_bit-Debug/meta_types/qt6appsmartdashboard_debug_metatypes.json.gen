@@ -56,18 +56,6 @@
                         "index": 7,
                         "name": "getWeather",
                         "returnType": "void"
-                    },
-                    {
-                        "access": "public",
-                        "arguments": [
-                            {
-                                "name": "state",
-                                "type": "QString"
-                            }
-                        ],
-                        "index": 8,
-                        "name": "getWeatherIcon",
-                        "returnType": "QString"
                     }
                 ],
                 "object": true,
@@ -109,11 +97,11 @@
                                 "type": "QString"
                             },
                             {
-                                "name": "min",
+                                "name": "humidity",
                                 "type": "QString"
                             },
                             {
-                                "name": "max",
+                                "name": "icon",
                                 "type": "QString"
                             }
                         ],

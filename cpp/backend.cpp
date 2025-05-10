@@ -11,6 +11,56 @@ Backend::Backend(QObject* parent) : QObject(parent) {
     });
 }
 
+void Backend::getWeather() {
+    QNetworkRequest request(QUrl(baseUrl + "/states/weather.forecast_thuis"));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    connect(reply, &QNetworkReply::finished, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject obj = doc.object();
+
+            QString temperature = obj["attributes"].toObject().value("temperature").toVariant().toString();
+            QString condition = obj["state"].toString();
+            QString humidity = obj["attributes"].toObject().value("humidity").toVariant().toString();
+
+            static const QHash<QString, QString> iconMap = {
+                { "sunny",         "\uf185" },
+                { "clear-night",   "\uf186" },
+                { "partlycloudy",  "\uf6c4" },
+                { "cloudy",        "\uf0c2" },
+                { "rainy",         "\uf740" },
+                { "pouring",       "\uf73d" },
+                { "snowy",         "\uf2dc" },
+                { "windy",         "\uf72e" },
+                { "fog",           "\uf74e" }
+            };
+
+            static const QHash<QString, QString> conditionTranslationMap = {
+                { "sunny",         "Zonnig" },
+                { "clear-night",   "Heldere nacht" },
+                { "partlycloudy",  "Gedeeltelijk bewolkt" },
+                { "cloudy",        "Bewolkt" },
+                { "rainy",         "Regenachtig" },
+                { "pouring",       "Gietende regen" },
+                { "snowy",         "Sneeuwachtig" },
+                { "windy",         "Winderig" },
+                { "fog",           "Mistig" }
+            };
+
+            QString icon = iconMap.value(condition, "\uf75f");
+            QString translatedCondition = conditionTranslationMap.value(condition, condition);  // fallback to original if no match
+
+            emit weatherUpdated(temperature, translatedCondition, humidity, icon);
+        } else {
+            qWarning() << "Weather fetch failed:" << reply->errorString();
+        }
+
+        reply->deleteLater();
+    });
+}
+
 void Backend::toggleLight(const QString& entityId, bool on) {
     QNetworkRequest request(QUrl(baseUrl + "/services/light/" + (on ? "turn_on" : "turn_off")));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
@@ -66,32 +116,3 @@ void Backend::getTemperature() {
     });
 }
 
-void Backend::getWeather() {
-    QNetworkRequest request(QUrl(baseUrl + "/states/weather.forecast_thuis"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-
-    QNetworkReply* reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, [this, reply]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-            QJsonObject obj = doc.object();
-
-            QString temperature = obj["attributes"].toObject().value("temperature").toVariant().toString();
-            QString condition = obj["state"].toString();
-
-            QJsonArray forecast = obj["attributes"].toObject().value("forecast").toArray();
-            QString min = "", max = "";
-            if (!forecast.isEmpty()) {
-                QJsonObject today = forecast.first().toObject();
-                max = QString::number(today["temperature"].toDouble());
-                min = QString::number(today["templow"].toDouble());
-            }
-
-            emit weatherUpdated(temperature, condition, min, max);
-        } else {
-            qWarning() << "Weather fetch failed:" << reply->errorString();
-        }
-
-        reply->deleteLater();
-    });
-}

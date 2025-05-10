@@ -20,38 +20,10 @@ public:
 
     Q_INVOKABLE void getWeather();
 
-
-    Q_INVOKABLE QString getWeatherIcon(const QString &state) {
-        QString icon;
-        if (state.toLower() == "sunny") {
-            icon = "\uf185";  // Sun icon
-        } else if (state.toLower() == "clear-night") {
-            icon = "\uf186";  // Moon icon
-        } else if (state.toLower() == "partlycloudy") {
-            icon = "\uf6c4";  // Cloud-Sun icon
-        } else if (state.toLower() == "cloudy") {
-            icon = "\uf0c2";  // Cloud icon
-        } else if (state.toLower() == "rainy") {
-            icon = "\uf740";  // Cloud-Rain icon
-        } else if (state.toLower() == "pouring") {
-            icon = "\uf73d";  // Heavy Rain icon
-        } else if (state.toLower() == "snowy") {
-            icon = "\uf2dc";  // Snowflake icon
-        } else if (state.toLower() == "windy") {
-            icon = "\uf72e";  // Wind icon
-        } else if (state.toLower() == "fog") {
-            icon = "\uf74e";  // Smog icon
-        } else {
-            icon = "\uf75f";  // Unknown icon
-        }
-
-        return icon;
-    }
-
 signals:
     void temperatureUpdated(QString temp);
     void lightStateUpdated(bool isOn);
-    void weatherUpdated(QString temperature, QString condition, QString min, QString max);
+    void weatherUpdated(QString temperature, QString condition, QString humidity, QString icon);
 
 private:
     QNetworkAccessManager manager;

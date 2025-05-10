@@ -1,4 +1,6 @@
-import QtQuick
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import 'pane'
 import 'components'
 
 Window {
@@ -24,85 +26,30 @@ Window {
 
     property var currentTime: new Date()
 
-    property string ambientTemperature: "-"
     property string weatherCondition: "-"
     property string weatherIcon: "-"
-    property string minTemp: "-"
-    property string maxTemp: "-"
-
-    QtObject {
-        id: internal
-
-        property real temperature: 26
-        property real humidity: 47
-        property real heating: 35
-        property real water: 231
-        property real lightIntensity: 45
-        property real powerConsumed: 7354
-        property real ambientTemperature: 22
-    }
+    property string ambientTemperature: "-"
+    property string ambientHumidity: "-"
 
     property ListModel roomsModel: ListModel {
         ListElement {
             label: 'Huis'
             icon: '\uf015'
-            size: 28
-            temperature: 26
-            humidity: 47
-            heating: 35
-            water: 231
-            lightIntensity: 45
         }
-
         ListElement {
             label: 'Muziek'
             icon: '\uf001'
-            size: 22
-            temperature: 32
-            humidity: 67
-            heating: 22
-            water: 344
-            lightIntensity: 78
         }
-
         ListElement {
             label: 'Klimaat'
             icon: '\uf2c9'
-            size: 28
-            temperature: 24
-            humidity: 40
-            heating: 40
-            water: 304
-            lightIntensity: 25
         }
-
         ListElement {
             label: 'Energie'
             icon: '\uf0e7'
-            size: 22
-            temperature: 28
-            humidity: 77
-            heating: 56
-            water: 430
-            lightIntensity: 85
         }
     }
 
-    onActiveRoomLabelChanged: {
-        for(var i=0; i<roomsModel.count; i++) {
-            var obji = roomsModel.get(i)
-
-            if(obji['label'] === activeRoomLabel) {
-                internal.temperature = obji['temperature']
-                internal.humidity = obji['humidity']
-                internal.heating = obji['heating']
-                internal.water = obji['water']
-                internal.lightIntensity = obji['lightIntensity']
-
-                break;
-            }
-        }
-    }
 
     function hex_to_RGB(hex) {
         hex = hex.toString();
@@ -117,10 +64,6 @@ Window {
         return Qt.rgba(parseInt(m[1], 16)/255.0, parseInt(m[2], 16)/255.1, parseInt(m[3], 16)/255.0, opacity);
     }
 
-    function getRandOffset(value, range=4) {
-        return Math.round(value + range/2 - (Math.random(1) * range))
-    }
-
     Timer {
         interval: 1000
         repeat: true
@@ -128,15 +71,10 @@ Window {
         triggeredOnStart: true
         onTriggered: {
             currentTime = new Date()
-            powerConsumed = getRandOffset(internal.powerConsumed, 2)
-            temperature = getRandOffset(internal.temperature)
-            humidity = getRandOffset(internal.humidity)
-            heating = getRandOffset(internal.heating)
-            water = getRandOffset(internal.water)
-            lightIntensity = getRandOffset(internal.lightIntensity)
         }
     }
 
+    // Main background
     Rectangle {
         id: bg
         anchors.fill: parent
@@ -146,15 +84,32 @@ Window {
             GradientStop { position: 1.0; color: bgGradientStop }
         }
 
+        // Layout for Left and Right panes
         Item {
             anchors.fill: parent
             anchors.margins: 24
 
             LeftPane { id: leftItem }
 
-            MiddlePane { id: middleItem }
+            // Right pane dynamically loaded based on activeRoomLabel
+            Loader {
+                id: rightPaneLoader
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: leftItem.right
+                anchors.right: parent.right
+                anchors.margins: 12
 
-            RightPane { id: rightItem }
+                sourceComponent: {
+                    switch (activeRoomLabel) {
+                    case "Huis": return homePaneComponent
+                    case "Muziek": return musicPaneComponent
+                    case "Klimaat": return climatePaneComponent
+                    case "Energie": return energyPaneComponent
+                    default: return null
+                    }
+                }
+            }
         }
     }
 
@@ -173,12 +128,18 @@ Window {
 
     Connections {
         target: backend
-        onWeatherUpdated: (temperature, condition, min, max) => {
+        onWeatherUpdated: (temperature, condition, humidity, icon) => {
             ambientTemperature = temperature
             weatherCondition = condition
-            weatherIcon = backend.getWeatherIcon(condition)
-            minTemp = min
-            maxTemp = max
+            weatherIcon = icon
+            ambientHumidity = humidity
         }
     }
+
+    // Define components for different room views
+    Component { id: homePaneComponent; HomePane { } }
+    Component { id: musicPaneComponent; MusicPane { } }
+    Component { id: climatePaneComponent; ClimatePane { } }
+    Component { id: energyPaneComponent; EnergyPane { } }
 }
+

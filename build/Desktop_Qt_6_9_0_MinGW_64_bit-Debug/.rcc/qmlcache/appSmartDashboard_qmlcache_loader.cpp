@@ -12,35 +12,21 @@ namespace _0x5f_SmartDashboard_qml_Main_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
+namespace _0x5f_SmartDashboard_qml_pane_LeftPane_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _0x5f_SmartDashboard_qml_pane_HomePane_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
 namespace _0x5f_SmartDashboard_qml_components_IconLabel_qml { 
-    extern const unsigned char qmlData[];
-    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
-    const QQmlPrivate::CachedQmlUnit unit = {
-        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
-    };
-}
-namespace _0x5f_SmartDashboard_qml_components_LeftPane_qml { 
-    extern const unsigned char qmlData[];
-    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
-    const QQmlPrivate::CachedQmlUnit unit = {
-        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
-    };
-}
-namespace _0x5f_SmartDashboard_qml_components_MiddlePane_qml { 
-    extern const unsigned char qmlData[];
-    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
-    const QQmlPrivate::CachedQmlUnit unit = {
-        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
-    };
-}
-namespace _0x5f_SmartDashboard_qml_components_RightPane_qml { 
-    extern const unsigned char qmlData[];
-    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
-    const QQmlPrivate::CachedQmlUnit unit = {
-        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
-    };
-}
-namespace _0x5f_SmartDashboard_qml_components_MiddlePaneWidget_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
     const QQmlPrivate::CachedQmlUnit unit = {
@@ -61,7 +47,7 @@ namespace _0x5f_SmartDashboard_qml_components_Progressbar_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
-namespace _0x5f_SmartDashboard_qml_components_RightPaneLightSwitchComponent_qml { 
+namespace _0x5f_SmartDashboard_qml_components_LightSwitch_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
     const QQmlPrivate::CachedQmlUnit unit = {
@@ -69,6 +55,27 @@ namespace _0x5f_SmartDashboard_qml_components_RightPaneLightSwitchComponent_qml 
     };
 }
 namespace _0x5f_SmartDashboard_qml_components_CircularProgressBar_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _0x5f_SmartDashboard_qml_pane_ClimatePane_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _0x5f_SmartDashboard_qml_pane_EnergyPane_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
+namespace _0x5f_SmartDashboard_qml_pane_MusicPane_qml { 
     extern const unsigned char qmlData[];
     extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
     const QQmlPrivate::CachedQmlUnit unit = {
@@ -90,15 +97,16 @@ Q_GLOBAL_STATIC(Registry, unitRegistry)
 
 Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/Main.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_Main_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/pane/LeftPane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_pane_LeftPane_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/pane/HomePane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_pane_HomePane_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/IconLabel.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_IconLabel_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/LeftPane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_LeftPane_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/MiddlePane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_MiddlePane_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/RightPane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_RightPane_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/MiddlePaneWidget.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_MiddlePaneWidget_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/Switch.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_Switch_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/Progressbar.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_Progressbar_qml::unit);
-    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/RightPaneLightSwitchComponent.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_RightPaneLightSwitchComponent_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/LightSwitch.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_LightSwitch_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/CircularProgressBar.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_CircularProgressBar_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/pane/ClimatePane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_pane_ClimatePane_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/pane/EnergyPane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_pane_EnergyPane_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/pane/MusicPane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_pane_MusicPane_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.structVersion = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

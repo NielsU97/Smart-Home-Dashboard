@@ -86,17 +86,17 @@ Item {
                     width: parent.width
                     spacing: 16
 
-                    RightPaneLightSwitchComponent {
+                    LightSwitch {
                         label: qsTr('Windows')
                         checked: true
                     }
 
-                    RightPaneLightSwitchComponent {
+                    LightSwitch {
                         label: qsTr('Blinders')
                         checked: true
                     }
 
-                    RightPaneLightSwitchComponent {
+                    LightSwitch{
                         label: qsTr('Curtains')
                         checked: false
                     }

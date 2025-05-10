@@ -6,26 +6,18 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 35,
-                        "durationMicroseconds": 415,
+                        "durationMicroseconds": 280,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "glassyBgColor",
-                        "line": 13
+                        "line": 15
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 129,
+                        "durationMicroseconds": 75,
                         "errorMessage": "",
                         "functionName": "currentTime",
-                        "line": 25
-                    },
-                    {
-                        "codegenSuccessfull": false,
-                        "column": 31,
-                        "durationMicroseconds": 3047,
-                        "errorMessage": "Cannot use shadowable base type for further lookups: call to method get, returning QJSValue",
-                        "functionName": "onActiveRoomLabelChanged",
-                        "line": 91
+                        "line": 27
                     },
                     {
                         "codegenSuccessfull": false,
@@ -33,7 +25,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "hex_to_RGB",
-                        "line": 107
+                        "line": 54
                     },
                     {
                         "codegenSuccessfull": false,
@@ -41,15 +33,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "hex_to_RGBA",
-                        "line": 113
-                    },
-                    {
-                        "codegenSuccessfull": false,
-                        "column": 5,
-                        "durationMicroseconds": 0,
-                        "errorMessage": "Functions without type annotations won't be compiled",
-                        "functionName": "getRandOffset",
-                        "line": 120
+                        "line": 60
                     },
                     {
                         "codegenSuccessfull": false,
@@ -57,71 +41,111 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "commafy",
-                        "line": 166
+                        "line": 121
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 22,
-                        "durationMicroseconds": 901,
+                        "durationMicroseconds": 31,
                         "errorMessage": "Cannot find name currentTime",
                         "functionName": "onTriggered",
-                        "line": 129
+                        "line": 72
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 128,
+                        "durationMicroseconds": 48,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 142
+                        "line": 80
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 26,
-                        "durationMicroseconds": 107,
+                        "durationMicroseconds": 63,
                         "errorMessage": "",
                         "functionName": "orientation",
-                        "line": 144
+                        "line": 82
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 35,
+                        "durationMicroseconds": 18,
                         "errorMessage": "Cannot access value for name bgGradientStart",
                         "functionName": "color",
-                        "line": 145
+                        "line": 83
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 24,
+                        "durationMicroseconds": 13,
                         "errorMessage": "Cannot access value for name bgGradientStop",
                         "functionName": "color",
-                        "line": 146
+                        "line": 84
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 88,
+                        "durationMicroseconds": 36,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 150
+                        "line": 89
+                    },
+                    {
+                        "codegenSuccessfull": false,
+                        "column": 34,
+                        "durationMicroseconds": 84,
+                        "errorMessage": "Cannot access value for name activeRoomLabel",
+                        "functionName": "sourceComponent",
+                        "line": 103
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 30,
+                        "durationMicroseconds": 75,
+                        "errorMessage": "",
+                        "functionName": "top",
+                        "line": 97
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 33,
+                        "durationMicroseconds": 71,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 98
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 31,
+                        "durationMicroseconds": 62,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 99
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 32,
+                        "durationMicroseconds": 66,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 100
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 28,
-                        "durationMicroseconds": 325,
+                        "durationMicroseconds": 207,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onCompleted",
-                        "line": 170
+                        "line": 125
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 56,
+                        "durationMicroseconds": 29,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "target",
-                        "line": 175
+                        "line": 130
                     },
                     {
                         "codegenSuccessfull": false,
@@ -129,7 +153,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find signal \"weatherUpdated\".",
                         "functionName": "onWeatherUpdated",
-                        "line": 176
+                        "line": 131
                     },
                     {
                         "codegenSuccessfull": false,
@@ -137,7 +161,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find signal \"weatherUpdated\".",
                         "functionName": "onWeatherUpdated",
-                        "line": 176
+                        "line": 131
                     }
                 ],
                 "filepath": "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/Main.qml"

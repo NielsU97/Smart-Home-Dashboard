@@ -48,17 +48,15 @@ template <> constexpr inline auto Backend::qt_create_metaobjectdata<qt_meta_tag_
         "weatherUpdated",
         "temperature",
         "condition",
-        "min",
-        "max",
+        "humidity",
+        "icon",
         "toggleLight",
         "entityId",
         "on",
         "getLightState",
         "startLightPolling",
         "getTemperature",
-        "getWeather",
-        "getWeatherIcon",
-        "state"
+        "getWeather"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -90,10 +88,6 @@ template <> constexpr inline auto Backend::qt_create_metaobjectdata<qt_meta_tag_
         QtMocHelpers::MethodData<void()>(16, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'getWeather'
         QtMocHelpers::MethodData<void()>(17, 2, QMC::AccessPublic, QMetaType::Void),
-        // Method 'getWeatherIcon'
-        QtMocHelpers::MethodData<QString(const QString &)>(18, 2, QMC::AccessPublic, QMetaType::QString, {{
-            { QMetaType::QString, 19 },
-        }}),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -125,8 +119,6 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 5: _t->startLightPolling((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 6: _t->getTemperature(); break;
         case 7: _t->getWeather(); break;
-        case 8: { QString _r = _t->getWeatherIcon((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
-            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
@@ -159,14 +151,14 @@ int Backend::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 8;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 8)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 9;
+        _id -= 8;
     }
     return _id;
 }
