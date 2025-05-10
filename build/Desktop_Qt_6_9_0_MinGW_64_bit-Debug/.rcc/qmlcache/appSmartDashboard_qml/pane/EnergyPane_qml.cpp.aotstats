@@ -5,35 +5,35 @@
                 "entries": [
                     {
                         "codegenSuccessfull": true,
-                        "column": 12,
-                        "durationMicroseconds": 347,
+                        "column": 19,
+                        "durationMicroseconds": 190,
                         "errorMessage": "",
-                        "functionName": "width",
+                        "functionName": "fill",
                         "line": 8
                     },
                     {
-                        "codegenSuccessfull": true,
-                        "column": 13,
-                        "durationMicroseconds": 75,
-                        "errorMessage": "",
-                        "functionName": "height",
-                        "line": 9
+                        "codegenSuccessfull": false,
+                        "column": 16,
+                        "durationMicroseconds": 192,
+                        "errorMessage": "Cannot access value for name glassyBgColor",
+                        "functionName": "color",
+                        "line": 12
                     },
                     {
                         "codegenSuccessfull": true,
-                        "column": 20,
-                        "durationMicroseconds": 123,
+                        "column": 23,
+                        "durationMicroseconds": 44,
                         "errorMessage": "",
-                        "functionName": "right",
-                        "line": 10
+                        "functionName": "fill",
+                        "line": 11
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 61,
+                        "durationMicroseconds": 41,
                         "errorMessage": "",
-                        "functionName": "centerIn",
-                        "line": 13
+                        "functionName": "fill",
+                        "line": 18
                     }
                 ],
                 "filepath": "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/EnergyPane.qml"

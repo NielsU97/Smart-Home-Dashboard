@@ -98,7 +98,7 @@ Window {
                 anchors.bottom: parent.bottom
                 anchors.left: leftItem.right
                 anchors.right: parent.right
-                anchors.margins: 12
+                anchors.leftMargin: 12
 
                 sourceComponent: {
                     switch (activeRoomLabel) {

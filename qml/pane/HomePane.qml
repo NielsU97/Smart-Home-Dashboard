@@ -82,7 +82,7 @@ Item {
                         anchors.margins: 24
 
                         Text {
-                            text: qsTr("Humidity")
+                            text: qsTr("Luchtvochtigheid")
                             font.pixelSize: 14
                             color: textColor
                             anchors.top: parent.top
