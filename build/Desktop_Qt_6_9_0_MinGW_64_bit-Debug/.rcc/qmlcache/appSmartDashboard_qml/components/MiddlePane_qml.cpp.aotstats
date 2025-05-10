@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 13,
-                        "durationMicroseconds": 242,
+                        "durationMicroseconds": 286,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 7
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 19,
-                        "durationMicroseconds": 293,
+                        "durationMicroseconds": 255,
                         "errorMessage": "Cannot access value for name leftItem",
                         "functionName": "left",
                         "line": 8
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 101,
+                        "durationMicroseconds": 87,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 12
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 365,
+                        "durationMicroseconds": 267,
                         "errorMessage": "Cannot access value for name temperature",
                         "functionName": "value",
                         "line": 18
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 260,
+                        "durationMicroseconds": 215,
                         "errorMessage": "Cannot access value for name humidity",
                         "functionName": "value",
                         "line": 24
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 201,
+                        "durationMicroseconds": 193,
                         "errorMessage": "Cannot access value for name heating",
                         "functionName": "value",
                         "line": 30
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 175,
+                        "durationMicroseconds": 165,
                         "errorMessage": "Cannot access value for name water",
                         "functionName": "value",
                         "line": 36

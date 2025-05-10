@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 13,
-                        "durationMicroseconds": 309,
+                        "durationMicroseconds": 311,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 7
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 12,
-                        "durationMicroseconds": 348,
+                        "durationMicroseconds": 1267,
                         "errorMessage": "",
                         "functionName": "color",
                         "line": 8
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 16,
-                        "durationMicroseconds": 329,
+                        "durationMicroseconds": 325,
                         "errorMessage": "Cannot access value for name checked",
                         "functionName": "color",
                         "line": 17
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 16,
-                        "durationMicroseconds": 175,
+                        "durationMicroseconds": 201,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 18
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 17,
-                        "durationMicroseconds": 70,
+                        "durationMicroseconds": 61,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 19
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 12,
-                        "durationMicroseconds": 104,
+                        "durationMicroseconds": 86,
                         "errorMessage": "Cannot access value for name checked",
                         "functionName": "x",
                         "line": 21
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 33,
-                        "durationMicroseconds": 127,
+                        "durationMicroseconds": 125,
                         "errorMessage": "",
                         "functionName": "verticalCenter",
                         "line": 22
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 72,
+                        "durationMicroseconds": 77,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 28

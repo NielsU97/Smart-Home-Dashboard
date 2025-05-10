@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/qt/qml/Smart-Home-Dashboard">
-    <file alias="qmldir">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/Smart-Home-Dashboard/qmldir</file>
-  </qresource>
-</RCC>
-

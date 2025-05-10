@@ -132,7 +132,7 @@ CMAKE_INSTALL_MANDIR:PATH=
 CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/Smart-Home-Dashboard
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/SmartDashboard
 
 //Run-time variable data (LOCALSTATEDIR/run)
 CMAKE_INSTALL_RUNSTATEDIR:PATH=
@@ -420,15 +420,6 @@ Qt6ZlibPrivate_DIR:PATH=C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6ZlibPrivate
 
 //The directory containing a CMake configuration file for Qt6.
 Qt6_DIR:PATH=C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6
-
-//Value Computed by CMake
-Smart-Home-Dashboard_BINARY_DIR:STATIC=C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug
-
-//Value Computed by CMake
-Smart-Home-Dashboard_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-Smart-Home-Dashboard_SOURCE_DIR:STATIC=C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard
 
 //Value Computed by CMake
 SmartDashboard_BINARY_DIR:STATIC=C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug
@@ -1423,6 +1414,6 @@ Vulkan_LIBRARY-ADVANCED:INTERNAL=1
 //linker supports push/pop state
 _CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
-_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/Smart-Home-Dashboard
+_GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=C:/Program Files (x86)/SmartDashboard
 __qt_qml_macros_module_base_dir:INTERNAL=C:/Qt/6.9.0/mingw_64/lib/cmake/Qt6Qml
 
