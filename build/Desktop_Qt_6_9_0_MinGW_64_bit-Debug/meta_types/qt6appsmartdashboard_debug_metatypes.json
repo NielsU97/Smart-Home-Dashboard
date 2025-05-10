@@ -1,0 +1,136 @@
+[
+    {
+        "classes": [
+            {
+                "className": "Backend",
+                "lineNumber": 9,
+                "methods": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "on",
+                                "type": "bool"
+                            }
+                        ],
+                        "index": 3,
+                        "name": "toggleLight",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 4,
+                        "name": "getLightState",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 5,
+                        "name": "startLightPolling",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 6,
+                        "name": "getTemperature",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 7,
+                        "name": "getWeather",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "state",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 8,
+                        "name": "getWeatherIcon",
+                        "returnType": "QString"
+                    }
+                ],
+                "object": true,
+                "qualifiedClassName": "Backend",
+                "signals": [
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "temp",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 0,
+                        "name": "temperatureUpdated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "isOn",
+                                "type": "bool"
+                            }
+                        ],
+                        "index": 1,
+                        "name": "lightStateUpdated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "temperature",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "condition",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "min",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "max",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 2,
+                        "name": "weatherUpdated",
+                        "returnType": "void"
+                    }
+                ],
+                "superClasses": [
+                    {
+                        "access": "public",
+                        "name": "QObject"
+                    }
+                ]
+            }
+        ],
+        "inputFile": "backend.h",
+        "outputRevision": 69
+    }
+]
