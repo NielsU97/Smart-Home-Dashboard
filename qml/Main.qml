@@ -17,19 +17,14 @@ Window {
 
     property string activeRoomLabel: 'Huis'
 
-    property real powerConsumed: 7354
-    property real temperature: 26
-    property real humidity: 47
-    property real heating: 35
-    property real water: 231
-    property real lightIntensity: 45
-
     property var currentTime: new Date()
 
     property string weatherCondition: "-"
     property string weatherIcon: "-"
     property string ambientTemperature: "-"
     property string ambientHumidity: "-"
+
+    property string alarmIcon: "-"
 
     property ListModel roomsModel: ListModel {
         ListElement {
@@ -71,6 +66,8 @@ Window {
         triggeredOnStart: true
         onTriggered: {
             currentTime = new Date()
+            backend.getWeatherState()
+            backend.getAlarmState()
         }
     }
 
@@ -84,14 +81,13 @@ Window {
             GradientStop { position: 1.0; color: bgGradientStop }
         }
 
-        // Layout for Left and Right panes
+        // Left and Right panes
         Item {
             anchors.fill: parent
             anchors.margins: 24
 
             LeftPane { id: leftItem }
 
-            // Right pane dynamically loaded based on activeRoomLabel
             Loader {
                 id: rightPaneLoader
                 anchors.top: parent.top
@@ -122,21 +118,19 @@ Window {
         return value.toLocaleString()
     }
 
-    Component.onCompleted: {
-        backend.getWeather()
-    }
-
     Connections {
         target: backend
-        onWeatherUpdated: (temperature, condition, humidity, icon) => {
+        function onWeatherUpdated(temperature, condition, humidity, icon) {
             ambientTemperature = temperature
             weatherCondition = condition
             weatherIcon = icon
             ambientHumidity = humidity
         }
+        function onAlarmUpdated(state, icon) {
+            alarmIcon = icon
+        }
     }
 
-    // Define components for different room views
     Component { id: homePaneComponent; HomePane { } }
     Component { id: musicPaneComponent; MusicPane { } }
     Component { id: climatePaneComponent; ClimatePane { } }

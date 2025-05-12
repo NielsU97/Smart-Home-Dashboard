@@ -1,4 +1,4 @@
-set(qml_import_scanner_imports_count 38)
+set(qml_import_scanner_imports_count 37)
 set(qml_import_scanner_import_0 "CLASSNAME;QtQuick2Plugin;LINKTARGET;Qt6::qtquick2plugin;NAME;QtQuick;PATH;C:/Qt/6.9.0/mingw_64/qml/QtQuick;PLUGIN;qtquick2plugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQuick/;RELATIVEPATH;QtQuick;TYPE;module;")
 set(qml_import_scanner_import_1 "CLASSNAME;QtQmlPlugin;LINKTARGET;Qt6::qmlplugin;NAME;QtQml;PATH;C:/Qt/6.9.0/mingw_64/qml/QtQml;PLUGIN;qmlplugin;PLUGINISOPTIONAL;;PREFER;:/qt-project.org/imports/QtQml/;RELATIVEPATH;QtQml;TYPE;module;")
 set(qml_import_scanner_import_2 "NAME;QML;PATH;C:/Qt/6.9.0/mingw_64/qml/QML;PREFER;:/qt-project.org/imports/QML/;RELATIVEPATH;QML;TYPE;module;")
@@ -33,8 +33,7 @@ set(qml_import_scanner_import_30 "NAME;pane;PATH;C:/Users/niels/Documents/GitHub
 set(qml_import_scanner_import_31 "NAME;components;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/components;TYPE;directory;")
 set(qml_import_scanner_import_32 "NAME;.;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/components;TYPE;directory;")
 set(qml_import_scanner_import_33 "NAME;../components;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/components;TYPE;directory;")
-set(qml_import_scanner_import_34 "CLASSNAME;QMultimediaQuickModule;COMPONENTS;C:/Qt/6.9.0/mingw_64/qml/QtMultimedia/Video.qml;LINKTARGET;Qt6::quickmultimedia;NAME;QtMultimedia;PATH;C:/Qt/6.9.0/mingw_64/qml/QtMultimedia;PLUGIN;quickmultimediaplugin;PREFER;:/qt-project.org/imports/QtMultimedia/;RELATIVEPATH;QtMultimedia;TYPE;module;")
-set(qml_import_scanner_import_35 "NAME;pane;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane;TYPE;directory;")
-set(qml_import_scanner_import_36 "NAME;components;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components;TYPE;directory;")
-set(qml_import_scanner_import_37 "NAME;../components;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components;TYPE;directory;")
+set(qml_import_scanner_import_34 "NAME;pane;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane;TYPE;directory;")
+set(qml_import_scanner_import_35 "NAME;components;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components;TYPE;directory;")
+set(qml_import_scanner_import_36 "NAME;../components;PATH;C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components;TYPE;directory;")
 

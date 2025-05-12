@@ -11,12 +11,12 @@ Backend::Backend(QObject* parent) : QObject(parent) {
     });
 }
 
-void Backend::getWeather() {
+void Backend::getWeatherState() {
     QNetworkRequest request(QUrl(baseUrl + "/states/weather.forecast_thuis"));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
 
     QNetworkReply* reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, [this, reply]() {
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
         if (reply->error() == QNetworkReply::NoError) {
             QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
             QJsonObject obj = doc.object();
@@ -50,7 +50,7 @@ void Backend::getWeather() {
             };
 
             QString icon = iconMap.value(condition, "\uf75f");
-            QString translatedCondition = conditionTranslationMap.value(condition, condition);  // fallback to original if no match
+            QString translatedCondition = conditionTranslationMap.value(condition, condition);
 
             emit weatherUpdated(temperature, translatedCondition, humidity, icon);
         } else {
@@ -58,8 +58,66 @@ void Backend::getWeather() {
         }
 
         reply->deleteLater();
-    });
+    }, Qt::QueuedConnection);
 }
+
+void Backend::getAlarmState() {
+    QNetworkRequest request(QUrl(baseUrl + "/states/alarm_control_panel.alarm"));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+            QJsonObject obj = doc.object();
+
+            QString state = obj["state"].toString();
+
+            static const QHash<QString, QString> iconMap = {
+                { "disarmed",       "\uf3ed" },  // lock open
+                { "armed_home",     "\uf015" },  // home
+                { "armed_away",     "\uf132" },  // lock
+                { "armed_night",    "\uf186" },  // moon
+                { "triggered",      "\uf12a" }   // exclamation
+            };
+
+            QString icon = iconMap.value(state, "\u231b"); // fallback icon
+
+            emit alarmUpdated(state, icon);
+        } else {
+            qWarning() << "Alarm state fetch failed:" << reply->errorString();
+        }
+
+        reply->deleteLater();
+    }, Qt::QueuedConnection);
+}
+
+void Backend::getTemperature(const QString& entityId) {
+    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+        QString temp = doc.object().value("state").toString();
+        emit temperatureUpdated(temp);
+        reply->deleteLater();
+    }, Qt::QueuedConnection);
+}
+
+void Backend::getHumidity(const QString& entityId) {
+    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+
+    QNetworkReply* reply = manager.get(request);
+    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
+        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+        QString hum = doc.object().value("state").toString();
+        emit humidityUpdated(hum);
+        reply->deleteLater();
+    }, Qt::QueuedConnection);
+}
+
 
 void Backend::toggleLight(const QString& entityId, bool on) {
     QNetworkRequest request(QUrl(baseUrl + "/services/light/" + (on ? "turn_on" : "turn_off")));
@@ -102,17 +160,3 @@ void Backend::getLightState(const QString& entityId) {
         reply->deleteLater();
     });
 }
-
-void Backend::getTemperature() {
-    QNetworkRequest request(QUrl(baseUrl + "/states/sensor.klimaatsensor_1_temperature"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-
-    QNetworkReply *reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, [this, reply]() {
-        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-        QString temp = doc.object().value("state").toString();
-        emit temperatureUpdated(temp);
-        reply->deleteLater();
-    });
-}
-

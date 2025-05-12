@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 35,
-                        "durationMicroseconds": 370,
+                        "durationMicroseconds": 12788,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "glassyBgColor",
                         "line": 15
@@ -14,10 +14,10 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 114,
+                        "durationMicroseconds": 887,
                         "errorMessage": "",
                         "functionName": "currentTime",
-                        "line": 27
+                        "line": 20
                     },
                     {
                         "codegenSuccessfull": false,
@@ -25,7 +25,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "hex_to_RGB",
-                        "line": 54
+                        "line": 49
                     },
                     {
                         "codegenSuccessfull": false,
@@ -33,7 +33,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "hex_to_RGBA",
-                        "line": 60
+                        "line": 55
                     },
                     {
                         "codegenSuccessfull": false,
@@ -41,127 +41,119 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "commafy",
-                        "line": 121
+                        "line": 117
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 22,
-                        "durationMicroseconds": 58,
+                        "durationMicroseconds": 217,
                         "errorMessage": "Cannot find name currentTime",
                         "functionName": "onTriggered",
-                        "line": 72
+                        "line": 67
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 79,
+                        "durationMicroseconds": 96,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 80
+                        "line": 77
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 26,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 134,
                         "errorMessage": "",
                         "functionName": "orientation",
-                        "line": 82
+                        "line": 79
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 30,
+                        "durationMicroseconds": 36,
                         "errorMessage": "Cannot access value for name bgGradientStart",
                         "functionName": "color",
-                        "line": 83
+                        "line": 80
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 38,
+                        "durationMicroseconds": 25,
                         "errorMessage": "Cannot access value for name bgGradientStop",
                         "functionName": "color",
-                        "line": 84
+                        "line": 81
                     },
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 78,
+                        "durationMicroseconds": 64,
                         "errorMessage": "",
                         "functionName": "fill",
-                        "line": 89
+                        "line": 86
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 34,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 185,
                         "errorMessage": "Cannot access value for name activeRoomLabel",
                         "functionName": "sourceComponent",
-                        "line": 103
-                    },
-                    {
-                        "codegenSuccessfull": true,
-                        "column": 30,
-                        "durationMicroseconds": 222,
-                        "errorMessage": "",
-                        "functionName": "top",
-                        "line": 97
-                    },
-                    {
-                        "codegenSuccessfull": true,
-                        "column": 33,
-                        "durationMicroseconds": 742,
-                        "errorMessage": "",
-                        "functionName": "bottom",
-                        "line": 98
-                    },
-                    {
-                        "codegenSuccessfull": true,
-                        "column": 31,
-                        "durationMicroseconds": 128,
-                        "errorMessage": "",
-                        "functionName": "left",
                         "line": 99
                     },
                     {
                         "codegenSuccessfull": true,
-                        "column": 32,
-                        "durationMicroseconds": 120,
+                        "column": 30,
+                        "durationMicroseconds": 174,
                         "errorMessage": "",
-                        "functionName": "right",
-                        "line": 100
+                        "functionName": "top",
+                        "line": 93
                     },
                     {
-                        "codegenSuccessfull": false,
-                        "column": 28,
-                        "durationMicroseconds": 344,
-                        "errorMessage": "Cannot access value for name backend",
-                        "functionName": "onCompleted",
-                        "line": 125
+                        "codegenSuccessfull": true,
+                        "column": 33,
+                        "durationMicroseconds": 112,
+                        "errorMessage": "",
+                        "functionName": "bottom",
+                        "line": 94
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 31,
+                        "durationMicroseconds": 104,
+                        "errorMessage": "",
+                        "functionName": "left",
+                        "line": 95
+                    },
+                    {
+                        "codegenSuccessfull": true,
+                        "column": 32,
+                        "durationMicroseconds": 122,
+                        "errorMessage": "",
+                        "functionName": "right",
+                        "line": 96
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 68,
+                        "durationMicroseconds": 90,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "target",
-                        "line": 130
+                        "line": 122
                     },
                     {
                         "codegenSuccessfull": false,
-                        "column": 28,
+                        "column": 9,
                         "durationMicroseconds": 0,
-                        "errorMessage": "Could not find signal \"weatherUpdated\".",
+                        "errorMessage": "Functions without type annotations won't be compiled",
                         "functionName": "onWeatherUpdated",
-                        "line": 131
+                        "line": 123
                     },
                     {
                         "codegenSuccessfull": false,
-                        "column": 28,
+                        "column": 9,
                         "durationMicroseconds": 0,
-                        "errorMessage": "Could not find signal \"weatherUpdated\".",
-                        "functionName": "onWeatherUpdated",
-                        "line": 131
+                        "errorMessage": "Functions without type annotations won't be compiled",
+                        "functionName": "onAlarmUpdated",
+                        "line": 129
                     }
                 ],
                 "filepath": "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/Main.qml"

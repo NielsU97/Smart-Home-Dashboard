@@ -6,6 +6,42 @@
             "methods": [
                 {
                     "access": "public",
+                    "index": 5,
+                    "name": "getWeatherState",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "index": 6,
+                    "name": "getAlarmState",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "entityId",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 7,
+                    "name": "getTemperature",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "entityId",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 8,
+                    "name": "getHumidity",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
                     "arguments": [
                         {
                             "name": "entityId",
@@ -16,7 +52,7 @@
                             "type": "bool"
                         }
                     ],
-                    "index": 3,
+                    "index": 9,
                     "name": "toggleLight",
                     "returnType": "void"
                 },
@@ -28,7 +64,7 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 4,
+                    "index": 10,
                     "name": "getLightState",
                     "returnType": "void"
                 },
@@ -40,50 +76,14 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 5,
+                    "index": 11,
                     "name": "startLightPolling",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "index": 6,
-                    "name": "getTemperature",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "index": 7,
-                    "name": "getWeather",
                     "returnType": "void"
                 }
             ],
             "object": true,
             "qualifiedClassName": "Backend",
             "signals": [
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "temp",
-                            "type": "QString"
-                        }
-                    ],
-                    "index": 0,
-                    "name": "temperatureUpdated",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "isOn",
-                            "type": "bool"
-                        }
-                    ],
-                    "index": 1,
-                    "name": "lightStateUpdated",
-                    "returnType": "void"
-                },
                 {
                     "access": "public",
                     "arguments": [
@@ -104,8 +104,60 @@
                             "type": "QString"
                         }
                     ],
-                    "index": 2,
+                    "index": 0,
                     "name": "weatherUpdated",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "state",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "icon",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 1,
+                    "name": "alarmUpdated",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "temp",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 2,
+                    "name": "temperatureUpdated",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "hum",
+                            "type": "QString"
+                        }
+                    ],
+                    "index": 3,
+                    "name": "humidityUpdated",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "isOn",
+                            "type": "bool"
+                        }
+                    ],
+                    "index": 4,
+                    "name": "lightStateUpdated",
                     "returnType": "void"
                 }
             ],

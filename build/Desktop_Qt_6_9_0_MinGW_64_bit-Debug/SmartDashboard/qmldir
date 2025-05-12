@@ -13,4 +13,5 @@ EnergyPane 1.0 qml/pane/EnergyPane.qml
 MusicPane 1.0 qml/pane/MusicPane.qml
 EnergyMetric 1.0 qml/components/EnergyMetric.qml
 Slider 1.0 qml/components/Slider.qml
+Button 1.0 qml/components/Button.qml
 

@@ -89,6 +89,13 @@ namespace _0x5f_SmartDashboard_qml_components_Slider_qml {
         reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
     };
 }
+namespace _0x5f_SmartDashboard_qml_components_Button_qml { 
+    extern const unsigned char qmlData[];
+    extern const QQmlPrivate::AOTCompiledFunction aotBuiltFunctions[];
+    const QQmlPrivate::CachedQmlUnit unit = {
+        reinterpret_cast<const QV4::CompiledData::Unit*>(&qmlData), &aotBuiltFunctions[0], nullptr
+    };
+}
 
 }
 namespace {
@@ -115,6 +122,7 @@ Registry::Registry() {
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/pane/MusicPane.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_pane_MusicPane_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/EnergyMetric.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_EnergyMetric_qml::unit);
     resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/Slider.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_Slider_qml::unit);
+    resourcePathToCachedUnit.insert(QStringLiteral("/SmartDashboard/qml/components/Button.qml"), &QmlCacheGeneratedCode::_0x5f_SmartDashboard_qml_components_Button_qml::unit);
     QQmlPrivate::RegisterQmlUnitCacheHook registration;
     registration.structVersion = 0;
     registration.lookupCachedQmlUnit = &lookupCachedUnit;

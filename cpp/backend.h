@@ -12,18 +12,23 @@ class Backend : public QObject
 public:
     explicit Backend(QObject *parent = nullptr);
 
+    Q_INVOKABLE void getWeatherState();
+    Q_INVOKABLE void getAlarmState();
+
+    Q_INVOKABLE void getTemperature(const QString& entityId);
+    Q_INVOKABLE void getHumidity(const QString& entityId);
+
     Q_INVOKABLE void toggleLight(const QString& entityId, bool on);
     Q_INVOKABLE void getLightState(const QString& entityId);
     Q_INVOKABLE void startLightPolling(const QString& entityId);
 
-    Q_INVOKABLE void getTemperature();
-
-    Q_INVOKABLE void getWeather();
-
 signals:
-    void temperatureUpdated(QString temp);
-    void lightStateUpdated(bool isOn);
     void weatherUpdated(QString temperature, QString condition, QString humidity, QString icon);
+    void alarmUpdated(const QString& state, const QString& icon);
+    void temperatureUpdated(QString temp);
+    void humidityUpdated(QString hum);
+
+    void lightStateUpdated(bool isOn);
 
 private:
     QNetworkAccessManager manager;

@@ -61,7 +61,7 @@ Item {
         Text {
             id: alarmicon
             font.pixelSize: 12
-            text: "\uf1f6"  // \uf1f6 and \uf0f3
+            text: alarmIcon
             color: textColor
             anchors.baseline: timetxt.baseline
             anchors.left: sectxt.right
@@ -103,7 +103,7 @@ Item {
 
                     Text {
                         id: tmptxt
-                        text: (ambientTemperature !== undefined && ambientTemperature !== null) ? ambientTemperature : "--"
+                        text: (ambientTemperature !== undefined && ambientTemperature !== null) ? ambientTemperature : "0"
                         font.pixelSize: 40
                         color: textColor
                     }
@@ -118,7 +118,7 @@ Item {
 
                 Text {
                     id: humtxt
-                    text: (ambientHumidity !== undefined && ambientHumidity !== null) ? ambientHumidity + "%" : "--%"
+                    text: (ambientHumidity !== undefined && ambientHumidity !== null) ? ambientHumidity + "%" : "0%"
                     font.pixelSize: 14
                     color: textColor
                     anchors.verticalCenter: parent.verticalCenter
