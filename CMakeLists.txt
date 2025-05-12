@@ -22,16 +22,20 @@ qt_add_qml_module(appSmartDashboard
     QML_FILES
         qml/Main.qml
         qml/pane/LeftPane.qml
-
         qml/pane/HomePane.qml
         qml/components/IconLabel.qml
         qml/components/Switch.qml
         qml/components/Progressbar.qml
-        qml/components/LightSwitch.qml
         qml/components/CircularProgressBar.qml
         SOURCES cpp/backend.h
         SOURCES cpp/backend.cpp
         QML_FILES qml/pane/ClimatePane.qml qml/pane/EnergyPane.qml qml/pane/MusicPane.qml
+        QML_FILES
+        QML_FILES
+        QML_FILES
+        QML_FILES
+        QML_FILES qml/components/EnergyMetric.qml
+        QML_FILES qml/components/Slider.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -2,8 +2,6 @@ import QtQuick
 import QtQuick.Controls
 
 Label {
-    id: lbl
-
     property real size: 28
     property string icon
 

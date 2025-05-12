@@ -9,7 +9,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"text\".",
                         "functionName": "text",
-                        "line": 10
+                        "line": 8
                     },
                     {
                         "codegenSuccessfull": false,
@@ -17,7 +17,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"color\".",
                         "functionName": "color",
-                        "line": 11
+                        "line": 9
                     },
                     {
                         "codegenSuccessfull": false,
@@ -25,7 +25,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"pixelSize\".",
                         "functionName": "pixelSize",
-                        "line": 12
+                        "line": 10
                     },
                     {
                         "codegenSuccessfull": false,
@@ -33,7 +33,7 @@
                         "durationMicroseconds": 0,
                         "errorMessage": "Could not find property \"family\".",
                         "functionName": "family",
-                        "line": 13
+                        "line": 11
                     }
                 ],
                 "filepath": "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/IconLabel.qml"

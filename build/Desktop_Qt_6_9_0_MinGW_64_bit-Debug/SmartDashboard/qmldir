@@ -7,9 +7,10 @@ HomePane 1.0 qml/pane/HomePane.qml
 IconLabel 1.0 qml/components/IconLabel.qml
 Switch 1.0 qml/components/Switch.qml
 Progressbar 1.0 qml/components/Progressbar.qml
-LightSwitch 1.0 qml/components/LightSwitch.qml
 CircularProgressBar 1.0 qml/components/CircularProgressBar.qml
 ClimatePane 1.0 qml/pane/ClimatePane.qml
 EnergyPane 1.0 qml/pane/EnergyPane.qml
 MusicPane 1.0 qml/pane/MusicPane.qml
+EnergyMetric 1.0 qml/components/EnergyMetric.qml
+Slider 1.0 qml/components/Slider.qml
 

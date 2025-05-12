@@ -6,11 +6,12 @@
     <file alias="qml/components/IconLabel.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/IconLabel.qml</file>
     <file alias="qml/components/Switch.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Switch.qml</file>
     <file alias="qml/components/Progressbar.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Progressbar.qml</file>
-    <file alias="qml/components/LightSwitch.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/LightSwitch.qml</file>
     <file alias="qml/components/CircularProgressBar.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/CircularProgressBar.qml</file>
     <file alias="qml/pane/ClimatePane.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/ClimatePane.qml</file>
     <file alias="qml/pane/EnergyPane.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/EnergyPane.qml</file>
     <file alias="qml/pane/MusicPane.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/MusicPane.qml</file>
+    <file alias="qml/components/EnergyMetric.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/EnergyMetric.qml</file>
+    <file alias="qml/components/Slider.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Slider.qml</file>
     <file alias="assets/fonts/CodecPro-Italic.ttf">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/assets/fonts/CodecPro-Italic.ttf</file>
     <file alias="assets/fonts/CodecPro-Regular.ttf">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/assets/fonts/CodecPro-Regular.ttf</file>
     <file alias="assets/fonts/fontawesome.otf">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/assets/fonts/fontawesome.otf</file>

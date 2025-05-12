@@ -1,79 +1,64 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import '../components'
+import "../components"
 
 Item {
     id: energyItem
     anchors.fill: parent
 
-    Rectangle {
+    ColumnLayout {
         anchors.fill: parent
-        color: glassyBgColor
-        radius: 16
-        border.color: "#444"
-        border.width: 1
+        spacing: 16
 
-        ColumnLayout {
-            anchors.fill: parent
-            anchors.margins: 20
-            spacing: 16
-
-            QQC2.Label {
-                text: "Energiedistributie"
-                font.pixelSize: 24
-                color: "white"
-            }
+        // Title Panel
+        Rectangle {
+            color: glassyBgColor
+            radius: 16
+            Layout.fillWidth: true
+            Layout.preferredHeight: 80
 
             QQC2.Label {
-                id: todayUsage
-                text: "Totaal verbruikt: 5.4 kWh"
-                color: "white"
+                anchors.centerIn: parent
+                text: "12 mei 2025 Kalender"
                 font.pixelSize: 18
+                font.bold: true
+                color: "white"
             }
+        }
 
-            // Solar
-            ColumnLayout {
-                spacing: 4
-                QQC2.Label {
-                    text: "Zon: 2.1 kWh"
-                    color: "#ffeb3b"
-                }
-                QQC2.ProgressBar {
-                    value: 0.39  // 2.1 / 5.4
-                    from: 0
-                    to: 1
-                }
-            }
+        // Metrics Panel
+        Rectangle {
+            color: glassyBgColor
+            radius: 16
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
-            // Grid
             ColumnLayout {
-                spacing: 4
-                QQC2.Label {
-                    text: "Net: 2.5 kWh"
-                    color: "#03a9f4"
-                }
-                QQC2.ProgressBar {
-                    value: 0.46
-                    from: 0
-                    to: 1
-                }
-            }
+                anchors.fill: parent
+                anchors.margins: 20
+                spacing: 24
 
-            // Battery
-            ColumnLayout {
-                spacing: 4
                 QQC2.Label {
-                    text: "Batterij: 0.8 kWh"
-                    color: "#8bc34a"
+                    text: "Energie distibutie"
+                    font.pixelSize: 16
+                    color: "lightgray"
+                    Layout.alignment: Qt.AlignHCenter
                 }
-                QQC2.ProgressBar {
-                    value: 0.15
-                    from: 0
-                    to: 1
+
+                GridLayout {
+                    columns: 2
+                    rowSpacing: 16
+                    columnSpacing: 40
+                    Layout.fillWidth: true
+
+                    EnergyMetric { icon: "☀"; label: "Zon"; value: "0.7 kWh"; color: "#ffeb3b" }
+                    EnergyMetric { icon: "⚡"; label: "Net"; value: "0.3 kWh + 1.0 kWh"; color: "#03a9f4" }
+                    EnergyMetric { icon: "💧"; label: "Water"; value: "132 L"; color: "#00bcd4" }
+                    EnergyMetric { icon: "🌫️"; label: "Koolstofarm"; value: "0.6 kWh"; color: "#8bc34a" }
+                    EnergyMetric { icon: "🏠"; label: "Thuis"; value: "1.4 kWh"; color: "#ffffff" }
                 }
             }
         }
     }
 }
-

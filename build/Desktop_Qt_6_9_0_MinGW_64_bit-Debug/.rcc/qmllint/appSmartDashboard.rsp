@@ -13,8 +13,9 @@ C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/HomePane.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/IconLabel.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Switch.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Progressbar.qml
-C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/LightSwitch.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/CircularProgressBar.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/ClimatePane.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/EnergyPane.qml
 C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/MusicPane.qml
+C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/EnergyMetric.qml
+C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Slider.qml

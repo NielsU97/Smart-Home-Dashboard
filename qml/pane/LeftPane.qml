@@ -59,8 +59,9 @@ Item {
         }
 
         Text {
-            id: ampmtxt
+            id: alarmicon
             font.pixelSize: 12
+            text: "\uf1f6"  // \uf1f6 and \uf0f3
             color: textColor
             anchors.baseline: timetxt.baseline
             anchors.left: sectxt.right

@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 12,
-                        "durationMicroseconds": 312,
+                        "durationMicroseconds": 273,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 5
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 15,
-                        "durationMicroseconds": 76,
+                        "durationMicroseconds": 65,
                         "errorMessage": "Cannot access value for name label",
                         "functionName": "text",
                         "line": 12
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 16,
-                        "durationMicroseconds": 480,
+                        "durationMicroseconds": 378,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 14
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 130,
+                        "durationMicroseconds": 124,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 16
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 95,
+                        "durationMicroseconds": 142,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 22

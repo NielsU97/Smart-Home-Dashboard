@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 35,
-                        "durationMicroseconds": 290,
+                        "durationMicroseconds": 370,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "glassyBgColor",
                         "line": 15
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 80,
+                        "durationMicroseconds": 114,
                         "errorMessage": "",
                         "functionName": "currentTime",
                         "line": 27
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 22,
-                        "durationMicroseconds": 34,
+                        "durationMicroseconds": 58,
                         "errorMessage": "Cannot find name currentTime",
                         "functionName": "onTriggered",
                         "line": 72
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 53,
+                        "durationMicroseconds": 79,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 80
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 26,
-                        "durationMicroseconds": 73,
+                        "durationMicroseconds": 110,
                         "errorMessage": "",
                         "functionName": "orientation",
                         "line": 82
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 20,
+                        "durationMicroseconds": 30,
                         "errorMessage": "Cannot access value for name bgGradientStart",
                         "functionName": "color",
                         "line": 83
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 16,
+                        "durationMicroseconds": 38,
                         "errorMessage": "Cannot access value for name bgGradientStop",
                         "functionName": "color",
                         "line": 84
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 42,
+                        "durationMicroseconds": 78,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 89
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 34,
-                        "durationMicroseconds": 90,
+                        "durationMicroseconds": 131,
                         "errorMessage": "Cannot access value for name activeRoomLabel",
                         "functionName": "sourceComponent",
                         "line": 103
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 87,
+                        "durationMicroseconds": 222,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 97
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 33,
-                        "durationMicroseconds": 82,
+                        "durationMicroseconds": 742,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 98
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 73,
+                        "durationMicroseconds": 128,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 99
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 68,
+                        "durationMicroseconds": 120,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 100
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 28,
-                        "durationMicroseconds": 207,
+                        "durationMicroseconds": 344,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onCompleted",
                         "line": 125
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 35,
+                        "durationMicroseconds": 68,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "target",
                         "line": 130

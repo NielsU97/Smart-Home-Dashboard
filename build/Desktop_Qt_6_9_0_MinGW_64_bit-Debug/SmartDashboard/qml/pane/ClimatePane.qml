@@ -5,13 +5,18 @@ import '../components'
 
 Item {
     id: climateItem
-    width: parent.width * 2/3  // Takes up 2/3 of the parent width
-    height: parent.height
-    anchors.right: parent.right
+    anchors.fill: parent
 
-    Text {
-        anchors.centerIn: parent
-        text: "Welcome to Klimaat"
-        color: "white"
+    Rectangle {
+        anchors.fill: parent
+        color: glassyBgColor
+        radius: 16
+
+        Text {
+            anchors.centerIn: parent
+            text: "Welcome to Klimaat"
+            color: "white"
+        }
     }
 }
+

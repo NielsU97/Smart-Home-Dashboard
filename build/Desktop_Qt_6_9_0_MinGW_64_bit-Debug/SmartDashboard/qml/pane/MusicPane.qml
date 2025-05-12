@@ -4,14 +4,18 @@ import QtQuick.Controls as QQC2
 import '../components'
 
 Item {
-    id: musicItem
-    width: parent.width * 2/3  // Takes up 2/3 of the parent width
-    height: parent.height
-    anchors.right: parent.right
+    id: climateItem
+    anchors.fill: parent
 
-    Text {
-        anchors.centerIn: parent
-        text: "Welcome to Muziek"
-        color: "white"
+    Rectangle {
+        anchors.fill: parent
+        color: glassyBgColor
+        radius: 16
+
+        Text {
+            anchors.centerIn: parent
+            text: "Welcome to Muziek"
+            color: "white"
+        }
     }
 }

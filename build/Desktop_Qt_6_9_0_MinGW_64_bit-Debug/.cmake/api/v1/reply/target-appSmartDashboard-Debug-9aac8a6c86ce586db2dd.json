@@ -104,13 +104,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 53,
+				"line" : 57,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 48,
+				"line" : 52,
 				"parent" : 0
 			},
 			{
@@ -701,6 +701,18 @@
 				"parent" : 63
 			},
 			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3192,
+				"parent" : 63
+			},
+			{
+				"command" : 23,
+				"file" : 12,
+				"line" : 3385,
+				"parent" : 63
+			},
+			{
 				"command" : 28,
 				"file" : 12,
 				"line" : 3487,
@@ -710,19 +722,19 @@
 				"command" : 27,
 				"file" : 0,
 				"line" : 401,
-				"parent" : 111
+				"parent" : 113
 			},
 			{
 				"command" : 26,
 				"file" : 0,
 				"line" : 2530,
-				"parent" : 112
+				"parent" : 114
 			},
 			{
 				"command" : 23,
 				"file" : 0,
 				"line" : 2074,
-				"parent" : 113
+				"parent" : 115
 			},
 			{
 				"command" : 30,
@@ -734,7 +746,7 @@
 				"command" : 23,
 				"file" : 0,
 				"line" : 2199,
-				"parent" : 115
+				"parent" : 117
 			}
 		]
 	},
@@ -941,7 +953,8 @@
 				25,
 				27,
 				29,
-				30
+				31,
+				32
 			]
 		},
 		{
@@ -1140,9 +1153,6 @@
 	"dependencies" : 
 	[
 		{
-			"id" : "appSmartDashboard_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 65,
 			"id" : "appSmartDashboard_copy_qml::@6890427a1f51a3e7e1df"
 		},
@@ -1157,6 +1167,9 @@
 		{
 			"backtrace" : 0,
 			"id" : "appSmartDashboard_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "appSmartDashboard_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "appSmartDashboard::@6890427a1f51a3e7e1df",
@@ -1312,17 +1325,17 @@
 			"sourceIndexes" : 
 			[
 				0,
-				37,
-				56,
-				57,
-				58,
+				39,
 				59,
 				60,
 				61,
 				62,
 				63,
 				64,
-				65
+				65,
+				66,
+				67,
+				68
 			]
 		},
 		{
@@ -1345,7 +1358,8 @@
 				25,
 				27,
 				29,
-				30
+				31,
+				32
 			]
 		},
 		{
@@ -1364,10 +1378,11 @@
 				24,
 				26,
 				28,
-				32,
+				30,
 				34,
-				35,
-				36
+				36,
+				37,
+				38
 			]
 		},
 		{
@@ -1381,16 +1396,14 @@
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				31,
-				33
+				33,
+				35
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				38,
-				39,
 				40,
 				41,
 				42,
@@ -1406,7 +1419,10 @@
 				52,
 				53,
 				54,
-				55
+				55,
+				56,
+				57,
+				58
 			]
 		}
 	],
@@ -1537,101 +1553,113 @@
 		},
 		{
 			"backtrace" : 101,
-			"path" : "qml/components/LightSwitch.qml",
+			"path" : "qml/components/CircularProgressBar.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 102,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/LightSwitch_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/CircularProgressBar_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 103,
-			"path" : "qml/components/CircularProgressBar.qml",
+			"path" : "qml/pane/ClimatePane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 104,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/CircularProgressBar_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/ClimatePane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 105,
-			"path" : "qml/pane/ClimatePane.qml",
+			"path" : "qml/pane/EnergyPane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 106,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/ClimatePane_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/EnergyPane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 107,
-			"path" : "qml/pane/EnergyPane.qml",
+			"path" : "qml/pane/MusicPane.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 108,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/EnergyPane_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/MusicPane_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 109,
-			"path" : "qml/pane/MusicPane.qml",
+			"path" : "qml/components/EnergyMetric.qml",
 			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 110,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/MusicPane_qml.cpp",
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/EnergyMetric_qml.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 114,
+			"backtrace" : 111,
+			"path" : "qml/components/Slider.qml",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 112,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/Slider_qml.cpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 116,
 			"compileGroupIndex" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.qt/rcc/qrc_appSmartDashboard_raw_qml_0.cpp",
 			"sourceGroupIndex" : 1
 		},
 		{
-			"backtrace" : 116,
+			"backtrace" : 118,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.qt/rcc/qmake_SmartDashboard.qrc",
 			"sourceGroupIndex" : 4
 		},
 		{
-			"backtrace" : 116,
+			"backtrace" : 118,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qmldir",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 116,
+			"backtrace" : 118,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.qt/rcc/appSmartDashboard_raw_qml_0.qrc",
 			"sourceGroupIndex" : 4
 		},
 		{
-			"backtrace" : 116,
+			"backtrace" : 118,
 			"path" : "assets/fonts/CodecPro-Italic.ttf",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 116,
+			"backtrace" : 118,
 			"path" : "assets/fonts/CodecPro-Regular.ttf",
 			"sourceGroupIndex" : 2
 		},
 		{
-			"backtrace" : 116,
+			"backtrace" : 118,
 			"path" : "assets/fonts/fontawesome.otf",
 			"sourceGroupIndex" : 2
 		},
@@ -1704,12 +1732,6 @@
 		{
 			"backtrace" : 0,
 			"isGenerated" : true,
-			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/LightSwitch_qml.cpp.rule",
-			"sourceGroupIndex" : 5
-		},
-		{
-			"backtrace" : 0,
-			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/CircularProgressBar_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
@@ -1729,6 +1751,18 @@
 			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/pane/MusicPane_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/EnergyMetric_qml.cpp.rule",
+			"sourceGroupIndex" : 5
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/.rcc/qmlcache/appSmartDashboard_qml/components/Slider_qml.cpp.rule",
 			"sourceGroupIndex" : 5
 		},
 		{
