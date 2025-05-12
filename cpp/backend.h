@@ -18,9 +18,9 @@ public:
     Q_INVOKABLE void getTemperature(const QString& entityId);
     Q_INVOKABLE void getHumidity(const QString& entityId);
 
-    Q_INVOKABLE void toggleLight(const QString& entityId, bool on);
     Q_INVOKABLE void getLightState(const QString& entityId);
-    Q_INVOKABLE void startLightPolling(const QString& entityId);
+    Q_INVOKABLE void setLightBrightness(const QString& entityId, int brightness);
+    Q_INVOKABLE void toggleLight(const QString& entityId, bool on);
 
 signals:
     void weatherUpdated(QString temperature, QString condition, QString humidity, QString icon);
@@ -28,7 +28,7 @@ signals:
     void temperatureUpdated(QString temp);
     void humidityUpdated(QString hum);
 
-    void lightStateUpdated(bool isOn);
+    void lightStateUpdated(const QString &entityId, bool isOn, int brightness);
 
 private:
     QNetworkAccessManager manager;
@@ -37,6 +37,9 @@ private:
     QTimer pollTimer;
     QString lastState;
     QString trackedEntity;
+
+    QHash<QString, QString> lastStateMap;
+    QHash<QString, int> lastBrightnessMap;
 };
 
 #endif // BACKEND_H

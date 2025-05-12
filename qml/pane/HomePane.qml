@@ -34,7 +34,7 @@ Item {
                         height: 20
 
                         Text {
-                            text: qsTr("Woonkamer licht")
+                            text: qsTr("Woonkamer")
                             font.pixelSize: 14
                             color: textColor
                             Layout.fillWidth: true
@@ -46,26 +46,29 @@ Item {
                             checked: false
                             Layout.alignment: Qt.AlignVCenter
 
-                            Component.onCompleted: {
-                                backend.startLightPolling("light.woonkamer")
-                            }
-
                             onCheckedChanged: {
                                 backend.toggleLight("light.woonkamer", checked)
                             }
 
-                            Connections {
-                                target: backend
-                                onLightStateUpdated: switchLiving.checked = isOn
-                            }
                         }
                     }
 
+                    Text {
+                        text: sliderLiving.value.toFixed(0) + "%"
+                        font.pixelSize: 12
+                        color: textColor
+                    }
+
                     Slider {
+                        id: sliderLiving
                         from: 0
                         to: 100
-                        value: 50
+                        value: 0
                         width: parent.width
+
+                        onValueChanged: {
+                            backend.setLightBrightness("light.woonkamer", value)
+                        }
                     }
                 }
             }
@@ -89,7 +92,7 @@ Item {
                         height: 20
 
                         Text {
-                            text: qsTr("Slaapkamer licht")
+                            text: qsTr("Slaapkamer")
                             font.pixelSize: 14
                             color: textColor
                             Layout.fillWidth: true
@@ -101,26 +104,29 @@ Item {
                             checked: false
                             Layout.alignment: Qt.AlignVCenter
 
-                            Component.onCompleted: {
-                                backend.startLightPolling("light.slaapkamer")
-                            }
-
                             onCheckedChanged: {
                                 backend.toggleLight("light.slaapkamer", checked)
                             }
 
-                            Connections {
-                                target: backend
-                                onLightStateUpdated: switchSleep.checked = isOn
-                            }
                         }
                     }
 
+                    Text {
+                        text: sliderSleep.value.toFixed(0) + "%"
+                        font.pixelSize: 12
+                        color: textColor
+                    }
+
                     Slider {
+                        id: sliderSleep
                         from: 0
                         to: 100
-                        value: 50
+                        value: 0
                         width: parent.width
+
+                        onValueChanged: {
+                            backend.setLightBrightness("light.slaapkamer", value)
+                        }
                     }
                 }
             }
@@ -145,7 +151,7 @@ Item {
                     height: 20
 
                     Text {
-                        text: qsTr("Gang licht")
+                        text: qsTr("Gang")
                         font.pixelSize: 14
                         color: textColor
                         Layout.fillWidth: true
@@ -153,31 +159,49 @@ Item {
                     }
 
                     Switch {
-                        id: switchHall
+                        id: switchHallway
                         checked: false
                         Layout.alignment: Qt.AlignVCenter
-
-                        Component.onCompleted: {
-                            backend.startLightPolling("light.ganglamp_licht")
-                        }
 
                         onCheckedChanged: {
                             backend.toggleLight("light.ganglamp_licht", checked)
                         }
-
-                        Connections {
-                            target: backend
-                            onLightStateUpdated: switchHall.checked = isOn
-                        }
                     }
                 }
 
+                Text {
+                    text: sliderHallway.value.toFixed(0) + "%"
+                    font.pixelSize: 12
+                    color: textColor
+                }
+
                 Slider {
+                    id: sliderHallway
                     from: 0
                     to: 100
-                    value: 50
+                    value: 0
                     width: parent.width
+
+                    onValueChanged: {
+                        backend.setLightBrightness("light.ganglamp_licht", value)
+                    }
                 }
+            }
+        }
+    }
+
+    Connections {
+        target: backend
+        function onLightStateUpdated(entityId, isOn, brightness) {
+            if (entityId === "light.woonkamer") {
+                switchLiving.checked = isOn;
+                sliderLiving.value = brightness;
+            } else if (entityId === "light.slaapkamer") {
+                switchSleep.checked = isOn;
+                sliderSleep.value = brightness;
+            } else if (entityId === "light.ganglamp_licht") {
+                switchHallway.checked = isOn;
+                sliderHallway.value = brightness;
             }
         }
     }

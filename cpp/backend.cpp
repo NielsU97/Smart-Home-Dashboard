@@ -118,6 +118,39 @@ void Backend::getHumidity(const QString& entityId) {
     }, Qt::QueuedConnection);
 }
 
+void Backend::getLightState(const QString& entityId) {
+    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
+    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkReply* reply = manager.get(request);
+
+    connect(reply, &QNetworkReply::finished, this, [this, reply, entityId]() {
+        if (reply->error() == QNetworkReply::NoError) {
+            const QByteArray response = reply->readAll();
+            QJsonDocument json = QJsonDocument::fromJson(response);
+            QJsonObject obj = json.object();
+            QString state = obj["state"].toString();
+
+            int brightness = obj["attributes"].toObject().value("brightness").toInt();
+            int brightnessPct = brightness * 100 / 255;
+
+            QString previousState = lastStateMap.value(entityId, "");
+            int previousBrightness = lastBrightnessMap.value(entityId, -1);
+
+            if (state != previousState || brightnessPct != previousBrightness) {
+                lastStateMap[entityId] = state;
+                lastBrightnessMap[entityId] = brightnessPct;
+
+                emit lightStateUpdated(entityId, state == "on", brightnessPct);
+            }
+        } else {
+            qWarning() << "Polling error:" << reply->errorString();
+        }
+        reply->deleteLater();
+    });
+}
+
 
 void Backend::toggleLight(const QString& entityId, bool on) {
     QNetworkRequest request(QUrl(baseUrl + "/services/light/" + (on ? "turn_on" : "turn_off")));
@@ -130,33 +163,15 @@ void Backend::toggleLight(const QString& entityId, bool on) {
     manager.post(request, QJsonDocument(payload).toJson());
 }
 
-void Backend::startLightPolling(const QString& entityId) {
-    trackedEntity = entityId;
-    getLightState(entityId);  // Initial fetch
-    pollTimer.start(1000);    // Poll every 3 seconds
-}
-
-void Backend::getLightState(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
+void Backend::setLightBrightness(const QString& entityId, int brightness) {
+    QNetworkRequest request(QUrl(baseUrl + "/services/light/turn_on"));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
 
-    QNetworkReply* reply = manager.get(request);
+    QJsonObject payload;
+    payload["entity_id"] = entityId;
+    payload["brightness_pct"] = brightness;
 
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            const QByteArray response = reply->readAll();
-            QJsonDocument json = QJsonDocument::fromJson(response);
-            QJsonObject obj = json.object();
-            QString state = obj["state"].toString();
-
-            if (state != lastState) {
-                lastState = state;
-                emit lightStateUpdated(state == "on");
-            }
-        } else {
-            qWarning() << "Polling error:" << reply->errorString();
-        }
-        reply->deleteLater();
-    });
+    manager.post(request, QJsonDocument(payload).toJson());
 }
+

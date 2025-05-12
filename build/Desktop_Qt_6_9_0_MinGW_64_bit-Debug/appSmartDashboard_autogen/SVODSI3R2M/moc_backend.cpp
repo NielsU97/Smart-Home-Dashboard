@@ -53,16 +53,17 @@ template <> constexpr inline auto Backend::qt_create_metaobjectdata<qt_meta_tag_
         "humidityUpdated",
         "hum",
         "lightStateUpdated",
+        "entityId",
         "isOn",
+        "brightness",
         "getWeatherState",
         "getAlarmState",
         "getTemperature",
-        "entityId",
         "getHumidity",
-        "toggleLight",
-        "on",
         "getLightState",
-        "startLightPolling"
+        "setLightBrightness",
+        "toggleLight",
+        "on"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -83,32 +84,32 @@ template <> constexpr inline auto Backend::qt_create_metaobjectdata<qt_meta_tag_
             { QMetaType::QString, 12 },
         }}),
         // Signal 'lightStateUpdated'
-        QtMocHelpers::SignalData<void(bool)>(13, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::Bool, 14 },
+        QtMocHelpers::SignalData<void(const QString &, bool, int)>(13, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 }, { QMetaType::Bool, 15 }, { QMetaType::Int, 16 },
         }}),
         // Method 'getWeatherState'
-        QtMocHelpers::MethodData<void()>(15, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(17, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'getAlarmState'
-        QtMocHelpers::MethodData<void()>(16, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(18, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'getTemperature'
-        QtMocHelpers::MethodData<void(const QString &)>(17, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 18 },
+        QtMocHelpers::MethodData<void(const QString &)>(19, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 },
         }}),
         // Method 'getHumidity'
-        QtMocHelpers::MethodData<void(const QString &)>(19, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 18 },
-        }}),
-        // Method 'toggleLight'
-        QtMocHelpers::MethodData<void(const QString &, bool)>(20, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 18 }, { QMetaType::Bool, 21 },
+        QtMocHelpers::MethodData<void(const QString &)>(20, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 },
         }}),
         // Method 'getLightState'
-        QtMocHelpers::MethodData<void(const QString &)>(22, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 18 },
+        QtMocHelpers::MethodData<void(const QString &)>(21, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 },
         }}),
-        // Method 'startLightPolling'
-        QtMocHelpers::MethodData<void(const QString &)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 18 },
+        // Method 'setLightBrightness'
+        QtMocHelpers::MethodData<void(const QString &, int)>(22, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 }, { QMetaType::Int, 16 },
+        }}),
+        // Method 'toggleLight'
+        QtMocHelpers::MethodData<void(const QString &, bool)>(23, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 }, { QMetaType::Bool, 24 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -137,14 +138,14 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 1: _t->alarmUpdated((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         case 2: _t->temperatureUpdated((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 3: _t->humidityUpdated((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 4: _t->lightStateUpdated((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
+        case 4: _t->lightStateUpdated((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[3]))); break;
         case 5: _t->getWeatherState(); break;
         case 6: _t->getAlarmState(); break;
         case 7: _t->getTemperature((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 8: _t->getHumidity((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 9: _t->toggleLight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[2]))); break;
-        case 10: _t->getLightState((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 11: _t->startLightPolling((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 9: _t->getLightState((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 10: _t->setLightBrightness((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 11: _t->toggleLight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[2]))); break;
         default: ;
         }
     }
@@ -157,7 +158,7 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
             return;
         if (QtMocHelpers::indexOfMethod<void (Backend::*)(QString )>(_a, &Backend::humidityUpdated, 3))
             return;
-        if (QtMocHelpers::indexOfMethod<void (Backend::*)(bool )>(_a, &Backend::lightStateUpdated, 4))
+        if (QtMocHelpers::indexOfMethod<void (Backend::*)(const QString & , bool , int )>(_a, &Backend::lightStateUpdated, 4))
             return;
     }
 }
@@ -218,8 +219,8 @@ void Backend::humidityUpdated(QString _t1)
 }
 
 // SIGNAL 4
-void Backend::lightStateUpdated(bool _t1)
+void Backend::lightStateUpdated(const QString & _t1, bool _t2, int _t3)
 {
-    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1);
+    QMetaObject::activate<void>(this, &staticMetaObject, 4, nullptr, _t1, _t2, _t3);
 }
 QT_WARNING_POP

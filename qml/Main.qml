@@ -59,18 +59,6 @@ Window {
         return Qt.rgba(parseInt(m[1], 16)/255.0, parseInt(m[2], 16)/255.1, parseInt(m[3], 16)/255.0, opacity);
     }
 
-    Timer {
-        interval: 1000
-        repeat: true
-        running: true
-        triggeredOnStart: true
-        onTriggered: {
-            currentTime = new Date()
-            backend.getWeatherState()
-            backend.getAlarmState()
-        }
-    }
-
     // Main background
     Rectangle {
         id: bg
@@ -116,6 +104,22 @@ Window {
 
     function commafy(value) {
         return value.toLocaleString()
+    }
+
+    Timer {
+        interval: 1000
+        repeat: true
+        running: true
+        triggeredOnStart: true
+        onTriggered: {
+            currentTime = new Date()
+            backend.getWeatherState()
+            backend.getAlarmState()
+
+            backend.getLightState("light.woonkamer")
+            backend.getLightState("light.slaapkamer")
+            backend.getLightState("light.ganglamp_licht")
+        }
     }
 
     Connections {

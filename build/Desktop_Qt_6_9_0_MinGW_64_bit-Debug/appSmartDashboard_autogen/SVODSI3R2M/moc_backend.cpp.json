@@ -46,25 +46,9 @@
                         {
                             "name": "entityId",
                             "type": "QString"
-                        },
-                        {
-                            "name": "on",
-                            "type": "bool"
                         }
                     ],
                     "index": 9,
-                    "name": "toggleLight",
-                    "returnType": "void"
-                },
-                {
-                    "access": "public",
-                    "arguments": [
-                        {
-                            "name": "entityId",
-                            "type": "QString"
-                        }
-                    ],
-                    "index": 10,
                     "name": "getLightState",
                     "returnType": "void"
                 },
@@ -74,10 +58,30 @@
                         {
                             "name": "entityId",
                             "type": "QString"
+                        },
+                        {
+                            "name": "brightness",
+                            "type": "int"
+                        }
+                    ],
+                    "index": 10,
+                    "name": "setLightBrightness",
+                    "returnType": "void"
+                },
+                {
+                    "access": "public",
+                    "arguments": [
+                        {
+                            "name": "entityId",
+                            "type": "QString"
+                        },
+                        {
+                            "name": "on",
+                            "type": "bool"
                         }
                     ],
                     "index": 11,
-                    "name": "startLightPolling",
+                    "name": "toggleLight",
                     "returnType": "void"
                 }
             ],
@@ -152,8 +156,16 @@
                     "access": "public",
                     "arguments": [
                         {
+                            "name": "entityId",
+                            "type": "QString"
+                        },
+                        {
                             "name": "isOn",
                             "type": "bool"
+                        },
+                        {
+                            "name": "brightness",
+                            "type": "int"
                         }
                     ],
                     "index": 4,
