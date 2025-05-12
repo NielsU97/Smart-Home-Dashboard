@@ -166,7 +166,6 @@ Item {
 
                     label: model.label
                     icon: model.icon
-                    size: model.size
                     onClicked: activeRoomLabel = label
 
                     Column {
@@ -215,6 +214,19 @@ Item {
                     }
                 }
             }
+        }
+    }
+
+    Connections {
+        target: backend
+        function onWeatherUpdated(temperature, condition, humidity, icon) {
+            ambientTemperature = temperature
+            weatherCondition = condition
+            weatherIcon = icon
+            ambientHumidity = humidity
+        }
+        function onAlarmUpdated(state, icon) {
+            alarmIcon = icon
         }
     }
 }

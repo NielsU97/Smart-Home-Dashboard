@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 35,
-                        "durationMicroseconds": 317,
+                        "durationMicroseconds": 334,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "glassyBgColor",
                         "line": 15
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 83,
+                        "durationMicroseconds": 123,
                         "errorMessage": "",
                         "functionName": "currentTime",
                         "line": 20
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 51,
+                        "durationMicroseconds": 78,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 65
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 26,
-                        "durationMicroseconds": 72,
+                        "durationMicroseconds": 105,
                         "errorMessage": "",
                         "functionName": "orientation",
                         "line": 67
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 27,
+                        "durationMicroseconds": 48,
                         "errorMessage": "Cannot access value for name bgGradientStart",
                         "functionName": "color",
                         "line": 68
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 17,
+                        "durationMicroseconds": 31,
                         "errorMessage": "Cannot access value for name bgGradientStop",
                         "functionName": "color",
                         "line": 69
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 38,
+                        "durationMicroseconds": 71,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 74
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 34,
-                        "durationMicroseconds": 88,
+                        "durationMicroseconds": 128,
                         "errorMessage": "Cannot access value for name activeRoomLabel",
                         "functionName": "sourceComponent",
                         "line": 87
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 118,
+                        "durationMicroseconds": 131,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 81
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 33,
-                        "durationMicroseconds": 64,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 82
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 111,
+                        "durationMicroseconds": 125,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 83
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 62,
+                        "durationMicroseconds": 93,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 84
@@ -126,34 +126,10 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 22,
-                        "durationMicroseconds": 239,
+                        "durationMicroseconds": 428,
                         "errorMessage": "Cannot find name currentTime",
                         "functionName": "onTriggered",
                         "line": 114
-                    },
-                    {
-                        "codegenSuccessfull": false,
-                        "column": 17,
-                        "durationMicroseconds": 35,
-                        "errorMessage": "Cannot access value for name backend",
-                        "functionName": "target",
-                        "line": 126
-                    },
-                    {
-                        "codegenSuccessfull": false,
-                        "column": 9,
-                        "durationMicroseconds": 0,
-                        "errorMessage": "Functions without type annotations won't be compiled",
-                        "functionName": "onWeatherUpdated",
-                        "line": 127
-                    },
-                    {
-                        "codegenSuccessfull": false,
-                        "column": 9,
-                        "durationMicroseconds": 0,
-                        "errorMessage": "Functions without type annotations won't be compiled",
-                        "functionName": "onAlarmUpdated",
-                        "line": 133
                     }
                 ],
                 "filepath": "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/Main.qml"

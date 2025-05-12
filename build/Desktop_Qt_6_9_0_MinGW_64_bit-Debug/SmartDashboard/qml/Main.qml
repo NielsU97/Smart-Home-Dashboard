@@ -107,7 +107,7 @@ Window {
     }
 
     Timer {
-        interval: 1000
+        interval: 500
         repeat: true
         running: true
         triggeredOnStart: true
@@ -119,19 +119,6 @@ Window {
             backend.getLightState("light.woonkamer")
             backend.getLightState("light.slaapkamer")
             backend.getLightState("light.ganglamp_licht")
-        }
-    }
-
-    Connections {
-        target: backend
-        function onWeatherUpdated(temperature, condition, humidity, icon) {
-            ambientTemperature = temperature
-            weatherCondition = condition
-            weatherIcon = icon
-            ambientHumidity = humidity
-        }
-        function onAlarmUpdated(state, icon) {
-            alarmIcon = icon
         }
     }
 

@@ -7,22 +7,25 @@ Item {
     id: homeItem
     anchors.fill: parent
 
+    // Main layout container
     ColumnLayout {
         anchors.fill: parent
+        spacing: 16
 
-        // First row
-        RowLayout {
-            anchors.fill: parent
-            spacing: 16
+        // First row with two light controls
+        GridLayout {
+            columns: 2
+            columnSpacing: 16
+            rowSpacing: 16
+            Layout.fillWidth: true
 
             // --- Living Room Light ---
             Rectangle {
                 id: livinglight
                 color: glassyBgColor
                 radius: 16
-                width: parent.width / 2
                 height: 120
-                Layout.preferredWidth: parent.width / 2
+                Layout.fillWidth: true
 
                 Column {
                     anchors.fill: parent
@@ -49,7 +52,6 @@ Item {
                             onCheckedChanged: {
                                 backend.toggleLight("light.woonkamer", checked)
                             }
-
                         }
                     }
 
@@ -66,8 +68,10 @@ Item {
                         value: 0
                         width: parent.width
 
-                        onValueChanged: {
-                            backend.setLightBrightness("light.woonkamer", value)
+                        onPressedChanged: {
+                            if (!pressed) {
+                                backend.setLightBrightness("light.woonkamer", value)
+                            }
                         }
                     }
                 }
@@ -78,9 +82,8 @@ Item {
                 id: sleepingroomlight
                 color: glassyBgColor
                 radius: 16
-                width: parent.width / 2
                 height: 120
-                Layout.preferredWidth: parent.width / 2
+                Layout.fillWidth: true
 
                 Column {
                     anchors.fill: parent
@@ -107,7 +110,6 @@ Item {
                             onCheckedChanged: {
                                 backend.toggleLight("light.slaapkamer", checked)
                             }
-
                         }
                     }
 
@@ -124,69 +126,78 @@ Item {
                         value: 0
                         width: parent.width
 
-                        onValueChanged: {
-                            backend.setLightBrightness("light.slaapkamer", value)
+                        onPressedChanged: {
+                            if (!pressed) {
+                                backend.setLightBrightness("light.slaapkamer", value)
+                            }
+                        }
+                    }
+                }
+            }
+
+            // --- Hallway Light ---
+            Rectangle {
+                id: hallwaylight
+                color: glassyBgColor
+                radius: 16
+                height: 120
+                Layout.fillWidth: true
+                Layout.columnSpan: 2  // Make it span both columns
+
+                Column {
+                    anchors.fill: parent
+                    anchors.margins: 12
+                    spacing: 8
+
+                    RowLayout {
+                        width: parent.width
+                        height: 20
+
+                        Text {
+                            text: qsTr("Gang")
+                            font.pixelSize: 14
+                            color: textColor
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+
+                        Switch {
+                            id: switchHallway
+                            checked: false
+                            Layout.alignment: Qt.AlignVCenter
+
+                            onCheckedChanged: {
+                                backend.toggleLight("light.ganglamp_licht", checked)
+                            }
+                        }
+                    }
+
+                    Text {
+                        text: sliderHallway.value.toFixed(0) + "%"
+                        font.pixelSize: 12
+                        color: textColor
+                    }
+
+                    Slider {
+                        id: sliderHallway
+                        from: 0
+                        to: 100
+                        value: 0
+                        width: parent.width
+
+                        onPressedChanged: {
+                            if (!pressed) {
+                                backend.setLightBrightness("light.ganglamp_licht", value)
+                            }
                         }
                     }
                 }
             }
         }
 
-        // Second row
-        Rectangle {
-            id: hallwaylight
-            color: glassyBgColor
-            radius: 16
-            width: parent.width / 2
-            height: 120
-            Layout.preferredWidth: parent.width / 2
-
-            Column {
-                anchors.fill: parent
-                anchors.margins: 12
-                spacing: 8
-
-                RowLayout {
-                    width: parent.width
-                    height: 20
-
-                    Text {
-                        text: qsTr("Gang")
-                        font.pixelSize: 14
-                        color: textColor
-                        Layout.fillWidth: true
-                        Layout.alignment: Qt.AlignVCenter
-                    }
-
-                    Switch {
-                        id: switchHallway
-                        checked: false
-                        Layout.alignment: Qt.AlignVCenter
-
-                        onCheckedChanged: {
-                            backend.toggleLight("light.ganglamp_licht", checked)
-                        }
-                    }
-                }
-
-                Text {
-                    text: sliderHallway.value.toFixed(0) + "%"
-                    font.pixelSize: 12
-                    color: textColor
-                }
-
-                Slider {
-                    id: sliderHallway
-                    from: 0
-                    to: 100
-                    value: 0
-                    width: parent.width
-
-                    onValueChanged: {
-                        backend.setLightBrightness("light.ganglamp_licht", value)
-                    }
-                }
-            }
+        // Add some spacing at the bottom
+        Item {
+            Layout.fillHeight: true
         }
     }
 
