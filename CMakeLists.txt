@@ -34,7 +34,7 @@ qt_add_qml_module(appSmartDashboard
         QML_FILES
         QML_FILES
         QML_FILES
-        QML_FILES qml/components/EnergyMetric.qml
+        QML_FILES
         QML_FILES qml/components/Slider.qml
         QML_FILES qml/components/Button.qml
 )

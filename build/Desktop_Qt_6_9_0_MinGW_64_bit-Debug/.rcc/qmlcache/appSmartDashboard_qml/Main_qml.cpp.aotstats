@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 35,
-                        "durationMicroseconds": 334,
+                        "durationMicroseconds": 383,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "glassyBgColor",
                         "line": 15
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 123,
+                        "durationMicroseconds": 121,
                         "errorMessage": "",
                         "functionName": "currentTime",
                         "line": 20
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 78,
+                        "durationMicroseconds": 86,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 65
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 26,
-                        "durationMicroseconds": 105,
+                        "durationMicroseconds": 121,
                         "errorMessage": "",
                         "functionName": "orientation",
                         "line": 67
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 48,
+                        "durationMicroseconds": 43,
                         "errorMessage": "Cannot access value for name bgGradientStart",
                         "functionName": "color",
                         "line": 68
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 50,
-                        "durationMicroseconds": 31,
+                        "durationMicroseconds": 23,
                         "errorMessage": "Cannot access value for name bgGradientStop",
                         "functionName": "color",
                         "line": 69
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 71,
+                        "durationMicroseconds": 77,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 74
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 34,
-                        "durationMicroseconds": 128,
+                        "durationMicroseconds": 126,
                         "errorMessage": "Cannot access value for name activeRoomLabel",
                         "functionName": "sourceComponent",
                         "line": 87
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 131,
+                        "durationMicroseconds": 139,
                         "errorMessage": "",
                         "functionName": "top",
                         "line": 81
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 33,
-                        "durationMicroseconds": 90,
+                        "durationMicroseconds": 108,
                         "errorMessage": "",
                         "functionName": "bottom",
                         "line": 82
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 125,
+                        "durationMicroseconds": 102,
                         "errorMessage": "",
                         "functionName": "left",
                         "line": 83
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 93,
+                        "durationMicroseconds": 94,
                         "errorMessage": "",
                         "functionName": "right",
                         "line": 84
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 22,
-                        "durationMicroseconds": 428,
+                        "durationMicroseconds": 429,
                         "errorMessage": "Cannot find name currentTime",
                         "functionName": "onTriggered",
                         "line": 114

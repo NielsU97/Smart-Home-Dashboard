@@ -142,7 +142,6 @@ Item {
                 radius: 16
                 height: 120
                 Layout.fillWidth: true
-                Layout.columnSpan: 2  // Make it span both columns
 
                 Column {
                     anchors.fill: parent
@@ -193,6 +192,45 @@ Item {
                     }
                 }
             }
+
+            // --- Storage Light ---
+            Rectangle {
+                id: storageLight
+                color: glassyBgColor
+                radius: 16
+                height: 120
+                Layout.fillWidth: true
+                //Layout.columnSpan: 2  // Make it span both columns
+
+                Column {
+                    anchors.fill: parent
+                    anchors.margins: 12
+                    spacing: 8
+
+                    RowLayout {
+                        width: parent.width
+                        height: 20
+
+                        Text {
+                            text: qsTr("Techniekhok")
+                            font.pixelSize: 14
+                            color: textColor
+                            Layout.fillWidth: true
+                            Layout.alignment: Qt.AlignVCenter
+                        }
+
+                        Switch {
+                            id: switchStorage
+                            checked: false
+                            Layout.alignment: Qt.AlignVCenter
+
+                            onCheckedChanged: {
+                                backend.toggleLight("light.berginglamp_licht", checked)
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         // Add some spacing at the bottom
@@ -213,6 +251,8 @@ Item {
             } else if (entityId === "light.ganglamp_licht") {
                 switchHallway.checked = isOn;
                 sliderHallway.value = brightness;
+            } else if (entityId === "light.berginglamp_licht") {
+                switchStorage.checked = isOn;
             }
         }
     }

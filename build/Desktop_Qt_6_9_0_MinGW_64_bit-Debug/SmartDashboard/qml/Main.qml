@@ -119,6 +119,7 @@ Window {
             backend.getLightState("light.woonkamer")
             backend.getLightState("light.slaapkamer")
             backend.getLightState("light.ganglamp_licht")
+            backend.getLightState("light.berginglamp_licht")
         }
     }
 

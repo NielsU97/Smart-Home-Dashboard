@@ -1,0 +1,27 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <!-- Main QML file -->
+        <file>qml/Main.qml</file>
+        
+        <!-- Components -->
+        <file>qml/components/Button.qml</file>
+        <file>qml/components/CircularProgressBar.qml</file>
+        <file>qml/components/IconLabel.qml</file>
+        <file>qml/components/Progressbar.qml</file>
+        <file>qml/components/Slider.qml</file>
+        <file>qml/components/Switch.qml</file>
+        
+        <!-- Panes -->
+        <file>qml/pane/ClimatePane.qml</file>
+        <file>qml/pane/EnergyPane.qml</file>
+        <file>qml/pane/HomePane.qml</file>
+        <file>qml/pane/LeftPane.qml</file>
+        <file>qml/pane/MusicPane.qml</file>
+        
+        <!-- Fonts -->
+        <file>assets/fonts/CodecPro-Italic.ttf</file>
+        <file>assets/fonts/CodecPro-Regular.ttf</file>
+        <file>assets/fonts/fontawesome.otf</file>
+    </qresource>
+</RCC>

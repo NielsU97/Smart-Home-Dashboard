@@ -22,8 +22,6 @@ set(src_and_dest_list
     "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/pane/EnergyPane.qml"
     "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/MusicPane.qml"
     "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/pane/MusicPane.qml"
-    "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/EnergyMetric.qml"
-    "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/components/EnergyMetric.qml"
     "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Slider.qml"
     "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard/qml/components/Slider.qml"
     "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Button.qml"

@@ -14,7 +14,7 @@ Item {
 
         Text {
             anchors.centerIn: parent
-            text: "Welcome to Klimaat"
+            text: "Klimaat"
             color: "white"
         }
     }

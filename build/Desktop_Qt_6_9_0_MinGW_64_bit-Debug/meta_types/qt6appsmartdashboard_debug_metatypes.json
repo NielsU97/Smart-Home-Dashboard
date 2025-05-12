@@ -7,13 +7,13 @@
                 "methods": [
                     {
                         "access": "public",
-                        "index": 5,
+                        "index": 6,
                         "name": "getWeatherState",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 6,
+                        "index": 7,
                         "name": "getAlarmState",
                         "returnType": "void"
                     },
@@ -25,7 +25,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 7,
+                        "index": 8,
                         "name": "getTemperature",
                         "returnType": "void"
                     },
@@ -37,7 +37,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 8,
+                        "index": 9,
                         "name": "getHumidity",
                         "returnType": "void"
                     },
@@ -49,7 +49,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 9,
+                        "index": 10,
                         "name": "getLightState",
                         "returnType": "void"
                     },
@@ -65,7 +65,7 @@
                                 "type": "int"
                             }
                         ],
-                        "index": 10,
+                        "index": 11,
                         "name": "setLightBrightness",
                         "returnType": "void"
                     },
@@ -81,8 +81,187 @@
                                 "type": "bool"
                             }
                         ],
-                        "index": 11,
+                        "index": 12,
                         "name": "toggleLight",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 13,
+                        "name": "getMediaPlayerState",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 14,
+                        "name": "mediaPlayPause",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 15,
+                        "name": "mediaPlay",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 16,
+                        "name": "mediaPause",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 17,
+                        "name": "mediaStop",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 18,
+                        "name": "mediaNextTrack",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 19,
+                        "name": "mediaPreviousTrack",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 20,
+                        "name": "mediaVolumeUp",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 21,
+                        "name": "mediaVolumeDown",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "volume",
+                                "type": "int"
+                            }
+                        ],
+                        "index": 22,
+                        "name": "mediaSetVolume",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "mediaUrl",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "mediaType",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 23,
+                        "name": "mediaPlayMedia",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "interval",
+                                "type": "int"
+                            }
+                        ],
+                        "index": 24,
+                        "name": "startMediaPlayerPolling",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 25,
+                        "isCloned": true,
+                        "name": "startMediaPlayerPolling",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "index": 26,
+                        "name": "stopMediaPlayerPolling",
                         "returnType": "void"
                     }
                 ],
@@ -171,6 +350,38 @@
                         ],
                         "index": 4,
                         "name": "lightStateUpdated",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "state",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "title",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "artist",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "albumArt",
+                                "type": "QString"
+                            },
+                            {
+                                "name": "volume",
+                                "type": "int"
+                            },
+                            {
+                                "name": "isMuted",
+                                "type": "bool"
+                            }
+                        ],
+                        "index": 5,
+                        "name": "mediaPlayerStateUpdated",
                         "returnType": "void"
                     }
                 ],

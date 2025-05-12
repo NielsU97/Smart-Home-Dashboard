@@ -7,26 +7,122 @@ Item {
     id: musicItem
     anchors.fill: parent
 
+    // Properties to bind with Home Assistant data
+    property string mediaTitle: "" // Current playing media title
+    property string mediaArtist: "" // Current artist
+    property string playerState: "idle" // playing, paused, idle, off
+    property url albumArtUrl: "" // Album art URL
+    property int mediaVolume: 50
+    property bool isMuted: false
+
+    // Entity ID for your Google Nest
+    property string mediaPlayerEntityId: "media_player.google_nest"
+
+    // Setup polling when component is loaded
+    Component.onCompleted: {
+        backend.startMediaPlayerPolling(mediaPlayerEntityId, 3000);
+    }
+
+    // Stop polling when destroyed
+    Component.onDestruction: {
+        backend.stopMediaPlayerPolling();
+    }
+
+    // Connect to signals from backend
+    Connections {
+        target: backend
+
+        function onMediaPlayerStateUpdated(state, title, artist, albumArt, volume, muted) {
+            mediaTitle = title;
+            mediaArtist = artist;
+            playerState = state;
+            albumArtUrl = albumArt;
+            mediaVolume = volume;
+            isMuted = muted;
+        }
+    }
+
     ColumnLayout {
         anchors.fill: parent
         spacing: 16
 
-        // Title Panel
+        // Title Panel with Album Art and Media Info
         Rectangle {
             color: glassyBgColor
             radius: 16
             Layout.fillWidth: true
             Layout.preferredHeight: 250
 
-            QQC2.Label {
-                anchors.centerIn: parent
-                text: "Google nest"
-                font.pixelSize: 18
-                font.bold: true
-                color: "white"
+            // Album Art and Info Container
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 20
+                spacing: 16
+
+                // Album Art
+                Rectangle {
+                    Layout.alignment: Qt.AlignHCenter
+                    width: 120
+                    height: 120
+                    radius: 12
+                    color: "#2A3141"
+
+                    Image {
+                        id: albumArtImage
+                        anchors.fill: parent
+                        anchors.margins: albumArtUrl != "" ? 0 : 20
+                        source: albumArtUrl != "" ? albumArtUrl : "" // Placeholder or actual album art
+                        fillMode: Image.PreserveAspectCrop
+                        visible: albumArtUrl != ""
+                    }
+
+                    QQC2.Label {
+                        anchors.centerIn: parent
+                        text: "♪"
+                        font.pixelSize: 40
+                        color: "white"
+                        visible: albumArtUrl == ""
+                    }
+                }
+
+                // Media Information
+                ColumnLayout {
+                    Layout.fillWidth: true
+                    spacing: 4
+                    Layout.alignment: Qt.AlignHCenter
+
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: {
+                            if (mediaTitle !== "")
+                                return mediaTitle
+                            else if (playerState === "playing")
+                                return "Radio wordt afgespeeld"
+                            else if (playerState === "off")
+                                return "Apparaat staat uit"
+                            else
+                                return "Er wordt niks afgespeeld"
+                        }
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: "white"
+                        horizontalAlignment: Text.AlignHCenter
+                        elide: Text.ElideRight
+                    }
+
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignHCenter
+                        text: mediaArtist !== "" ? mediaArtist : "Google Nest Mini"
+                        font.pixelSize: 14
+                        color: "white"
+                        opacity: 0.7
+                        horizontalAlignment: Text.AlignHCenter
+                    }
+                }
             }
         }
 
+        // Controls Panel
         Rectangle {
             color: glassyBgColor
             radius: 16
@@ -46,52 +142,56 @@ Item {
 
                     // Volume Down
                     Button {
-                        icon: "\u2212"
+                        icon: "\u2212"  // Minus sign
                         iconOnly: true
                         onClicked: {
-                            // Implement volume down action
-                            // backend.volumeDown()
+                            // Call Home Assistant service to decrease volume
+                            backend.mediaVolumeDown(mediaPlayerEntityId);
                         }
                     }
 
                     // Volume Up
                     Button {
-                        icon: "\u002B"
+                        icon: "\u002B"  // Plus sign
                         iconOnly: true
                         onClicked: {
-                            // Implement volume up action
-                            // backend.volumeUp()
+                            // Call Home Assistant service to increase volume
+                            backend.mediaVolumeUp(mediaPlayerEntityId);
                         }
                     }
 
                     // Previous Track
                     Button {
-                        icon: "\u25C0\u25C0"
+                        icon: "\u25C0\u25C0"  // Double left arrow
                         iconOnly: true
                         onClicked: {
-                            // Implement previous track action
-                            // backend.previousTrack()
+                            // Call Home Assistant service for previous track
+                            backend.mediaPreviousTrack(mediaPlayerEntityId);
                         }
                     }
 
                     // Next Track
                     Button {
-                        icon: "\u25B6\u25B6"
+                        icon: "\u25B6\u25B6"  // Double right arrow
                         iconOnly: true
                         onClicked: {
-                            // Implement next track action
-                            // backend.nextTrack()
+                            // Call Home Assistant service for next track
+                            backend.mediaNextTrack(mediaPlayerEntityId);
                         }
                     }
 
                     // Play/Pause
                     Button {
                         id: playPauseButton
-                        icon: "\u25B6"
+                        icon: playerState === "playing" ? "\u25A0" : "\u25B6"  // Pause or Play icon
                         iconOnly: true
                         onClicked: {
-                            // Implement play/pause action
-                            // backend.playPause()
+                            // Call Home Assistant service for play/pause
+                            if (playerState === "playing") {
+                                backend.mediaPause(mediaPlayerEntityId);
+                            } else {
+                                backend.mediaPlay(mediaPlayerEntityId);
+                            }
                         }
                     }
                 }
@@ -107,8 +207,12 @@ Item {
                         buttonText: "NPO 2"
                         iconOnly: false
                         onClicked: {
-                            // Implement NPO 2 radio station action
-                            // backend.playRadioStation("NPO 2")
+                            // Call Home Assistant service to play this radio station
+                            backend.mediaPlayMedia(
+                                mediaPlayerEntityId,
+                                "http://icecast.omroep.nl/radio2-bb-mp3",
+                                "music"
+                            );
                         }
                     }
 
@@ -117,8 +221,12 @@ Item {
                         buttonText: "NPO 5"
                         iconOnly: false
                         onClicked: {
-                            // Implement NPO 5 radio station action
-                            // backend.playRadioStation("NPO 5")
+                            // Call Home Assistant service to play this radio station
+                            backend.mediaPlayMedia(
+                                mediaPlayerEntityId,
+                                "http://icecast.omroep.nl/radio5-bb-mp3",
+                                "music"
+                            );
                         }
                     }
 
@@ -127,8 +235,12 @@ Item {
                         buttonText: "Qmusic"
                         iconOnly: false
                         onClicked: {
-                            // Implement Qmusic radio station action
-                            // backend.playRadioStation("Qmusic")
+                            // Call Home Assistant service to play this radio station
+                            backend.mediaPlayMedia(
+                                mediaPlayerEntityId,
+                                "https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3",
+                                "music"
+                            );
                         }
                     }
 
@@ -137,18 +249,26 @@ Item {
                         buttonText: "538"
                         iconOnly: false
                         onClicked: {
-                            // Implement 538 radio station action
-                            // backend.playRadioStation("538")
+                            // Call Home Assistant service to play this radio station
+                            backend.mediaPlayMedia(
+                                mediaPlayerEntityId,
+                                "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538.mp3",
+                                "music"
+                            );
                         }
                     }
 
-                    // Spotify Nederlands
+                    // Nederlands
                     Button {
                         buttonText: "Nederlands"
                         iconOnly: false
                         onClicked: {
-                            // Implement Spotify playlist action
-                            // backend.playSpotifyPlaylist("Nederlands")
+                            // Call Home Assistant service to play this radio station
+                            backend.mediaPlayMedia(
+                                mediaPlayerEntityId,
+                                "http://icecast.omroep.nl/radio1-bb-mp3",
+                                "music"
+                            );
                         }
                     }
                 }

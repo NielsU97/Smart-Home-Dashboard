@@ -10,7 +10,6 @@
     <file alias="qml/pane/ClimatePane.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/ClimatePane.qml</file>
     <file alias="qml/pane/EnergyPane.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/EnergyPane.qml</file>
     <file alias="qml/pane/MusicPane.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/pane/MusicPane.qml</file>
-    <file alias="qml/components/EnergyMetric.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/EnergyMetric.qml</file>
     <file alias="qml/components/Slider.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Slider.qml</file>
     <file alias="qml/components/Button.qml">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Button.qml</file>
     <file alias="assets/fonts/CodecPro-Italic.ttf">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/assets/fonts/CodecPro-Italic.ttf</file>
