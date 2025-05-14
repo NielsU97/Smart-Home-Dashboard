@@ -17,6 +17,7 @@ HEADERS += \
 
 # Resources
 RESOURCES += qml.qrc
+QTQUICK_COMPILER_SKIPPED_RESOURCES += qml.qrc
 
 # Default rules for deployment
 qnx: target.path = /tmp/$${TARGET}/bin

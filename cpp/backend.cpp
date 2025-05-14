@@ -175,8 +175,6 @@ void Backend::setLightBrightness(const QString& entityId, int brightness) {
     manager.post(request, QJsonDocument(payload).toJson());
 }
 
-// Add these functions to your existing backend.cpp file
-
 void Backend::getMediaPlayerState(const QString& entityId) {
     QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
