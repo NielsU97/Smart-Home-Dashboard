@@ -6,17 +6,14 @@ CONFIG += c++11 qtquickcompiler
 TARGET = SmartDashboard
 TEMPLATE = app
 
-# Include path to find header files
-INCLUDEPATH += appSmartDashboard/Header\ Files
-
 # Source files
 SOURCES += \
-    appSmartDashboard/Source\ Files/cpp/main.cpp \
-    appSmartDashboard/Source\ Files/cpp/backend.cpp
+    cpp/main.cpp \
+    cpp/backend.cpp
 
 # Header files
 HEADERS += \
-    appSmartDashboard/Header\ Files/cpp/backend.h
+    cpp/backend.h
 
 # Resources
 RESOURCES += qml.qrc

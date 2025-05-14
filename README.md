@@ -1,14 +1,14 @@
-<h2> Vuild Application </h2>
+<h2> Build Application </h2>
 
 `Command 1` - Install Required Qt Packages
 ```
 sudo apt-get update
-sudo apt-get install qt5-default qtdeclarative5-dev qml-module-qtquick-controls2
+sudo apt install qt6-base-dev qt6-declarative-dev
 ```
 
 `Command 2` - Build Your Project
 ```
-qmake
+qmake6
 make
 ```
 
