@@ -1,9 +1,12 @@
   <br>
-  <h1 align="center">Raspberry Pi Dashboard with Home Assistant</h1>
+  <h1 align="center">QT Dashboard for Raspberry Pi with Home Assistant api</h1>
   <br>
+ <p align="center">
+<img src="https://github.com/NielsU97/HomeDisplay/blob/main/screenshot.png" width="1000">
+  </br>
 </br>  
-<p>	  
-<h2> Preperation </h2>
+<p>
+<h2> Preparation </h2>
 </br>
 The application is build for my homeassistant. Change the home assisant api token and ip address in main.cpp. 
 Change the light and other entities to your entities. 

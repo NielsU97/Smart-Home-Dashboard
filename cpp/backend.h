@@ -54,8 +54,8 @@ signals:
 
 private:
     QNetworkAccessManager manager;
-    const QString token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJmMThiOTUxOGY0MDQ0ZDU3YjcyN2Q2ZDBkZTAzNGUzZSIsImlhdCI6MTc0Njg2OTEzMiwiZXhwIjoyMDYyMjI5MTMyfQ.2oXtT8OpzYq-Cd7wz7Ubj76vDpHF_U9LzaGOTUP45R4";
-    const QString baseUrl = "http://192.168.2.1:8123/api";
+    const QString token = "YOUR_HOMEASSISTANT_TOKEN";
+    const QString baseUrl = "http://YOUR_HOMEASSISTANT_URL/api";
 
     QTimer pollTimer;
     QTimer* lightPollingTimer = new QTimer(this);

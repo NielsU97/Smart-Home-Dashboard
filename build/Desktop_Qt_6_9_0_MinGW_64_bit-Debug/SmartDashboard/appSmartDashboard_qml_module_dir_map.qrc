@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/">
-    <file alias="/SmartDashboard">C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/build/Desktop_Qt_6_9_0_MinGW_64_bit-Debug/SmartDashboard</file>
-
-  </qresource>
-</RCC>
