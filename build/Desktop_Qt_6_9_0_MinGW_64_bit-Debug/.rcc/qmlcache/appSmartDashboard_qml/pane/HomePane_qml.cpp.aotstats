@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 19,
-                        "durationMicroseconds": 209,
+                        "durationMicroseconds": 254,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 8
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 64,
+                        "durationMicroseconds": 79,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 12
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 24,
-                        "durationMicroseconds": 391,
+                        "durationMicroseconds": 307,
                         "errorMessage": "Cannot access value for name glassyBgColor",
                         "functionName": "color",
                         "line": 25
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 35,
-                        "durationMicroseconds": 187,
+                        "durationMicroseconds": 73,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 31
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 237,
+                        "durationMicroseconds": 112,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 36
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 1195,
+                        "durationMicroseconds": 382,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 42
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 132,
+                        "durationMicroseconds": 115,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 44
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 47,
-                        "durationMicroseconds": 259,
+                        "durationMicroseconds": 269,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onCheckedChanged",
                         "line": 52
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 82,
+                        "durationMicroseconds": 92,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 50
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 31,
-                        "durationMicroseconds": 60,
+                        "durationMicroseconds": 71,
                         "errorMessage": "Cannot retrieve a non-object type by ID: sliderLiving",
                         "functionName": "text",
                         "line": 59
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 32,
-                        "durationMicroseconds": 348,
+                        "durationMicroseconds": 356,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 61
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 24,
-                        "durationMicroseconds": 248,
+                        "durationMicroseconds": 252,
                         "errorMessage": "Cannot access value for name glassyBgColor",
                         "functionName": "color",
                         "line": 83
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 35,
-                        "durationMicroseconds": 81,
+                        "durationMicroseconds": 80,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 89
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 84,
+                        "durationMicroseconds": 82,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 94
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 356,
+                        "durationMicroseconds": 345,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 100
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 82,
+                        "durationMicroseconds": 95,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 102
@@ -150,7 +150,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 47,
-                        "durationMicroseconds": 358,
+                        "durationMicroseconds": 385,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onCheckedChanged",
                         "line": 110
@@ -158,7 +158,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 83,
+                        "durationMicroseconds": 128,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 108
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 31,
-                        "durationMicroseconds": 65,
+                        "durationMicroseconds": 59,
                         "errorMessage": "Cannot retrieve a non-object type by ID: sliderSleep",
                         "functionName": "text",
                         "line": 117
@@ -174,7 +174,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 32,
-                        "durationMicroseconds": 352,
+                        "durationMicroseconds": 336,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 119
@@ -198,7 +198,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 24,
-                        "durationMicroseconds": 227,
+                        "durationMicroseconds": 224,
                         "errorMessage": "Cannot access value for name glassyBgColor",
                         "functionName": "color",
                         "line": 141
@@ -206,7 +206,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 35,
-                        "durationMicroseconds": 61,
+                        "durationMicroseconds": 72,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 147
@@ -214,7 +214,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 77,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 152
@@ -222,7 +222,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 314,
+                        "durationMicroseconds": 324,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 158
@@ -230,7 +230,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 81,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 160
@@ -238,7 +238,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 47,
-                        "durationMicroseconds": 226,
+                        "durationMicroseconds": 231,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onCheckedChanged",
                         "line": 168
@@ -246,7 +246,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 75,
+                        "durationMicroseconds": 92,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 166
@@ -254,7 +254,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 31,
-                        "durationMicroseconds": 46,
+                        "durationMicroseconds": 61,
                         "errorMessage": "Cannot retrieve a non-object type by ID: sliderHallway",
                         "functionName": "text",
                         "line": 175
@@ -262,7 +262,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 32,
-                        "durationMicroseconds": 309,
+                        "durationMicroseconds": 314,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 177
@@ -286,7 +286,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 24,
-                        "durationMicroseconds": 250,
+                        "durationMicroseconds": 271,
                         "errorMessage": "Cannot access value for name glassyBgColor",
                         "functionName": "color",
                         "line": 199
@@ -294,7 +294,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 35,
-                        "durationMicroseconds": 65,
+                        "durationMicroseconds": 72,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 206
@@ -302,7 +302,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 76,
+                        "durationMicroseconds": 86,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 211
@@ -310,7 +310,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 322,
+                        "durationMicroseconds": 339,
                         "errorMessage": "Cannot access value for name textColor",
                         "functionName": "color",
                         "line": 217
@@ -318,7 +318,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 84,
+                        "durationMicroseconds": 98,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 219
@@ -326,7 +326,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 47,
-                        "durationMicroseconds": 240,
+                        "durationMicroseconds": 234,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onCheckedChanged",
                         "line": 227
@@ -334,7 +334,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 47,
-                        "durationMicroseconds": 79,
+                        "durationMicroseconds": 89,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 225
@@ -342,7 +342,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 57,
+                        "durationMicroseconds": 54,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "target",
                         "line": 243

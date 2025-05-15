@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 99,
+                        "durationMicroseconds": 94,
                         "errorMessage": "Cannot access value for name height",
                         "functionName": "radius",
                         "line": 13
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 71,
+                        "durationMicroseconds": 64,
                         "errorMessage": "Cannot access value for name control",
                         "functionName": "width",
                         "line": 21
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 21,
-                        "durationMicroseconds": 16,
+                        "durationMicroseconds": 12,
                         "errorMessage": "Cannot access value for name parent",
                         "functionName": "height",
                         "line": 22
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 21,
-                        "durationMicroseconds": 13,
+                        "durationMicroseconds": 12,
                         "errorMessage": "Cannot access value for name height",
                         "functionName": "radius",
                         "line": 23

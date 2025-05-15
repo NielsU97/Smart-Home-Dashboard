@@ -45,7 +45,6 @@ Window {
         }
     }
 
-
     function hex_to_RGB(hex) {
         hex = hex.toString();
         var m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
@@ -62,6 +61,7 @@ Window {
     // Main background
     Rectangle {
         id: bg
+        //rotation: 180
         anchors.fill: parent
         gradient: Gradient {
             orientation: Gradient.Horizontal

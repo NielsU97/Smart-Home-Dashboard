@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 13,
-                        "durationMicroseconds": 312,
+                        "durationMicroseconds": 326,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 7
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 12,
-                        "durationMicroseconds": 308,
+                        "durationMicroseconds": 325,
                         "errorMessage": "",
                         "functionName": "color",
                         "line": 8
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 16,
-                        "durationMicroseconds": 335,
+                        "durationMicroseconds": 305,
                         "errorMessage": "Cannot access value for name checked",
                         "functionName": "color",
                         "line": 17
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 16,
-                        "durationMicroseconds": 169,
+                        "durationMicroseconds": 196,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 18
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 17,
-                        "durationMicroseconds": 53,
+                        "durationMicroseconds": 58,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 19
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 17,
-                        "durationMicroseconds": 98,
+                        "durationMicroseconds": 104,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 20
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 12,
-                        "durationMicroseconds": 81,
+                        "durationMicroseconds": 86,
                         "errorMessage": "Cannot access value for name checked",
                         "functionName": "x",
                         "line": 21
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 33,
-                        "durationMicroseconds": 114,
+                        "durationMicroseconds": 108,
                         "errorMessage": "",
                         "functionName": "verticalCenter",
                         "line": 22
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 83,
+                        "durationMicroseconds": 87,
                         "errorMessage": "Cannot access value for name checked",
                         "functionName": "onClicked",
                         "line": 29

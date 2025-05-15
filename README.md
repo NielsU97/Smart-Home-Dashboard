@@ -1,20 +1,51 @@
+  <br>
+  <h1 align="center">Raspberry Pi Dashboard with Home Assistant</h1>
+  <br>
+</br>  
+<p>	  
+<h2> Preperation </h2>
+</br>
+The application is build for my homeassistant. Change the home assisant api token and ip address in main.cpp. 
+Change the light and other entities to your entities. 
+
+
+`SSH` - Connect to your Pi using Secure Shell (Command prompt) with Hostname or IP address
+```
+ssh username@hostname
+
+ssh username@192.xxx.x.xx
+```
+Or use PuTTY instead of command prompt. 
+
+`Command 1` - Check and Update our Pi
+```
+sudo apt-get update -y
+```
+```
+sudo apt-get upgrade -y
+```
+
 <h2> Build Application </h2>
 
-`Command 1` - Install Required Qt Packages
+`Command 1` - Install Qt6
 ```
-sudo apt-get update
 sudo apt install qt6-base-dev qt6-declarative-dev
+```
 
+`Command 2` - Install Required Qt Packages
+```
 sudo apt-get install $(apt-cache search qml6-module | awk '{print $1}')
 ```
 
-`Command 2` - Build Your Project
+`Command 3` - Build Your Project
 ```
 qmake6
 make
 ```
 
-`Command 3` -  Run Your Application
+I'm installed the Raspberry Pi headless with Raspbian OS lite. For running the application on my DSI display, i used eglfs
+
+`Command 4` -  Run Your Application
 ```
 ./SmartDashboard -platform eglfs
 ```
@@ -30,7 +61,6 @@ sudo nano /lib/systemd/system/dashboard.service
 
 `Command 2` - Add in the following text (Check your path)
 ```
-
 [Unit]
 Description=Smart Home Dashboard
 After=multi-user.target
