@@ -5,12 +5,15 @@
 #include <QQuickStyle>
 #include <QQmlContext>
 #include <QtCore/QStringLiteral>
+#include <QCursor>
 
 #include "backend.h"
 
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
+
+    //QGuiApplication::setOverrideCursor(Qt::BlankCursor);
 
     QQuickStyle::setStyle("Basic");
 

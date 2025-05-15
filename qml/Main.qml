@@ -26,6 +26,8 @@ Window {
 
     property string alarmIcon: "-"
 
+    property string lightOnLiving: ""
+
     property ListModel roomsModel: ListModel {
         ListElement {
             label: 'Huis'

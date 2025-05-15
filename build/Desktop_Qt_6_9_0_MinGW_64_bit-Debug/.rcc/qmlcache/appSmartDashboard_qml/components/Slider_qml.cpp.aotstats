@@ -6,34 +6,34 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 102,
+                        "durationMicroseconds": 106,
                         "errorMessage": "Cannot access value for name height",
                         "functionName": "radius",
-                        "line": 17
+                        "line": 16
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 23,
-                        "durationMicroseconds": 14,
+                        "durationMicroseconds": 12,
                         "errorMessage": "Cannot access value for name parent",
                         "functionName": "fill",
-                        "line": 21
+                        "line": 20
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 71,
+                        "durationMicroseconds": 73,
                         "errorMessage": "Cannot access value for name control",
                         "functionName": "width",
-                        "line": 24
+                        "line": 23
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 21,
-                        "durationMicroseconds": 14,
+                        "durationMicroseconds": 13,
                         "errorMessage": "Cannot access value for name parent",
                         "functionName": "height",
-                        "line": 25
+                        "line": 24
                     },
                     {
                         "codegenSuccessfull": false,
@@ -41,15 +41,15 @@
                         "durationMicroseconds": 15,
                         "errorMessage": "Cannot access value for name height",
                         "functionName": "radius",
-                        "line": 26
+                        "line": 25
                     },
                     {
                         "codegenSuccessfull": false,
                         "column": 37,
-                        "durationMicroseconds": 14,
+                        "durationMicroseconds": 12,
                         "errorMessage": "Cannot access value for name parent",
                         "functionName": "verticalCenter",
-                        "line": 28
+                        "line": 27
                     }
                 ],
                 "filepath": "C:/Users/niels/Documents/GitHub/Smart-Home-Dashboard/qml/components/Slider.qml"

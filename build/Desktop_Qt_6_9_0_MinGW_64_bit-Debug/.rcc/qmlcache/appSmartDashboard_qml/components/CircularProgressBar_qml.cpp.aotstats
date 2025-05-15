@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 22,
-                        "durationMicroseconds": 328,
+                        "durationMicroseconds": 311,
                         "errorMessage": "",
                         "functionName": "transformOrigin",
                         "line": 6
@@ -14,7 +14,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 29,
-                        "durationMicroseconds": 696,
+                        "durationMicroseconds": 691,
                         "errorMessage": "Cannot generate efficient code for storing an array in a non-sequence type",
                         "functionName": "metaData",
                         "line": 8
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 137,
+                        "durationMicroseconds": 625,
                         "errorMessage": "",
                         "functionName": "fromAngle",
                         "line": 24
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 201,
+                        "durationMicroseconds": 231,
                         "errorMessage": "",
                         "functionName": "toAngle",
                         "line": 25
@@ -38,7 +38,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 29,
-                        "durationMicroseconds": 113,
+                        "durationMicroseconds": 124,
                         "errorMessage": "",
                         "functionName": "lineWidth",
                         "line": 27
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 28,
-                        "durationMicroseconds": 117,
+                        "durationMicroseconds": 112,
                         "errorMessage": "",
                         "functionName": "fontSize",
                         "line": 28
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 41,
-                        "durationMicroseconds": 257,
+                        "durationMicroseconds": 278,
                         "errorMessage": "Cannot generate efficient code for internal conversion with incompatible or ambiguous types: call to method rgba, returning QVariant -> QColor stored as QVariant",
                         "functionName": "knobBackgroundColor",
                         "line": 30
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 31,
-                        "durationMicroseconds": 224,
+                        "durationMicroseconds": 242,
                         "errorMessage": "Cannot generate efficient code for internal conversion with incompatible or ambiguous types: call to method rgba, returning QVariant -> QColor stored as QVariant",
                         "functionName": "knobColor",
                         "line": 31
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 18,
-                        "durationMicroseconds": 61,
+                        "durationMicroseconds": 53,
                         "errorMessage": "Cannot access value for name title",
                         "functionName": "visible",
                         "line": 48
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 15,
-                        "durationMicroseconds": 100,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "text",
                         "line": 49
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 16,
-                        "durationMicroseconds": 269,
+                        "durationMicroseconds": 250,
                         "errorMessage": "Cannot generate efficient code for internal conversion with incompatible or ambiguous types: call to method rgba, returning QVariant -> QColor stored as QVariant",
                         "functionName": "color",
                         "line": 50
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 82,
+                        "durationMicroseconds": 77,
                         "errorMessage": "",
                         "functionName": "horizontalAlignment",
                         "line": 51
@@ -118,7 +118,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 16,
-                        "durationMicroseconds": 83,
+                        "durationMicroseconds": 84,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 57
@@ -126,7 +126,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 17,
-                        "durationMicroseconds": 113,
+                        "durationMicroseconds": 95,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 58
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 1138,
+                        "durationMicroseconds": 151,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 61
@@ -142,7 +142,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 18,
-                        "durationMicroseconds": 2732,
+                        "durationMicroseconds": 15912,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onPaint",
                         "line": 63
@@ -150,7 +150,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 16,
-                        "durationMicroseconds": 113,
+                        "durationMicroseconds": 135,
                         "errorMessage": "",
                         "functionName": "width",
                         "line": 89
@@ -158,7 +158,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 17,
-                        "durationMicroseconds": 69,
+                        "durationMicroseconds": 82,
                         "errorMessage": "",
                         "functionName": "height",
                         "line": 90
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 393,
+                        "durationMicroseconds": 399,
                         "errorMessage": "",
                         "functionName": "step",
                         "line": 93
@@ -174,7 +174,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 30,
-                        "durationMicroseconds": 110,
+                        "durationMicroseconds": 120,
                         "errorMessage": "",
                         "functionName": "radius",
                         "line": 94
@@ -182,7 +182,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 18,
-                        "durationMicroseconds": 3459,
+                        "durationMicroseconds": 3481,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "onPaint",
                         "line": 110
@@ -190,7 +190,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 19,
-                        "durationMicroseconds": 213,
+                        "durationMicroseconds": 212,
                         "errorMessage": "Cannot generate efficient code for call to untyped JavaScript function",
                         "functionName": "text",
                         "line": 103
@@ -198,7 +198,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 34,
-                        "durationMicroseconds": 118,
+                        "durationMicroseconds": 105,
                         "errorMessage": "",
                         "functionName": "horizontalAlignment",
                         "line": 104
@@ -206,7 +206,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 32,
-                        "durationMicroseconds": 65,
+                        "durationMicroseconds": 70,
                         "errorMessage": "",
                         "functionName": "verticalAlignment",
                         "line": 105
@@ -214,7 +214,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 29,
-                        "durationMicroseconds": 81,
+                        "durationMicroseconds": 87,
                         "errorMessage": "",
                         "functionName": "pointSize",
                         "line": 102
@@ -222,7 +222,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 27,
-                        "durationMicroseconds": 49,
+                        "durationMicroseconds": 52,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 106

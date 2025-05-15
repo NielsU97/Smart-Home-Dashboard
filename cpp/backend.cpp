@@ -175,6 +175,25 @@ void Backend::setLightBrightness(const QString& entityId, int brightness) {
     manager.post(request, QJsonDocument(payload).toJson());
 }
 
+void Backend::startLightPolling(int intervalMs) {
+    disconnect(lightPollingTimer, nullptr, nullptr, nullptr);
+
+    connect(lightPollingTimer, &QTimer::timeout, this, [this]() {
+        getLightState("light.woonkamer");
+        getLightState("light.slaapkamer");
+        getLightState("light.ganglamp_licht");
+        getLightState("light.berginglamp_licht");
+    });
+
+    lightPollingTimer->start(intervalMs);
+}
+
+void Backend::stopLightPolling() {
+    if (lightPollingTimer->isActive())
+        lightPollingTimer->stop();
+}
+
+
 void Backend::getMediaPlayerState(const QString& entityId) {
     QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
     request.setRawHeader("Authorization", "Bearer " + token.toUtf8());

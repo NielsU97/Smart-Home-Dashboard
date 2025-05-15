@@ -70,6 +70,9 @@ template <> constexpr inline auto Backend::qt_create_metaobjectdata<qt_meta_tag_
         "setLightBrightness",
         "toggleLight",
         "on",
+        "startLightPolling",
+        "intervalMs",
+        "stopLightPolling",
         "getMediaPlayerState",
         "mediaPlayPause",
         "mediaPlay",
@@ -138,60 +141,66 @@ template <> constexpr inline auto Backend::qt_create_metaobjectdata<qt_meta_tag_
         QtMocHelpers::MethodData<void(const QString &, bool)>(29, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 }, { QMetaType::Bool, 30 },
         }}),
+        // Method 'startLightPolling'
+        QtMocHelpers::MethodData<void(int)>(31, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::Int, 32 },
+        }}),
+        // Method 'stopLightPolling'
+        QtMocHelpers::MethodData<void()>(33, 2, QMC::AccessPublic, QMetaType::Void),
         // Method 'getMediaPlayerState'
-        QtMocHelpers::MethodData<void(const QString &)>(31, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 14 },
-        }}),
-        // Method 'mediaPlayPause'
-        QtMocHelpers::MethodData<void(const QString &)>(32, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 14 },
-        }}),
-        // Method 'mediaPlay'
-        QtMocHelpers::MethodData<void(const QString &)>(33, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 14 },
-        }}),
-        // Method 'mediaPause'
         QtMocHelpers::MethodData<void(const QString &)>(34, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
-        // Method 'mediaStop'
+        // Method 'mediaPlayPause'
         QtMocHelpers::MethodData<void(const QString &)>(35, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
-        // Method 'mediaNextTrack'
+        // Method 'mediaPlay'
         QtMocHelpers::MethodData<void(const QString &)>(36, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
-        // Method 'mediaPreviousTrack'
+        // Method 'mediaPause'
         QtMocHelpers::MethodData<void(const QString &)>(37, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
-        // Method 'mediaVolumeUp'
+        // Method 'mediaStop'
         QtMocHelpers::MethodData<void(const QString &)>(38, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
-        // Method 'mediaVolumeDown'
+        // Method 'mediaNextTrack'
         QtMocHelpers::MethodData<void(const QString &)>(39, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
+        // Method 'mediaPreviousTrack'
+        QtMocHelpers::MethodData<void(const QString &)>(40, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 },
+        }}),
+        // Method 'mediaVolumeUp'
+        QtMocHelpers::MethodData<void(const QString &)>(41, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 },
+        }}),
+        // Method 'mediaVolumeDown'
+        QtMocHelpers::MethodData<void(const QString &)>(42, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 },
+        }}),
         // Method 'mediaSetVolume'
-        QtMocHelpers::MethodData<void(const QString &, int)>(40, 2, QMC::AccessPublic, QMetaType::Void, {{
+        QtMocHelpers::MethodData<void(const QString &, int)>(43, 2, QMC::AccessPublic, QMetaType::Void, {{
             { QMetaType::QString, 14 }, { QMetaType::Int, 21 },
         }}),
         // Method 'mediaPlayMedia'
-        QtMocHelpers::MethodData<void(const QString &, const QString &, const QString &)>(41, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 14 }, { QMetaType::QString, 42 }, { QMetaType::QString, 43 },
+        QtMocHelpers::MethodData<void(const QString &, const QString &, const QString &)>(44, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 }, { QMetaType::QString, 45 }, { QMetaType::QString, 46 },
         }}),
         // Method 'startMediaPlayerPolling'
-        QtMocHelpers::MethodData<void(const QString &, int)>(44, 2, QMC::AccessPublic, QMetaType::Void, {{
-            { QMetaType::QString, 14 }, { QMetaType::Int, 45 },
+        QtMocHelpers::MethodData<void(const QString &, int)>(47, 2, QMC::AccessPublic, QMetaType::Void, {{
+            { QMetaType::QString, 14 }, { QMetaType::Int, 48 },
         }}),
         // Method 'startMediaPlayerPolling'
-        QtMocHelpers::MethodData<void(const QString &)>(44, 2, QMC::AccessPublic | QMC::MethodCloned, QMetaType::Void, {{
+        QtMocHelpers::MethodData<void(const QString &)>(47, 2, QMC::AccessPublic | QMC::MethodCloned, QMetaType::Void, {{
             { QMetaType::QString, 14 },
         }}),
         // Method 'stopMediaPlayerPolling'
-        QtMocHelpers::MethodData<void()>(46, 2, QMC::AccessPublic, QMetaType::Void),
+        QtMocHelpers::MethodData<void()>(49, 2, QMC::AccessPublic, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -228,20 +237,22 @@ void Backend::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 10: _t->getLightState((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 11: _t->setLightBrightness((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
         case 12: _t->toggleLight((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[2]))); break;
-        case 13: _t->getMediaPlayerState((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 14: _t->mediaPlayPause((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 15: _t->mediaPlay((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 16: _t->mediaPause((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 17: _t->mediaStop((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 18: _t->mediaNextTrack((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 19: _t->mediaPreviousTrack((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 20: _t->mediaVolumeUp((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 21: _t->mediaVolumeDown((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 22: _t->mediaSetVolume((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 23: _t->mediaPlayMedia((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
-        case 24: _t->startMediaPlayerPolling((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
-        case 25: _t->startMediaPlayerPolling((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 26: _t->stopMediaPlayerPolling(); break;
+        case 13: _t->startLightPolling((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 14: _t->stopLightPolling(); break;
+        case 15: _t->getMediaPlayerState((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 16: _t->mediaPlayPause((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 17: _t->mediaPlay((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 18: _t->mediaPause((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 19: _t->mediaStop((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 20: _t->mediaNextTrack((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 21: _t->mediaPreviousTrack((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 22: _t->mediaVolumeUp((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 23: _t->mediaVolumeDown((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 24: _t->mediaSetVolume((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 25: _t->mediaPlayMedia((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[3]))); break;
+        case 26: _t->startMediaPlayerPolling((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<int>>(_a[2]))); break;
+        case 27: _t->startMediaPlayerPolling((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 28: _t->stopMediaPlayerPolling(); break;
         default: ;
         }
     }
@@ -280,14 +291,14 @@ int Backend::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 27)
+        if (_id < 29)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 27;
+        _id -= 29;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 27)
+        if (_id < 29)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 27;
+        _id -= 29;
     }
     return _id;
 }

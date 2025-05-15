@@ -89,24 +89,18 @@
                         "access": "public",
                         "arguments": [
                             {
-                                "name": "entityId",
-                                "type": "QString"
+                                "name": "intervalMs",
+                                "type": "int"
                             }
                         ],
                         "index": 13,
-                        "name": "getMediaPlayerState",
+                        "name": "startLightPolling",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "arguments": [
-                            {
-                                "name": "entityId",
-                                "type": "QString"
-                            }
-                        ],
                         "index": 14,
-                        "name": "mediaPlayPause",
+                        "name": "stopLightPolling",
                         "returnType": "void"
                     },
                     {
@@ -118,7 +112,7 @@
                             }
                         ],
                         "index": 15,
-                        "name": "mediaPlay",
+                        "name": "getMediaPlayerState",
                         "returnType": "void"
                     },
                     {
@@ -130,7 +124,7 @@
                             }
                         ],
                         "index": 16,
-                        "name": "mediaPause",
+                        "name": "mediaPlayPause",
                         "returnType": "void"
                     },
                     {
@@ -142,7 +136,7 @@
                             }
                         ],
                         "index": 17,
-                        "name": "mediaStop",
+                        "name": "mediaPlay",
                         "returnType": "void"
                     },
                     {
@@ -154,7 +148,7 @@
                             }
                         ],
                         "index": 18,
-                        "name": "mediaNextTrack",
+                        "name": "mediaPause",
                         "returnType": "void"
                     },
                     {
@@ -166,7 +160,7 @@
                             }
                         ],
                         "index": 19,
-                        "name": "mediaPreviousTrack",
+                        "name": "mediaStop",
                         "returnType": "void"
                     },
                     {
@@ -178,7 +172,7 @@
                             }
                         ],
                         "index": 20,
-                        "name": "mediaVolumeUp",
+                        "name": "mediaNextTrack",
                         "returnType": "void"
                     },
                     {
@@ -190,6 +184,30 @@
                             }
                         ],
                         "index": 21,
+                        "name": "mediaPreviousTrack",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 22,
+                        "name": "mediaVolumeUp",
+                        "returnType": "void"
+                    },
+                    {
+                        "access": "public",
+                        "arguments": [
+                            {
+                                "name": "entityId",
+                                "type": "QString"
+                            }
+                        ],
+                        "index": 23,
                         "name": "mediaVolumeDown",
                         "returnType": "void"
                     },
@@ -205,7 +223,7 @@
                                 "type": "int"
                             }
                         ],
-                        "index": 22,
+                        "index": 24,
                         "name": "mediaSetVolume",
                         "returnType": "void"
                     },
@@ -225,7 +243,7 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 23,
+                        "index": 25,
                         "name": "mediaPlayMedia",
                         "returnType": "void"
                     },
@@ -241,7 +259,7 @@
                                 "type": "int"
                             }
                         ],
-                        "index": 24,
+                        "index": 26,
                         "name": "startMediaPlayerPolling",
                         "returnType": "void"
                     },
@@ -253,14 +271,14 @@
                                 "type": "QString"
                             }
                         ],
-                        "index": 25,
+                        "index": 27,
                         "isCloned": true,
                         "name": "startMediaPlayerPolling",
                         "returnType": "void"
                     },
                     {
                         "access": "public",
-                        "index": 26,
+                        "index": 28,
                         "name": "stopMediaPlayerPolling",
                         "returnType": "void"
                     }

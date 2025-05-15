@@ -5,7 +5,6 @@ Slider {
     id: control
     from: 0
     to: 100
-    value: 50
     height: 16
 
     handle: null

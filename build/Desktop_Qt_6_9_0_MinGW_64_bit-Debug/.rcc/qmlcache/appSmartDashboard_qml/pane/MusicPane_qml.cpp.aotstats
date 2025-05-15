@@ -6,7 +6,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 19,
-                        "durationMicroseconds": 281,
+                        "durationMicroseconds": 257,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 8
@@ -22,7 +22,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 30,
-                        "durationMicroseconds": 198,
+                        "durationMicroseconds": 194,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onDestruction",
                         "line": 27
@@ -30,7 +30,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 17,
-                        "durationMicroseconds": 53,
+                        "durationMicroseconds": 61,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "target",
                         "line": 33
@@ -46,7 +46,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 23,
-                        "durationMicroseconds": 96,
+                        "durationMicroseconds": 87,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 46
@@ -54,7 +54,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 250,
+                        "durationMicroseconds": 253,
                         "errorMessage": "Cannot access value for name glassyBgColor",
                         "functionName": "color",
                         "line": 51
@@ -62,7 +62,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 70,
+                        "durationMicroseconds": 78,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 58
@@ -70,7 +70,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 39,
-                        "durationMicroseconds": 113,
+                        "durationMicroseconds": 126,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 64
@@ -78,7 +78,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 33,
-                        "durationMicroseconds": 107,
+                        "durationMicroseconds": 110,
                         "errorMessage": "Cannot access value for name albumArtUrl",
                         "functionName": "source",
                         "line": 74
@@ -86,7 +86,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 35,
-                        "durationMicroseconds": 95,
+                        "durationMicroseconds": 90,
                         "errorMessage": "",
                         "functionName": "fillMode",
                         "line": 75
@@ -94,7 +94,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 34,
-                        "durationMicroseconds": 45,
+                        "durationMicroseconds": 52,
                         "errorMessage": "Cannot access value for name albumArtUrl",
                         "functionName": "visible",
                         "line": 76
@@ -102,7 +102,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 39,
-                        "durationMicroseconds": 66,
+                        "durationMicroseconds": 65,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 72
@@ -110,7 +110,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 42,
-                        "durationMicroseconds": 56,
+                        "durationMicroseconds": 65,
                         "errorMessage": "Cannot access value for name albumArtUrl",
                         "functionName": "margins",
                         "line": 73
@@ -134,7 +134,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 39,
-                        "durationMicroseconds": 96,
+                        "durationMicroseconds": 99,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 92
@@ -166,7 +166,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 43,
-                        "durationMicroseconds": 102,
+                        "durationMicroseconds": 126,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 95
@@ -190,7 +190,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 43,
-                        "durationMicroseconds": 88,
+                        "durationMicroseconds": 89,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 114
@@ -198,7 +198,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 20,
-                        "durationMicroseconds": 278,
+                        "durationMicroseconds": 282,
                         "errorMessage": "Cannot access value for name glassyBgColor",
                         "functionName": "color",
                         "line": 127
@@ -206,7 +206,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 31,
-                        "durationMicroseconds": 72,
+                        "durationMicroseconds": 64,
                         "errorMessage": "",
                         "functionName": "fill",
                         "line": 133
@@ -214,7 +214,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 39,
-                        "durationMicroseconds": 96,
+                        "durationMicroseconds": 86,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 140
@@ -222,7 +222,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 308,
+                        "durationMicroseconds": 324,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 147
@@ -230,7 +230,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 234,
+                        "durationMicroseconds": 241,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 157
@@ -238,7 +238,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 267,
+                        "durationMicroseconds": 290,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 167
@@ -246,7 +246,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 239,
+                        "durationMicroseconds": 247,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 177
@@ -254,7 +254,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 31,
-                        "durationMicroseconds": 63,
+                        "durationMicroseconds": 60,
                         "errorMessage": "Cannot access value for name playerState",
                         "functionName": "icon",
                         "line": 186
@@ -262,7 +262,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 553,
+                        "durationMicroseconds": 556,
                         "errorMessage": "Cannot access value for name playerState",
                         "functionName": "onClicked",
                         "line": 188
@@ -270,7 +270,7 @@
                     {
                         "codegenSuccessfull": true,
                         "column": 39,
-                        "durationMicroseconds": 135,
+                        "durationMicroseconds": 112,
                         "errorMessage": "",
                         "functionName": "alignment",
                         "line": 202
@@ -278,7 +278,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 289,
+                        "durationMicroseconds": 265,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 209
@@ -286,7 +286,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 276,
+                        "durationMicroseconds": 255,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 223
@@ -294,7 +294,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 290,
+                        "durationMicroseconds": 234,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 237
@@ -302,7 +302,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 274,
+                        "durationMicroseconds": 235,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 251
@@ -310,7 +310,7 @@
                     {
                         "codegenSuccessfull": false,
                         "column": 36,
-                        "durationMicroseconds": 288,
+                        "durationMicroseconds": 246,
                         "errorMessage": "Cannot access value for name backend",
                         "functionName": "onClicked",
                         "line": 265
