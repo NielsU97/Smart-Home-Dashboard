@@ -2,7 +2,7 @@
   <h1 align="center">QT Dashboard for Raspberry Pi with Home Assistant api</h1>
   <br>
  <p align="center">
-<img src="https://github.com/NielsU97/HomeDisplay/blob/main/screenshot.png" width="1000">
+<img src="https://github.com/NielsU97/Smart-Home-Dashboard/blob/main/screenshot.png" width="1000">
   </br>
 </br>  
 <p>
