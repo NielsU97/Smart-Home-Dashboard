@@ -4,30 +4,31 @@ import 'pane'
 import 'components'
 
 Window {
+    id: root
+
+    // ---- Window Properties ----
     width: 800
     height: 480
     visible: true
     title: qsTr("Smart Home Dashboard")
 
+    // ---- Theme Properties ----
     property string bgGradientStart: '#0d8bfd'
     property string bgGradientStop: '#866aaf'
     property string textColor: '#d9d9d9'
-    property color glassyBgColor: hex_to_RGBA('#1e1f2a', 0.8)
+    property color glassyBgColor: utils.hex_to_RGBA('#1e1f2a', 0.8)
     property alias fontawesomefontloader: fontawesomefontloader
 
+    // ---- State Properties ----
     property string activeRoomLabel: 'Huis'
-
     property var currentTime: new Date()
-
     property string weatherCondition: "-"
     property string weatherIcon: "-"
     property string ambientTemperature: "-"
     property string ambientHumidity: "-"
-
     property string alarmIcon: "-"
 
-    property string lightOnLiving: ""
-
+    // ---- Room Navigation Model ----
     property ListModel roomsModel: ListModel {
         ListElement {
             label: 'Huis'
@@ -47,68 +48,98 @@ Window {
         }
     }
 
-    function hex_to_RGB(hex) {
-        hex = hex.toString();
-        var m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
-        return Qt.rgba(parseInt(m[1], 16)/255.0, parseInt(m[2], 16)/255.1, parseInt(m[3], 16)/255.0, 1);
+    // ---- Utility Functions ----
+    QtObject {
+        id: utils
+
+        function hex_to_RGB(hex) {
+            hex = hex.toString();
+            var m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
+            return Qt.rgba(
+                parseInt(m[1], 16) / 255.0,
+                parseInt(m[2], 16) / 255.0,
+                parseInt(m[3], 16) / 255.0,
+                1
+            );
+        }
+
+        function hex_to_RGBA(hex, opacity=1) {
+            hex = hex.toString();
+            opacity = opacity > 1 ? 1 : opacity // Opacity should be 0 - 1
+            var m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
+            return Qt.rgba(
+                parseInt(m[1], 16) / 255.0,
+                parseInt(m[2], 16) / 255.0,
+                parseInt(m[3], 16) / 255.0,
+                opacity
+            );
+        }
+
+        function commafy(value) {
+            return value.toLocaleString()
+        }
     }
 
-    function hex_to_RGBA(hex, opacity=1) {
-        hex = hex.toString();
-        opacity = opacity > 1 ? 1 : opacity // Opacity should be 0 - 1
-        var m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
-        return Qt.rgba(parseInt(m[1], 16)/255.0, parseInt(m[2], 16)/255.1, parseInt(m[3], 16)/255.0, opacity);
-    }
-
-    // Main background
+    // ---- Main Background ----
     Rectangle {
-        id: bg
-        //rotation: 180
+        id: background
         anchors.fill: parent
         gradient: Gradient {
             orientation: Gradient.Horizontal
             GradientStop { position: 0.0; color: bgGradientStart }
             GradientStop { position: 1.0; color: bgGradientStop }
         }
+    }
 
-        // Left and Right panes
-        Item {
-            anchors.fill: parent
-            anchors.margins: 24
+    // ---- Main Layout ----
+    Item {
+        id: mainLayout
+        anchors.fill: parent
+        anchors.margins: 24
 
-            LeftPane { id: leftItem }
+        // Left panel for navigation
+        LeftPane {
+            id: leftItem
+        }
 
-            Loader {
-                id: rightPaneLoader
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.left: leftItem.right
-                anchors.right: parent.right
-                anchors.leftMargin: 12
+        // Right content area with dynamic pane loading
+        Loader {
+            id: rightPaneLoader
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                left: leftItem.right
+                right: parent.right
+                leftMargin: 12
+            }
 
-                sourceComponent: {
-                    switch (activeRoomLabel) {
-                    case "Huis": return homePaneComponent
-                    case "Muziek": return musicPaneComponent
-                    case "Klimaat": return climatePaneComponent
-                    case "Energie": return energyPaneComponent
-                    default: return null
-                    }
+            sourceComponent: {
+                switch (activeRoomLabel) {
+                case "Huis": return homePaneComponent
+                case "Muziek": return musicPaneComponent
+                case "Klimaat": return climatePaneComponent
+                case "Energie": return energyPaneComponent
+                default: return null
                 }
             }
         }
     }
 
+    // ---- Resources ----
     FontLoader {
         id: fontawesomefontloader
         source: "qrc:/SmartDashboard/assets/fonts/fontawesome.otf"
     }
 
-    function commafy(value) {
-        return value.toLocaleString()
-    }
+    // ---- Components ----
+    Component { id: homePaneComponent; HomePane { } }
+    Component { id: musicPaneComponent; MusicPane { } }
+    Component { id: climatePaneComponent; ClimatePane { } }
+    Component { id: energyPaneComponent; EnergyPane { } }
 
+    // ---- Timers ----
     Timer {
+        id: updateTimer
         interval: 500
         repeat: true
         running: true
@@ -117,17 +148,58 @@ Window {
             currentTime = new Date()
             backend.getWeatherState()
             backend.getAlarmState()
-
-            backend.getLightState("light.woonkamer")
-            backend.getLightState("light.slaapkamer")
-            backend.getLightState("light.ganglamp_licht")
-            backend.getLightState("light.berginglamp_licht")
         }
     }
-
-    Component { id: homePaneComponent; HomePane { } }
-    Component { id: musicPaneComponent; MusicPane { } }
-    Component { id: climatePaneComponent; ClimatePane { } }
-    Component { id: energyPaneComponent; EnergyPane { } }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

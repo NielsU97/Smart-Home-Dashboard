@@ -25,6 +25,9 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     Backend backend;
+    backend.setUrl("http://HOMEASSISTANT_URL:8123/api");
+    backend.setAuthToken("YOUR_HOMEASSISTANT_TOKEN");
+
     engine.rootContext()->setContextProperty("backend", &backend);
 
     const QUrl url(QStringLiteral("qrc:/SmartDashboard/qml/Main.qml"));

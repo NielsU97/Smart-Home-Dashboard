@@ -7,6 +7,75 @@ Item {
     id: homeItem
     anchors.fill: parent
 
+    // Keep track of user-initiated switch changes to avoid feedback loops
+    property bool userSwitchingLiving: false
+    property bool userSwitchingSleep: false
+    property bool userSwitchingHallway: false
+    property bool userSwitchingStorage: false
+
+    // Setup polling when component is loaded
+    Component.onCompleted: {
+        if (!backend.isLightPollingActive) {
+            backend.startLightPolling(500);
+        }
+
+        // Immediately fetch initial states
+        refreshLightStates();
+    }
+
+    Component.onDestruction: {
+
+    }
+
+    // Refresh light states whenever this pane becomes active
+    Connections {
+        target: root
+        function onActiveRoomLabelChanged() {
+            if (root.activeRoomLabel === "Huis") {
+                refreshLightStates();
+            }
+        }
+    }
+
+    // Function to refresh all light states
+    function refreshLightStates() {
+        backend.getLightState("light.woonkamer");
+        backend.getLightState("light.slaapkamer");
+        backend.getLightState("light.ganglamp_licht");
+        backend.getLightState("light.berginglamp_licht");
+    }
+
+    Connections {
+        target: backend
+        function onLightStateUpdated(entityId, isOn, brightness) {
+            if (entityId === "light.woonkamer") {
+                // Only update the UI if the change wasn't initiated by the user
+                if (!userSwitchingLiving) {
+                    switchLiving.checked = isOn;
+                    sliderLiving.value = brightness;
+                }
+                userSwitchingLiving = false;
+            } else if (entityId === "light.slaapkamer") {
+                if (!userSwitchingSleep) {
+                    switchSleep.checked = isOn;
+                    sliderSleep.value = brightness;
+                }
+                userSwitchingSleep = false;
+            } else if (entityId === "light.ganglamp_licht") {
+                if (!userSwitchingHallway) {
+                    switchHallway.checked = isOn;
+                    sliderHallway.value = brightness;
+                }
+                userSwitchingHallway = false;
+            } else if (entityId === "light.berginglamp_licht") {
+                if (!userSwitchingStorage) {
+                    switchStorage.checked = isOn;
+                }
+                userSwitchingStorage = false;
+            }
+        }
+    }
+
     // Main layout container
     ColumnLayout {
         anchors.fill: parent
@@ -49,8 +118,9 @@ Item {
                             checked: false
                             Layout.alignment: Qt.AlignVCenter
 
-                            onCheckedChanged: {
-                                backend.toggleLight("light.woonkamer", checked)
+                            onToggled: {
+                                userSwitchingLiving = true;
+                                backend.toggleLight("light.woonkamer", checked);
                             }
                         }
                     }
@@ -107,8 +177,9 @@ Item {
                             checked: false
                             Layout.alignment: Qt.AlignVCenter
 
-                            onCheckedChanged: {
-                                backend.toggleLight("light.slaapkamer", checked)
+                            onToggled: {
+                                userSwitchingSleep = true;
+                                backend.toggleLight("light.slaapkamer", checked);
                             }
                         }
                     }
@@ -165,8 +236,9 @@ Item {
                             checked: false
                             Layout.alignment: Qt.AlignVCenter
 
-                            onCheckedChanged: {
-                                backend.toggleLight("light.ganglamp_licht", checked)
+                            onToggled: {
+                                userSwitchingHallway = true;
+                                backend.toggleLight("light.ganglamp_licht", checked);
                             }
                         }
                     }
@@ -200,7 +272,6 @@ Item {
                 radius: 16
                 height: 120
                 Layout.fillWidth: true
-                //Layout.columnSpan: 2  // Make it span both columns
 
                 Column {
                     anchors.fill: parent
@@ -224,8 +295,9 @@ Item {
                             checked: false
                             Layout.alignment: Qt.AlignVCenter
 
-                            onCheckedChanged: {
-                                backend.toggleLight("light.berginglamp_licht", checked)
+                            onToggled: {
+                                userSwitchingStorage = true;
+                                backend.toggleLight("light.berginglamp_licht", checked);
                             }
                         }
                     }
@@ -236,24 +308,6 @@ Item {
         // Add some spacing at the bottom
         Item {
             Layout.fillHeight: true
-        }
-    }
-
-    Connections {
-        target: backend
-        function onLightStateUpdated(entityId, isOn, brightness) {
-            if (entityId === "light.woonkamer") {
-                switchLiving.checked = isOn;
-                sliderLiving.value = brightness;
-            } else if (entityId === "light.slaapkamer") {
-                switchSleep.checked = isOn;
-                sliderSleep.value = brightness;
-            } else if (entityId === "light.ganglamp_licht") {
-                switchHallway.checked = isOn;
-                sliderHallway.value = brightness;
-            } else if (entityId === "light.berginglamp_licht") {
-                switchStorage.checked = isOn;
-            }
         }
     }
 }

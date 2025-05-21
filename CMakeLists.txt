@@ -37,6 +37,7 @@ qt_add_qml_module(appSmartDashboard
         QML_FILES
         QML_FILES qml/components/Slider.qml
         QML_FILES qml/components/Button.qml
+        QML_FILES
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

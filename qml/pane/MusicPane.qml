@@ -28,6 +28,14 @@ Item {
         backend.stopMediaPlayerPolling();
     }
 
+    // Add visibility handler - refresh state when becoming visible
+    onVisibleChanged: {
+        if (visible) {
+            // Force an immediate state update when coming back to this view
+            backend.getMediaPlayerState(mediaPlayerEntityId);
+        }
+    }
+
     // Connect to signals from backend
     Connections {
         target: backend
@@ -258,15 +266,15 @@ Item {
                         }
                     }
 
-                    // Nederlands
+                    // Spotify
                     Button {
-                        buttonText: "Nederlands"
+                        buttonText: "Spotify"
                         iconOnly: false
                         onClicked: {
                             // Call Home Assistant service to play this radio station
                             backend.mediaPlayMedia(
                                 mediaPlayerEntityId,
-                                "http://icecast.omroep.nl/radio1-bb-mp3",
+                                "spotify:playlist:7mlnu1diy0G60IButOXyuq",
                                 "music"
                             );
                         }

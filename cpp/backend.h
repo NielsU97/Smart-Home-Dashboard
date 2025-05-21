@@ -1,78 +1,93 @@
 #ifndef BACKEND_H
 #define BACKEND_H
+
 #include <QObject>
+#include <QString>
+#include <QUrl>
 #include <QNetworkAccessManager>
+#include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QTimer>
-#include <QUrl>
+#include <QHash>
 
 class Backend : public QObject
 {
     Q_OBJECT
+
 public:
     explicit Backend(QObject *parent = nullptr);
 
-    // Existing methods
-    Q_INVOKABLE void getWeatherState();
-    Q_INVOKABLE void getAlarmState();
-    Q_INVOKABLE void getTemperature(const QString& entityId);
-    Q_INVOKABLE void getHumidity(const QString& entityId);
+    // Configuration
+    Q_INVOKABLE void setAuthToken(const QString &authToken);
+    Q_INVOKABLE void setUrl(const QString &url);
 
-    Q_INVOKABLE void getLightState(const QString& entityId);
-    Q_INVOKABLE void setLightBrightness(const QString& entityId, int brightness);
-    Q_INVOKABLE void toggleLight(const QString& entityId, bool on);
-    Q_INVOKABLE void startLightPolling(int intervalMs);
+    // Weather
+    Q_INVOKABLE void getWeatherState();
+
+    // Alarm
+    Q_INVOKABLE void getAlarmState();
+
+    // Climate sensors
+    Q_INVOKABLE void getTemperature(const QString &entityId);
+    Q_INVOKABLE void getHumidity(const QString &entityId);
+
+    // Lights
+    Q_INVOKABLE void getLightState(const QString &entityId);
+    Q_INVOKABLE void toggleLight(const QString &entityId, bool on);
+    Q_INVOKABLE void setLightBrightness(const QString &entityId, int brightness);
+    Q_INVOKABLE void startLightPolling(int interval);
     Q_INVOKABLE void stopLightPolling();
 
-    // New media player methods
-    Q_INVOKABLE void getMediaPlayerState(const QString& entityId);
-    Q_INVOKABLE void mediaPlayPause(const QString& entityId);
-    Q_INVOKABLE void mediaPlay(const QString& entityId);
-    Q_INVOKABLE void mediaPause(const QString& entityId);
-    Q_INVOKABLE void mediaStop(const QString& entityId);
-    Q_INVOKABLE void mediaNextTrack(const QString& entityId);
-    Q_INVOKABLE void mediaPreviousTrack(const QString& entityId);
-    Q_INVOKABLE void mediaVolumeUp(const QString& entityId);
-    Q_INVOKABLE void mediaVolumeDown(const QString& entityId);
-    Q_INVOKABLE void mediaSetVolume(const QString& entityId, int volume);
-    Q_INVOKABLE void mediaPlayMedia(const QString& entityId, const QString& mediaUrl, const QString& mediaType);
-    Q_INVOKABLE void startMediaPlayerPolling(const QString& entityId, int interval = 5000);
+    // Media player
+    Q_INVOKABLE void getMediaPlayerState(const QString &entityId);
+    Q_INVOKABLE void mediaPlayPause(const QString &entityId);
+    Q_INVOKABLE void mediaPlay(const QString &entityId);
+    Q_INVOKABLE void mediaPause(const QString &entityId);
+    Q_INVOKABLE void mediaStop(const QString &entityId);
+    Q_INVOKABLE void mediaNextTrack(const QString &entityId);
+    Q_INVOKABLE void mediaPreviousTrack(const QString &entityId);
+    Q_INVOKABLE void mediaVolumeUp(const QString &entityId);
+    Q_INVOKABLE void mediaVolumeDown(const QString &entityId);
+    Q_INVOKABLE void mediaSetVolume(const QString &entityId, int volume);
+    Q_INVOKABLE void mediaPlayMedia(const QString &entityId, const QString &mediaUrl, const QString &mediaType);
+    Q_INVOKABLE void startMediaPlayerPolling(const QString &entityId, int interval);
     Q_INVOKABLE void stopMediaPlayerPolling();
 
 signals:
-    // Existing signals
-    void weatherUpdated(QString temperature, QString condition, QString humidity, QString icon);
-    void alarmUpdated(const QString& state, const QString& icon);
-    void temperatureUpdated(QString temp);
-    void humidityUpdated(QString hum);
-    void lightStateUpdated(const QString &entityId, bool isOn, int brightness);
-
-    // New media player signals
-    void mediaPlayerStateUpdated(const QString& state, const QString& title,
-                                 const QString& artist, const QString& albumArt,
-                                 int volume, bool isMuted);
+    void weatherUpdated(const QString &temperature, const QString &condition, const QString &humidity, const QString &icon);
+    void alarmUpdated(const QString &state, const QString &icon);
+    void temperatureUpdated(const QString &temp);
+    void humidityUpdated(const QString &hum);
+    void lightStateUpdated(const QString &entityId, bool state, int brightness);
+    void lightPollingStatusChanged(bool isActive);
+    void mediaPlayerStateUpdated(const QString &state, const QString &title, const QString &artist, const QString &albumArt, int volume, bool muted);
 
 private:
     QNetworkAccessManager manager;
-    const QString token = "YOUR_HOMEASSISTANT_TOKEN";
-    const QString baseUrl = "http://YOUR_HOMEASSISTANT_URL/api";
+    QString token;
+    QString baseUrl;
 
-    QTimer pollTimer;
-    QTimer* lightPollingTimer = new QTimer(this);
-
-    QTimer mediaPlayerPollTimer;
-    QString lastState;
-    QString trackedEntity;
-    QString trackedMediaPlayer;
+    // Light polling timer
+    QTimer lightPollingTimer;
     QHash<QString, QString> lastStateMap;
     QHash<QString, int> lastBrightnessMap;
 
+    // Media player polling timer
+    QTimer mediaPlayerPollTimer;
+    QString trackedMediaPlayer;
+
+    // Media player state cache
     QString lastMediaPlayerState;
     QString lastMediaTitle;
     QString lastMediaArtist;
     QString lastMediaAlbumArt;
-    int lastMediaVolume;
-    bool lastMediaMuted;
+    int lastMediaVolume = 0;
+    bool lastMediaMuted = false;
+
+    // Add helper method to ensure we can get cached media player state
+    void updateMediaPlayerCache(const QString &state, const QString &title,
+                                const QString &artist, const QString &albumArt,
+                                int volume, bool muted);
 };
 
 #endif // BACKEND_H

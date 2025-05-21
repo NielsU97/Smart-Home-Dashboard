@@ -1,14 +1,19 @@
 #include "backend.h"
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QNetworkRequest>
 #include <QJsonArray>
+#include <QDebug>
 
 Backend::Backend(QObject* parent) : QObject(parent) {
-    connect(&pollTimer, &QTimer::timeout, this, [this]() {
-        if (!trackedEntity.isEmpty())
-            getLightState(trackedEntity);
-    });
+
+}
+
+void Backend::setAuthToken(const QString& authToken) {
+    token = authToken;
+}
+
+void Backend::setUrl(const QString& url) {
+    baseUrl = url;
 }
 
 void Backend::getWeatherState() {
@@ -135,22 +140,18 @@ void Backend::getLightState(const QString& entityId) {
             int brightness = obj["attributes"].toObject().value("brightness").toInt();
             int brightnessPct = brightness * 100 / 255;
 
-            QString previousState = lastStateMap.value(entityId, "");
-            int previousBrightness = lastBrightnessMap.value(entityId, -1);
+            // Always update our internal cache
+            lastStateMap[entityId] = state;
+            lastBrightnessMap[entityId] = brightnessPct;
 
-            if (state != previousState || brightnessPct != previousBrightness) {
-                lastStateMap[entityId] = state;
-                lastBrightnessMap[entityId] = brightnessPct;
-
-                emit lightStateUpdated(entityId, state == "on", brightnessPct);
-            }
+            // Always emit the signal when actively requested
+            emit lightStateUpdated(entityId, state == "on", brightnessPct);
         } else {
             qWarning() << "Polling error:" << reply->errorString();
         }
         reply->deleteLater();
     });
 }
-
 
 void Backend::toggleLight(const QString& entityId, bool on) {
     QNetworkRequest request(QUrl(baseUrl + "/services/light/" + (on ? "turn_on" : "turn_off")));
@@ -159,6 +160,9 @@ void Backend::toggleLight(const QString& entityId, bool on) {
 
     QJsonObject payload;
     payload["entity_id"] = entityId;
+
+    // Update our internal state cache immediately for better responsiveness
+    lastStateMap[entityId] = on ? "on" : "off";
 
     manager.post(request, QJsonDocument(payload).toJson());
 }
@@ -172,27 +176,65 @@ void Backend::setLightBrightness(const QString& entityId, int brightness) {
     payload["entity_id"] = entityId;
     payload["brightness_pct"] = brightness;
 
+    // Update our internal brightness cache immediately
+    lastBrightnessMap[entityId] = brightness;
+    lastStateMap[entityId] = "on"; // If setting brightness, the light must be on
+
     manager.post(request, QJsonDocument(payload).toJson());
 }
 
-void Backend::startLightPolling(int intervalMs) {
-    disconnect(lightPollingTimer, nullptr, nullptr, nullptr);
+void Backend::startLightPolling(int interval) {
+    // Initial fetch
+    getLightState("light.woonkamer");
+    getLightState("light.slaapkamer");
+    getLightState("light.ganglamp_licht");
+    getLightState("light.berginglamp_licht");
 
-    connect(lightPollingTimer, &QTimer::timeout, this, [this]() {
+    // Stop existing timer if running
+    if (lightPollingTimer.isActive()) {
+        lightPollingTimer.stop();
+        emit lightPollingStatusChanged(false);
+    }
+
+    lightPollingTimer.setInterval(interval);
+
+    // Avoid multiple connections
+    disconnect(&lightPollingTimer, nullptr, this, nullptr);
+
+    // Set up timer for polling
+    connect(&lightPollingTimer, &QTimer::timeout, this, [this]() {
         getLightState("light.woonkamer");
         getLightState("light.slaapkamer");
         getLightState("light.ganglamp_licht");
         getLightState("light.berginglamp_licht");
     });
 
-    lightPollingTimer->start(intervalMs);
+    lightPollingTimer.start();
+    emit lightPollingStatusChanged(true);
 }
 
 void Backend::stopLightPolling() {
-    if (lightPollingTimer->isActive())
-        lightPollingTimer->stop();
+    if (lightPollingTimer.isActive()) {
+        lightPollingTimer.stop();
+        emit lightPollingStatusChanged(false);
+    }
 }
 
+// Helper method to update cache and emit signal
+void Backend::updateMediaPlayerCache(const QString &state, const QString &title,
+                                     const QString &artist, const QString &albumArt,
+                                     int volume, bool muted) {
+    // Update cache
+    lastMediaPlayerState = state;
+    lastMediaTitle = title;
+    lastMediaArtist = artist;
+    lastMediaAlbumArt = albumArt;
+    lastMediaVolume = volume;
+    lastMediaMuted = muted;
+
+    // Emit signal
+    emit mediaPlayerStateUpdated(state, title, artist, albumArt, volume, muted);
+}
 
 void Backend::getMediaPlayerState(const QString& entityId) {
     QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
@@ -226,25 +268,8 @@ void Backend::getMediaPlayerState(const QString& entityId) {
                 albumArt = baseUrlPrefix + albumArt;
             }
 
-            // Check if anything changed before emitting signal
-            if (state != lastMediaPlayerState ||
-                mediaTitle != lastMediaTitle ||
-                mediaArtist != lastMediaArtist ||
-                albumArt != lastMediaAlbumArt ||
-                volume != lastMediaVolume ||
-                isMuted != lastMediaMuted) {
-
-                // Update last known values
-                lastMediaPlayerState = state;
-                lastMediaTitle = mediaTitle;
-                lastMediaArtist = mediaArtist;
-                lastMediaAlbumArt = albumArt;
-                lastMediaVolume = volume;
-                lastMediaMuted = isMuted;
-
-                // Emit the signal with updated values
-                emit mediaPlayerStateUpdated(state, mediaTitle, mediaArtist, albumArt, volume, isMuted);
-            }
+            // Always update cache and emit signal when explicitly requested
+            updateMediaPlayerCache(state, mediaTitle, mediaArtist, albumArt, volume, isMuted);
         } else {
             qWarning() << "Media player state fetch failed:" << reply->errorString();
         }
@@ -272,6 +297,12 @@ void Backend::mediaPlay(const QString& entityId) {
     QJsonObject payload;
     payload["entity_id"] = entityId;
 
+    // Update our cached state optimistically for better responsiveness
+    if (!lastMediaPlayerState.isEmpty()) {
+        updateMediaPlayerCache("playing", lastMediaTitle, lastMediaArtist,
+                               lastMediaAlbumArt, lastMediaVolume, lastMediaMuted);
+    }
+
     QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
     connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
 }
@@ -284,6 +315,12 @@ void Backend::mediaPause(const QString& entityId) {
     QJsonObject payload;
     payload["entity_id"] = entityId;
 
+    // Update our cached state optimistically for better responsiveness
+    if (!lastMediaPlayerState.isEmpty()) {
+        updateMediaPlayerCache("paused", lastMediaTitle, lastMediaArtist,
+                               lastMediaAlbumArt, lastMediaVolume, lastMediaMuted);
+    }
+
     QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
     connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
 }
@@ -295,6 +332,12 @@ void Backend::mediaStop(const QString& entityId) {
 
     QJsonObject payload;
     payload["entity_id"] = entityId;
+
+    // Update our cached state optimistically
+    if (!lastMediaPlayerState.isEmpty()) {
+        updateMediaPlayerCache("idle", lastMediaTitle, lastMediaArtist,
+                               lastMediaAlbumArt, lastMediaVolume, lastMediaMuted);
+    }
 
     QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
     connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
@@ -310,6 +353,11 @@ void Backend::mediaNextTrack(const QString& entityId) {
 
     QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
     connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+
+    // Force update after a short delay to get the new track info
+    QTimer::singleShot(500, this, [this, entityId]() {
+        getMediaPlayerState(entityId);
+    });
 }
 
 void Backend::mediaPreviousTrack(const QString& entityId) {
@@ -322,6 +370,11 @@ void Backend::mediaPreviousTrack(const QString& entityId) {
 
     QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
     connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+
+    // Force update after a short delay to get the new track info
+    QTimer::singleShot(500, this, [this, entityId]() {
+        getMediaPlayerState(entityId);
+    });
 }
 
 void Backend::mediaVolumeUp(const QString& entityId) {
