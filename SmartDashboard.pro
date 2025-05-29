@@ -1,4 +1,8 @@
-QT += quick core gui quickcontrols2
+QT += quick quickcontrols2 websockets network qml core gui
+
+# You can make your code fail to compile if it uses deprecated APIs.
+# Uncomment the next line to disable deprecated APIs before Qt 6.0.0
+# DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
 # For Raspberry Pi optimization
 CONFIG += c++11 qtquickcompiler

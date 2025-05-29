@@ -7,6 +7,47 @@ Item {
     height: parent.height
     anchors.left: parent.left
 
+    property var currentTime: new Date()
+    property string alarmIcon: '-'
+
+    QtObject {
+        id: weatherModel
+        property string temperature: "-"
+        property string condition: "-"
+        property string humidity: "-"
+        property string icon: "-"
+    }
+
+
+    // ---- Backend Connections ----
+    Connections {
+        target: backend
+
+        function onWeatherUpdated(temperature, condition, humidity, icon) {
+            weatherModel.temperature = temperature;
+            weatherModel.condition = condition;
+            weatherModel.humidity = humidity;
+            weatherModel.icon = icon;
+        }
+
+        function onAlarmUpdated(state, icon) {
+            alarmIcon = icon;
+        }
+    }
+
+    // ---- Timers ----
+    Timer {
+        id: updateTimer
+        interval: 1000
+        repeat: true
+        running: true
+        triggeredOnStart: true
+        onTriggered: {
+            currentTime = new Date()
+        }
+    }
+
+    // ---- Layout ----
     Item {
         id: dateitem
         height: 150
@@ -90,7 +131,7 @@ Item {
 
                 IconLabel {
                     id: cloudicon
-                    icon: weatherIcon
+                    icon: weatherModel.icon
                     size: 24
                     color: textColor
                     anchors.verticalCenter: parent.verticalCenter
@@ -103,7 +144,7 @@ Item {
 
                     Text {
                         id: tmptxt
-                        text: (ambientTemperature !== undefined && ambientTemperature !== null) ? ambientTemperature : "0"
+                        text: (weatherModel.temperature !== undefined && weatherModel.temperature !== null) ? weatherModel.temperature : "0"
                         font.pixelSize: 40
                         color: textColor
                     }
@@ -118,7 +159,7 @@ Item {
 
                 Text {
                     id: humtxt
-                    text: (ambientHumidity !== undefined && ambientHumidity !== null) ? ambientHumidity + "%" : "0%"
+                    text: (weatherModel.humidity !== undefined && weatherModel.humidity !== null) ? weatherModel.humidity + "%" : "0%"
                     font.pixelSize: 14
                     color: textColor
                     anchors.verticalCenter: parent.verticalCenter
@@ -127,7 +168,7 @@ Item {
 
             Text {
                 id: weathercommentxt
-                text: weatherCondition ?? ""
+                text: weatherModel.condition ?? ""
                 font.pixelSize: 16
                 color: textColor
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -214,19 +255,6 @@ Item {
                     }
                 }
             }
-        }
-    }
-
-    Connections {
-        target: backend
-        function onWeatherUpdated(temperature, condition, humidity, icon) {
-            ambientTemperature = temperature
-            weatherCondition = condition
-            weatherIcon = icon
-            ambientHumidity = humidity
-        }
-        function onAlarmUpdated(state, icon) {
-            alarmIcon = icon
         }
     }
 }

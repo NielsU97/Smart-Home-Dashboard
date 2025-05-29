@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     Backend backend;
-    backend.setUrl("http://HOMEASSISTANT_URL:8123/api");
+    backend.setUrl("http://YOUR_HOMEASSISTANT_URL:8123/api");
     backend.setAuthToken("YOUR_HOMEASSISTANT_TOKEN");
 
     engine.rootContext()->setContextProperty("backend", &backend);
@@ -33,13 +33,21 @@ int main(int argc, char *argv[])
     const QUrl url(QStringLiteral("qrc:/SmartDashboard/qml/Main.qml"));
 
     QObject::connect(
-      &engine,
-      &QQmlApplicationEngine::objectCreationFailed,
-       &app,
-       []() { QCoreApplication::exit(-1); },
-       Qt::QueuedConnection);
+        &engine,
+        &QQmlApplicationEngine::objectCreationFailed,
+        &app,
+        []() { QCoreApplication::exit(-1); },
+        Qt::QueuedConnection);
 
     engine.load(url);
+
+    backend.subscribeToWeather();
+    backend.subscribeToAlarm();
+    backend.subscribeToLights();
+    backend.subscribeToMediaPlayer("media_player.google_nest");
+
+
+    QMetaObject::invokeMethod(&backend, "connectWebSocket", Qt::QueuedConnection);
 
     return app.exec();
 }

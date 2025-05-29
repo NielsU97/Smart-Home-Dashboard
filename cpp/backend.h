@@ -9,6 +9,11 @@
 #include <QNetworkReply>
 #include <QTimer>
 #include <QHash>
+#include <QSet>
+#include <QtWebSockets/QWebSocket>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
 
 class Backend : public QObject
 {
@@ -20,26 +25,26 @@ public:
     // Configuration
     Q_INVOKABLE void setAuthToken(const QString &authToken);
     Q_INVOKABLE void setUrl(const QString &url);
+    Q_INVOKABLE void connectWebSocket();
+    Q_INVOKABLE void disconnectWebSocket();
 
     // Weather
-    Q_INVOKABLE void getWeatherState();
+    Q_INVOKABLE void subscribeToWeather();
 
     // Alarm
-    Q_INVOKABLE void getAlarmState();
+    Q_INVOKABLE void subscribeToAlarm();
 
     // Climate sensors
-    Q_INVOKABLE void getTemperature(const QString &entityId);
-    Q_INVOKABLE void getHumidity(const QString &entityId);
+    Q_INVOKABLE void subscribeToTemperature(const QString &entityId);
+    Q_INVOKABLE void subscribeToHumidity(const QString &entityId);
 
     // Lights
-    Q_INVOKABLE void getLightState(const QString &entityId);
+    Q_INVOKABLE void subscribeToLights();
     Q_INVOKABLE void toggleLight(const QString &entityId, bool on);
     Q_INVOKABLE void setLightBrightness(const QString &entityId, int brightness);
-    Q_INVOKABLE void startLightPolling(int interval);
-    Q_INVOKABLE void stopLightPolling();
 
     // Media player
-    Q_INVOKABLE void getMediaPlayerState(const QString &entityId);
+    Q_INVOKABLE void subscribeToMediaPlayer(const QString &entityId);
     Q_INVOKABLE void mediaPlayPause(const QString &entityId);
     Q_INVOKABLE void mediaPlay(const QString &entityId);
     Q_INVOKABLE void mediaPause(const QString &entityId);
@@ -50,44 +55,51 @@ public:
     Q_INVOKABLE void mediaVolumeDown(const QString &entityId);
     Q_INVOKABLE void mediaSetVolume(const QString &entityId, int volume);
     Q_INVOKABLE void mediaPlayMedia(const QString &entityId, const QString &mediaUrl, const QString &mediaType);
-    Q_INVOKABLE void startMediaPlayerPolling(const QString &entityId, int interval);
-    Q_INVOKABLE void stopMediaPlayerPolling();
 
 signals:
+    void connectionStatusChanged(bool connected);
     void weatherUpdated(const QString &temperature, const QString &condition, const QString &humidity, const QString &icon);
     void alarmUpdated(const QString &state, const QString &icon);
-    void temperatureUpdated(const QString &temp);
-    void humidityUpdated(const QString &hum);
+    void temperatureUpdated(const QString &entityId, const QString &temp);
+    void humidityUpdated(const QString &entityId, const QString &hum);
     void lightStateUpdated(const QString &entityId, bool state, int brightness);
-    void lightPollingStatusChanged(bool isActive);
-    void mediaPlayerStateUpdated(const QString &state, const QString &title, const QString &artist, const QString &albumArt, int volume, bool muted);
+    void mediaPlayerStateUpdated(const QString &entityId, const QString &state, const QString &title, const QString &artist, const QString &albumArt, int volume, bool muted);
+
+private slots:
+    void onWebSocketConnected();
+    void onWebSocketDisconnected();
+    void onWebSocketMessageReceived(const QString &message);
+    void onWebSocketError(QAbstractSocket::SocketError error);
 
 private:
-    QNetworkAccessManager manager;
-    QString token;
-    QString baseUrl;
+    // WebSocket connection
+    QWebSocket *m_webSocket;
+    QString m_token;
+    QString m_baseUrl;
+    QString m_wsUrl;
+    quint64 m_messageId;
+    bool m_authenticated;
 
-    // Light polling timer
-    QTimer lightPollingTimer;
-    QHash<QString, QString> lastStateMap;
-    QHash<QString, int> lastBrightnessMap;
+    // Subscription tracking
+    QHash<quint64, QString> m_pendingSubscriptions;
+    QSet<QString> m_subscribedEntities;
 
-    // Media player polling timer
-    QTimer mediaPlayerPollTimer;
-    QString trackedMediaPlayer;
+    // Helper methods
+    void sendMessage(const QJsonObject &message);
+    void authenticate();
+    void subscribeToStateChangeEvents();
+    void requestCurrentStates();
+    void handleAuthResult(const QJsonObject &message);
+    void handleSubscriptionResult(const QJsonObject &message);
+    void handleStateChanged(const QJsonObject &event);
 
-    // Media player state cache
-    QString lastMediaPlayerState;
-    QString lastMediaTitle;
-    QString lastMediaArtist;
-    QString lastMediaAlbumArt;
-    int lastMediaVolume = 0;
-    bool lastMediaMuted = false;
+    void processEntityState(const QString &entityId, const QJsonObject &state);
+    void processWeatherState(const QJsonObject &state);
+    void processAlarmState(const QJsonObject &state);
+    void processLightState(const QString &entityId, const QJsonObject &state);
+    void processMediaPlayerState(const QString &entityId, const QJsonObject &state);
 
-    // Add helper method to ensure we can get cached media player state
-    void updateMediaPlayerCache(const QString &state, const QString &title,
-                                const QString &artist, const QString &albumArt,
-                                int volume, bool muted);
+    void callService(const QString &domain, const QString &service, const QJsonObject &serviceData);
 };
 
 #endif // BACKEND_H

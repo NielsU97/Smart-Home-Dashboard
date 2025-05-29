@@ -18,29 +18,15 @@ Item {
     // Entity ID for your Google Nest
     property string mediaPlayerEntityId: "media_player.google_nest"
 
-    // Setup polling when component is loaded
-    Component.onCompleted: {
-        backend.startMediaPlayerPolling(mediaPlayerEntityId, 3000);
-    }
-
-    // Stop polling when destroyed
-    Component.onDestruction: {
-        backend.stopMediaPlayerPolling();
-    }
-
-    // Add visibility handler - refresh state when becoming visible
-    onVisibleChanged: {
-        if (visible) {
-            // Force an immediate state update when coming back to this view
-            backend.getMediaPlayerState(mediaPlayerEntityId);
-        }
-    }
 
     // Connect to signals from backend
     Connections {
         target: backend
 
-        function onMediaPlayerStateUpdated(state, title, artist, albumArt, volume, muted) {
+        function onMediaPlayerStateUpdated(entityId, state, title, artist, albumArt, volume, muted) {
+            if (entityId !== mediaPlayerEntityId)
+                return;
+
             mediaTitle = title;
             mediaArtist = artist;
             playerState = state;
@@ -49,6 +35,7 @@ Item {
             isMuted = muted;
         }
     }
+
 
     ColumnLayout {
         anchors.fill: parent
@@ -246,7 +233,7 @@ Item {
                             // Call Home Assistant service to play this radio station
                             backend.mediaPlayMedia(
                                 mediaPlayerEntityId,
-                                "https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live_96.mp3",
+                                "https://stream.qmusic.nl/qmusic/mp3",
                                 "music"
                             );
                         }

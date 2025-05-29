@@ -13,38 +13,6 @@ Item {
     property bool userSwitchingHallway: false
     property bool userSwitchingStorage: false
 
-    // Setup polling when component is loaded
-    Component.onCompleted: {
-        if (!backend.isLightPollingActive) {
-            backend.startLightPolling(500);
-        }
-
-        // Immediately fetch initial states
-        refreshLightStates();
-    }
-
-    Component.onDestruction: {
-
-    }
-
-    // Refresh light states whenever this pane becomes active
-    Connections {
-        target: root
-        function onActiveRoomLabelChanged() {
-            if (root.activeRoomLabel === "Huis") {
-                refreshLightStates();
-            }
-        }
-    }
-
-    // Function to refresh all light states
-    function refreshLightStates() {
-        backend.getLightState("light.woonkamer");
-        backend.getLightState("light.slaapkamer");
-        backend.getLightState("light.ganglamp_licht");
-        backend.getLightState("light.berginglamp_licht");
-    }
-
     Connections {
         target: backend
         function onLightStateUpdated(entityId, isOn, brightness) {

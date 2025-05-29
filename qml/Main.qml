@@ -1,11 +1,11 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 import 'pane'
 import 'components'
 
 Window {
     id: root
-
     // ---- Window Properties ----
     width: 800
     height: 480
@@ -21,12 +21,6 @@ Window {
 
     // ---- State Properties ----
     property string activeRoomLabel: 'Huis'
-    property var currentTime: new Date()
-    property string weatherCondition: "-"
-    property string weatherIcon: "-"
-    property string ambientTemperature: "-"
-    property string ambientHumidity: "-"
-    property string alarmIcon: "-"
 
     // ---- Room Navigation Model ----
     property ListModel roomsModel: ListModel {
@@ -51,7 +45,6 @@ Window {
     // ---- Utility Functions ----
     QtObject {
         id: utils
-
         function hex_to_RGB(hex) {
             hex = hex.toString();
             var m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
@@ -62,7 +55,6 @@ Window {
                 1
             );
         }
-
         function hex_to_RGBA(hex, opacity=1) {
             hex = hex.toString();
             opacity = opacity > 1 ? 1 : opacity // Opacity should be 0 - 1
@@ -74,7 +66,6 @@ Window {
                 opacity
             );
         }
-
         function commafy(value) {
             return value.toLocaleString()
         }
@@ -102,9 +93,9 @@ Window {
             id: leftItem
         }
 
-        // Right content area with dynamic pane loading
-        Loader {
-            id: rightPaneLoader
+        // Right content area with StackLayout for state persistence
+        StackLayout {
+            id: rightPaneStack
             anchors {
                 top: parent.top
                 bottom: parent.bottom
@@ -113,14 +104,32 @@ Window {
                 leftMargin: 12
             }
 
-            sourceComponent: {
+            // Set the current index based on activeRoomLabel
+            currentIndex: {
                 switch (activeRoomLabel) {
-                case "Huis": return homePaneComponent
-                case "Muziek": return musicPaneComponent
-                case "Klimaat": return climatePaneComponent
-                case "Energie": return energyPaneComponent
-                default: return null
+                case "Huis": return 0
+                case "Muziek": return 1
+                case "Klimaat": return 2
+                case "Energie": return 3
+                default: return 0
                 }
+            }
+
+            // All panes are created once and kept in memory
+            HomePane {
+                id: homePane
+            }
+
+            MusicPane {
+                id: musicPane
+            }
+
+            ClimatePane {
+                id: climatePane
+            }
+
+            EnergyPane {
+                id: energyPane
             }
         }
     }
@@ -130,76 +139,4 @@ Window {
         id: fontawesomefontloader
         source: "qrc:/SmartDashboard/assets/fonts/fontawesome.otf"
     }
-
-    // ---- Components ----
-    Component { id: homePaneComponent; HomePane { } }
-    Component { id: musicPaneComponent; MusicPane { } }
-    Component { id: climatePaneComponent; ClimatePane { } }
-    Component { id: energyPaneComponent; EnergyPane { } }
-
-    // ---- Timers ----
-    Timer {
-        id: updateTimer
-        interval: 500
-        repeat: true
-        running: true
-        triggeredOnStart: true
-        onTriggered: {
-            currentTime = new Date()
-            backend.getWeatherState()
-            backend.getAlarmState()
-        }
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

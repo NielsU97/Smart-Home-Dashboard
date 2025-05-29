@@ -2,449 +2,391 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
-#include <QDebug>
 
-Backend::Backend(QObject* parent) : QObject(parent) {
-
+Backend::Backend(QObject* parent)
+    : QObject(parent)
+    , m_webSocket(nullptr)
+    , m_messageId(1)
+    , m_authenticated(false)
+{
 }
 
 void Backend::setAuthToken(const QString& authToken) {
-    token = authToken;
+    m_token = authToken;
 }
 
 void Backend::setUrl(const QString& url) {
-    baseUrl = url;
+    m_baseUrl = url;
+    m_wsUrl = url;
+    m_wsUrl.replace("http://", "ws://");
+    m_wsUrl.replace("https://", "wss://");
+    m_wsUrl.replace("/api", "/api/websocket");
 }
 
-void Backend::getWeatherState() {
-    QNetworkRequest request(QUrl(baseUrl + "/states/weather.forecast_thuis"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+void Backend::connectWebSocket() {
+    if (m_webSocket) {
+        m_webSocket->deleteLater();
+    }
 
-    QNetworkReply* reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-            QJsonObject obj = doc.object();
+    m_webSocket = new QWebSocket(QString(), QWebSocketProtocol::VersionLatest, this);
 
-            QString temperature = obj["attributes"].toObject().value("temperature").toVariant().toString();
-            QString condition = obj["state"].toString();
-            QString humidity = obj["attributes"].toObject().value("humidity").toVariant().toString();
+    connect(m_webSocket, &QWebSocket::connected, this, &Backend::onWebSocketConnected);
+    connect(m_webSocket, &QWebSocket::disconnected, this, &Backend::onWebSocketDisconnected);
+    connect(m_webSocket, &QWebSocket::textMessageReceived, this, &Backend::onWebSocketMessageReceived);
+    connect(m_webSocket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::errorOccurred),
+            this, &Backend::onWebSocketError);
 
-            static const QHash<QString, QString> iconMap = {
-                { "sunny",         "\uf185" },
-                { "clear-night",   "\uf186" },
-                { "partlycloudy",  "\uf6c4" },
-                { "cloudy",        "\uf0c2" },
-                { "rainy",         "\uf740" },
-                { "pouring",       "\uf73d" },
-                { "snowy",         "\uf2dc" },
-                { "windy",         "\uf72e" },
-                { "fog",           "\uf74e" }
-            };
+    m_webSocket->open(QUrl(m_wsUrl));
+}
 
-            static const QHash<QString, QString> conditionTranslationMap = {
-                { "sunny",         "Zonnig" },
-                { "clear-night",   "Heldere nacht" },
-                { "partlycloudy",  "Gedeeltelijk bewolkt" },
-                { "cloudy",        "Bewolkt" },
-                { "rainy",         "Regenachtig" },
-                { "pouring",       "Gietende regen" },
-                { "snowy",         "Sneeuwachtig" },
-                { "windy",         "Winderig" },
-                { "fog",           "Mistig" }
-            };
+void Backend::disconnectWebSocket() {
+    if (m_webSocket && m_webSocket->state() == QAbstractSocket::ConnectedState) {
+        m_webSocket->close();
+    }
+}
 
-            QString icon = iconMap.value(condition, "\uf75f");
-            QString translatedCondition = conditionTranslationMap.value(condition, condition);
+void Backend::onWebSocketConnected() {
+    m_authenticated = false;
+    emit connectionStatusChanged(true);
+    authenticate();
+}
 
-            emit weatherUpdated(temperature, translatedCondition, humidity, icon);
-        } else {
-            qWarning() << "Weather fetch failed:" << reply->errorString();
+void Backend::onWebSocketDisconnected() {
+    m_authenticated = false;
+    emit connectionStatusChanged(false);
+    qDebug() << "WebSocket disconnected";
+
+}
+
+void Backend::onWebSocketMessageReceived(const QString &message) {
+    QJsonDocument doc = QJsonDocument::fromJson(message.toUtf8());
+    QJsonObject obj = doc.object();
+
+    QString type = obj["type"].toString();
+
+    if (type == "auth_required") {
+        authenticate();
+    } else if (type == "auth_ok") {
+        handleAuthResult(obj);
+    } else if (type == "auth_invalid") {
+        m_authenticated = false;
+        emit connectionStatusChanged(false);
+    } else if (type == "result") {
+        handleSubscriptionResult(obj);
+    } else if (type == "event") {
+        handleStateChanged(obj);
+    }
+}
+
+void Backend::onWebSocketError(QAbstractSocket::SocketError error) {
+    emit connectionStatusChanged(false);
+}
+
+void Backend::sendMessage(const QJsonObject &message) {
+    if (!m_webSocket || m_webSocket->state() != QAbstractSocket::ConnectedState) {
+        return;
+    }
+
+    QJsonDocument doc(message);
+    QString jsonString = doc.toJson(QJsonDocument::Compact);
+
+    m_webSocket->sendTextMessage(jsonString);
+}
+
+void Backend::authenticate() {
+    QJsonObject authMessage;
+    authMessage["type"] = "auth";
+    authMessage["access_token"] = m_token;
+    sendMessage(authMessage);
+}
+
+void Backend::handleAuthResult(const QJsonObject &message) {
+    m_authenticated = true;
+    subscribeToStateChangeEvents();
+}
+
+void Backend::subscribeToStateChangeEvents()
+{
+    if (!m_authenticated) return;
+
+    QJsonObject subscribeMessage;
+    subscribeMessage["id"] = static_cast<qint64>(m_messageId);
+    subscribeMessage["type"] = "subscribe_events";
+    subscribeMessage["event_type"] = "state_changed";
+
+    m_pendingSubscriptions[m_messageId] = "state_changed";
+    m_messageId++;
+
+    sendMessage(subscribeMessage);
+}
+
+void Backend::requestCurrentStates() {
+    if (!m_authenticated) {
+        return;
+    }
+
+    QJsonObject message;
+    message["id"] = static_cast<qint64>(m_messageId);
+    message["type"] = "get_states";
+
+    m_pendingSubscriptions[m_messageId] = "get_states";
+    m_messageId++;
+
+    sendMessage(message);
+}
+
+void Backend::handleSubscriptionResult(const QJsonObject &message) {
+    quint64 id = message["id"].toVariant().toULongLong();
+
+    if (m_pendingSubscriptions.contains(id)) {
+        QString requestType = m_pendingSubscriptions[id];
+        m_pendingSubscriptions.remove(id);
+
+        // If this was a state_changed subscription, now request current states
+        if (requestType == "state_changed") {
+            requestCurrentStates();
         }
 
-        reply->deleteLater();
-    }, Qt::QueuedConnection);
-}
+        // Handle get_states response
+        if (requestType == "get_states" && message.contains("result")) {
+            QJsonArray states = message["result"].toArray();
 
-void Backend::getAlarmState() {
-    QNetworkRequest request(QUrl(baseUrl + "/states/alarm_control_panel.alarm"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+            for (int i = 0; i < states.size(); ++i) {
+                QJsonObject state = states[i].toObject();
+                QString entityId = state["entity_id"].toString();
 
-    QNetworkReply* reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-            QJsonObject obj = doc.object();
-
-            QString state = obj["state"].toString();
-
-            static const QHash<QString, QString> iconMap = {
-                { "disarmed",       "\uf3ed" },  // lock open
-                { "armed_home",     "\uf015" },  // home
-                { "armed_away",     "\uf132" },  // lock
-                { "armed_night",    "\uf186" },  // moon
-                { "triggered",      "\uf12a" }   // exclamation
-            };
-
-            QString icon = iconMap.value(state, "\u231b"); // fallback icon
-
-            emit alarmUpdated(state, icon);
-        } else {
-            qWarning() << "Alarm state fetch failed:" << reply->errorString();
+                if (m_subscribedEntities.contains(entityId)) {
+                    processEntityState(entityId, state);
+                }
+            }
         }
-
-        reply->deleteLater();
-    }, Qt::QueuedConnection);
+    }
 }
 
-void Backend::getTemperature(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
+void Backend::handleStateChanged(const QJsonObject &event) {
+    QJsonObject eventData = event["event"].toObject();
+    QJsonObject data = eventData["data"].toObject();
 
-    QNetworkReply* reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-        QString temp = doc.object().value("state").toString();
-        emit temperatureUpdated(temp);
-        reply->deleteLater();
-    }, Qt::QueuedConnection);
+    QString entityId = data["entity_id"].toString();
+
+    if (!m_subscribedEntities.contains(entityId)) {
+        // Not a relevant entity, skip it
+        return;
+    }
+
+    QJsonObject newState = data["new_state"].toObject();
+
+    processEntityState(entityId, newState);
 }
 
-void Backend::getHumidity(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-
-    QNetworkReply* reply = manager.get(request);
-    connect(reply, &QNetworkReply::finished, this, [this, reply]() {
-        QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-        QString hum = doc.object().value("state").toString();
-        emit humidityUpdated(hum);
-        reply->deleteLater();
-    }, Qt::QueuedConnection);
-}
-
-void Backend::getLightState(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QNetworkReply* reply = manager.get(request);
-
-    connect(reply, &QNetworkReply::finished, this, [this, reply, entityId]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            const QByteArray response = reply->readAll();
-            QJsonDocument json = QJsonDocument::fromJson(response);
-            QJsonObject obj = json.object();
-            QString state = obj["state"].toString();
-
-            int brightness = obj["attributes"].toObject().value("brightness").toInt();
-            int brightnessPct = brightness * 100 / 255;
-
-            // Always update our internal cache
-            lastStateMap[entityId] = state;
-            lastBrightnessMap[entityId] = brightnessPct;
-
-            // Always emit the signal when actively requested
-            emit lightStateUpdated(entityId, state == "on", brightnessPct);
-        } else {
-            qWarning() << "Polling error:" << reply->errorString();
+void Backend::processEntityState(const QString &entityId, const QJsonObject &state) {
+    if (entityId == "weather.forecast_thuis") {
+        processWeatherState(state);
+    } else if (entityId == "alarm_control_panel.alarm") {
+        processAlarmState(state);
+    } else if (entityId.startsWith("light.")) {
+        processLightState(entityId, state);
+    } else if (entityId.startsWith("media_player.")) {
+        processMediaPlayerState(entityId, state);
+    } else if (entityId.startsWith("sensor.")) {
+        QString stateValue = state["state"].toString();
+        if (entityId.contains("temperature")) {
+            emit temperatureUpdated(entityId, stateValue);
+        } else if (entityId.contains("humidity")) {
+            emit humidityUpdated(entityId, stateValue);
         }
-        reply->deleteLater();
-    });
+    }
+}
+
+void Backend::processWeatherState(const QJsonObject &state) {
+    QJsonObject attributes = state["attributes"].toObject();
+    QString temperature = attributes["temperature"].toVariant().toString();
+    QString condition = state["state"].toString();
+    QString humidity = attributes["humidity"].toVariant().toString();
+
+    static const QHash<QString, QString> iconMap = {
+        { "sunny",         "\uf185" },
+        { "clear-night",   "\uf186" },
+        { "partlycloudy",  "\uf6c4" },
+        { "cloudy",        "\uf0c2" },
+        { "rainy",         "\uf740" },
+        { "pouring",       "\uf73d" },
+        { "snowy",         "\uf2dc" },
+        { "windy",         "\uf72e" },
+        { "fog",           "\uf74e" }
+    };
+
+    static const QHash<QString, QString> conditionTranslationMap = {
+        { "sunny",         "Zonnig" },
+        { "clear-night",   "Heldere nacht" },
+        { "partlycloudy",  "Gedeeltelijk bewolkt" },
+        { "cloudy",        "Bewolkt" },
+        { "rainy",         "Regenachtig" },
+        { "pouring",       "Gietende regen" },
+        { "snowy",         "Sneeuwachtig" },
+        { "windy",         "Winderig" },
+        { "fog",           "Mistig" }
+    };
+
+    QString icon = iconMap.value(condition, "\uf75f");
+    QString translatedCondition = conditionTranslationMap.value(condition, condition);
+
+    emit weatherUpdated(temperature, translatedCondition, humidity, icon);
+}
+
+void Backend::processAlarmState(const QJsonObject &state) {
+    QString stateValue = state["state"].toString();
+
+    static const QHash<QString, QString> iconMap = {
+        { "disarmed",       "\uf3ed" },
+        { "armed_home",     "\uf015" },
+        { "armed_away",     "\uf132" },
+        { "armed_night",    "\uf186" },
+        { "triggered",      "\uf12a" }
+    };
+
+    QString icon = iconMap.value(stateValue, "\u231b");
+    emit alarmUpdated(stateValue, icon);
+}
+
+void Backend::processLightState(const QString &entityId, const QJsonObject &state) {
+    QString stateValue = state["state"].toString();
+    QJsonObject attributes = state["attributes"].toObject();
+    int brightness = attributes["brightness"].toInt();
+    int brightnessPct = brightness * 100 / 255;
+
+    emit lightStateUpdated(entityId, stateValue == "on", brightnessPct);
+}
+
+void Backend::processMediaPlayerState(const QString &entityId, const QJsonObject &state) {
+    QString stateValue = state["state"].toString();
+    QJsonObject attributes = state["attributes"].toObject();
+
+    QString mediaTitle = attributes["media_title"].toString();
+    QString mediaArtist = attributes["media_artist"].toString();
+    QString albumArt = attributes["entity_picture"].toString();
+    int volume = qRound(attributes["volume_level"].toDouble() * 100);
+    bool isMuted = attributes["is_volume_muted"].toBool();
+
+    if (!albumArt.isEmpty() && !albumArt.startsWith("http")) {
+        QString baseUrlPrefix = m_baseUrl;
+        baseUrlPrefix.replace("/api", "");
+        albumArt = baseUrlPrefix + albumArt;
+    }
+
+    emit mediaPlayerStateUpdated(entityId, stateValue, mediaTitle, mediaArtist, albumArt, volume, isMuted);
+}
+
+void Backend::callService(const QString &domain, const QString &service, const QJsonObject &serviceData) {
+    QJsonObject message;
+    message["id"] = static_cast<qint64>(m_messageId++);
+    message["type"] = "call_service";
+    message["domain"] = domain;
+    message["service"] = service;
+    message["service_data"] = serviceData;
+
+    sendMessage(message);
 }
 
 void Backend::toggleLight(const QString& entityId, bool on) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/light/" + (on ? "turn_on" : "turn_off")));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    // Update our internal state cache immediately for better responsiveness
-    lastStateMap[entityId] = on ? "on" : "off";
-
-    manager.post(request, QJsonDocument(payload).toJson());
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("light", on ? "turn_on" : "turn_off", serviceData);
 }
 
 void Backend::setLightBrightness(const QString& entityId, int brightness) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/light/turn_on"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-    payload["brightness_pct"] = brightness;
-
-    // Update our internal brightness cache immediately
-    lastBrightnessMap[entityId] = brightness;
-    lastStateMap[entityId] = "on"; // If setting brightness, the light must be on
-
-    manager.post(request, QJsonDocument(payload).toJson());
-}
-
-void Backend::startLightPolling(int interval) {
-    // Initial fetch
-    getLightState("light.woonkamer");
-    getLightState("light.slaapkamer");
-    getLightState("light.ganglamp_licht");
-    getLightState("light.berginglamp_licht");
-
-    // Stop existing timer if running
-    if (lightPollingTimer.isActive()) {
-        lightPollingTimer.stop();
-        emit lightPollingStatusChanged(false);
-    }
-
-    lightPollingTimer.setInterval(interval);
-
-    // Avoid multiple connections
-    disconnect(&lightPollingTimer, nullptr, this, nullptr);
-
-    // Set up timer for polling
-    connect(&lightPollingTimer, &QTimer::timeout, this, [this]() {
-        getLightState("light.woonkamer");
-        getLightState("light.slaapkamer");
-        getLightState("light.ganglamp_licht");
-        getLightState("light.berginglamp_licht");
-    });
-
-    lightPollingTimer.start();
-    emit lightPollingStatusChanged(true);
-}
-
-void Backend::stopLightPolling() {
-    if (lightPollingTimer.isActive()) {
-        lightPollingTimer.stop();
-        emit lightPollingStatusChanged(false);
-    }
-}
-
-// Helper method to update cache and emit signal
-void Backend::updateMediaPlayerCache(const QString &state, const QString &title,
-                                     const QString &artist, const QString &albumArt,
-                                     int volume, bool muted) {
-    // Update cache
-    lastMediaPlayerState = state;
-    lastMediaTitle = title;
-    lastMediaArtist = artist;
-    lastMediaAlbumArt = albumArt;
-    lastMediaVolume = volume;
-    lastMediaMuted = muted;
-
-    // Emit signal
-    emit mediaPlayerStateUpdated(state, title, artist, albumArt, volume, muted);
-}
-
-void Backend::getMediaPlayerState(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/states/" + entityId));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QNetworkReply* reply = manager.get(request);
-
-    connect(reply, &QNetworkReply::finished, this, [this, reply, entityId]() {
-        if (reply->error() == QNetworkReply::NoError) {
-            const QByteArray response = reply->readAll();
-            QJsonDocument json = QJsonDocument::fromJson(response);
-            QJsonObject obj = json.object();
-            QJsonObject attributes = obj["attributes"].toObject();
-
-            // Get basic state
-            QString state = obj["state"].toString();
-
-            // Get media information from attributes
-            QString mediaTitle = attributes.value("media_title").toString();
-            QString mediaArtist = attributes.value("media_artist").toString();
-            QString albumArt = attributes.value("entity_picture").toString();
-            int volume = qRound(attributes.value("volume_level").toDouble() * 100); // Convert 0.0-1.0 to 0-100
-            bool isMuted = attributes.value("is_volume_muted").toBool();
-
-            // If the album art URL is relative, prepend the base URL
-            if (!albumArt.isEmpty() && !albumArt.startsWith("http")) {
-                // Remove /api from baseUrl for entity pictures
-                QString baseUrlPrefix = baseUrl;
-                baseUrlPrefix.replace("/api", "");
-                albumArt = baseUrlPrefix + albumArt;
-            }
-
-            // Always update cache and emit signal when explicitly requested
-            updateMediaPlayerCache(state, mediaTitle, mediaArtist, albumArt, volume, isMuted);
-        } else {
-            qWarning() << "Media player state fetch failed:" << reply->errorString();
-        }
-        reply->deleteLater();
-    });
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    serviceData["brightness_pct"] = brightness;
+    callService("light", "turn_on", serviceData);
 }
 
 void Backend::mediaPlayPause(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/media_play_pause"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "media_play_pause", serviceData);
 }
 
 void Backend::mediaPlay(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/media_play"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    // Update our cached state optimistically for better responsiveness
-    if (!lastMediaPlayerState.isEmpty()) {
-        updateMediaPlayerCache("playing", lastMediaTitle, lastMediaArtist,
-                               lastMediaAlbumArt, lastMediaVolume, lastMediaMuted);
-    }
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "media_play", serviceData);
 }
 
 void Backend::mediaPause(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/media_pause"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    // Update our cached state optimistically for better responsiveness
-    if (!lastMediaPlayerState.isEmpty()) {
-        updateMediaPlayerCache("paused", lastMediaTitle, lastMediaArtist,
-                               lastMediaAlbumArt, lastMediaVolume, lastMediaMuted);
-    }
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "media_pause", serviceData);
 }
 
 void Backend::mediaStop(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/media_stop"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    // Update our cached state optimistically
-    if (!lastMediaPlayerState.isEmpty()) {
-        updateMediaPlayerCache("idle", lastMediaTitle, lastMediaArtist,
-                               lastMediaAlbumArt, lastMediaVolume, lastMediaMuted);
-    }
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "media_stop", serviceData);
 }
 
 void Backend::mediaNextTrack(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/media_next_track"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
-
-    // Force update after a short delay to get the new track info
-    QTimer::singleShot(500, this, [this, entityId]() {
-        getMediaPlayerState(entityId);
-    });
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "media_next_track", serviceData);
 }
 
 void Backend::mediaPreviousTrack(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/media_previous_track"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
-
-    // Force update after a short delay to get the new track info
-    QTimer::singleShot(500, this, [this, entityId]() {
-        getMediaPlayerState(entityId);
-    });
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "media_previous_track", serviceData);
 }
 
 void Backend::mediaVolumeUp(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/volume_up"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "volume_up", serviceData);
 }
 
 void Backend::mediaVolumeDown(const QString& entityId) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/volume_down"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "volume_down", serviceData);
 }
 
 void Backend::mediaSetVolume(const QString& entityId, int volume) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/volume_set"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-    payload["volume_level"] = volume / 100.0; // Convert from 0-100 to 0.0-1.0
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    serviceData["volume_level"] = volume / 100.0;
+    callService("media_player", "volume_set", serviceData);
 }
 
 void Backend::mediaPlayMedia(const QString& entityId, const QString& mediaUrl, const QString& mediaType) {
-    QNetworkRequest request(QUrl(baseUrl + "/services/media_player/play_media"));
-    request.setRawHeader("Authorization", "Bearer " + token.toUtf8());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
-
-    QJsonObject payload;
-    payload["entity_id"] = entityId;
-    payload["media_content_id"] = mediaUrl;
-    payload["media_content_type"] = mediaType;
-
-    QNetworkReply* reply = manager.post(request, QJsonDocument(payload).toJson());
-    connect(reply, &QNetworkReply::finished, reply, &QObject::deleteLater);
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    serviceData["media_content_id"] = mediaUrl;
+    serviceData["media_content_type"] = mediaType;
+    callService("media_player", "play_media", serviceData);
 }
 
-void Backend::startMediaPlayerPolling(const QString& entityId, int interval) {
-    // Store the entity ID we're tracking
-    trackedMediaPlayer = entityId;
-
-    // Initial fetch
-    getMediaPlayerState(entityId);
-
-    // Set up timer for polling
-    mediaPlayerPollTimer.stop();
-    mediaPlayerPollTimer.setInterval(interval);
-    connect(&mediaPlayerPollTimer, &QTimer::timeout, this, [this, entityId]() {
-        getMediaPlayerState(entityId);
-    });
-    mediaPlayerPollTimer.start();
+void Backend::subscribeToWeather() {
+    m_subscribedEntities.insert("weather.forecast_thuis");
 }
 
-void Backend::stopMediaPlayerPolling() {
-    mediaPlayerPollTimer.stop();
-    trackedMediaPlayer.clear();
+void Backend::subscribeToAlarm() {
+    m_subscribedEntities.insert("alarm_control_panel.alarm");
+}
+
+void Backend::subscribeToLights() {
+    m_subscribedEntities.insert("light.woonkamer");
+    m_subscribedEntities.insert("light.slaapkamer");
+    m_subscribedEntities.insert("light.ganglamp_licht");
+    m_subscribedEntities.insert("light.berginglamp_licht");
+}
+
+void Backend::subscribeToTemperature(const QString &entityId) {
+    m_subscribedEntities.insert(entityId);
+}
+
+void Backend::subscribeToHumidity(const QString &entityId) {
+    m_subscribedEntities.insert(entityId);
+}
+
+void Backend::subscribeToMediaPlayer(const QString &entityId) {
+    m_subscribedEntities.insert(entityId);
 }

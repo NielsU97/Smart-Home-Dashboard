@@ -4,7 +4,7 @@ project(SmartDashboard VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.4 REQUIRED COMPONENTS Quick QuickControls2)
+find_package(Qt6 6.4 REQUIRED COMPONENTS Quick QuickControls2 WebSockets Network)
 
 qt_standard_project_setup()
 
@@ -52,7 +52,11 @@ set_target_properties(appSmartDashboard PROPERTIES
 )
 
 target_link_libraries(appSmartDashboard
-    PRIVATE Qt6::Quick Qt6::QuickControls2
+    PRIVATE
+        Qt6::Quick
+        Qt6::QuickControls2
+        Qt6::WebSockets
+        Qt6::Network
 )
 
 include(GNUInstallDirs)
