@@ -7,31 +7,41 @@ Item {
     id: homeItem
     anchors.fill: parent
 
-    // Keep track of user-initiated switch changes to avoid feedback loops
+    // Keep track of user-initiated changes to avoid feedback loops
     property bool userSwitchingLiving: false
     property bool userSwitchingSleep: false
     property bool userSwitchingHallway: false
     property bool userSwitchingStorage: false
+    property bool userSlidingLiving: false
+    property bool userSlidingSleep: false
+    property bool userSlidingHallway: false
 
     Connections {
         target: backend
         function onLightStateUpdated(entityId, isOn, brightness) {
             if (entityId === "light.woonkamer") {
-                // Only update the UI if the change wasn't initiated by the user
+                // Only update switch if change wasn't initiated by user switch
                 if (!userSwitchingLiving) {
                     switchLiving.checked = isOn;
+                }
+                // Always update brightness slider unless user is currently sliding
+                if (!userSlidingLiving) {
                     sliderLiving.value = brightness;
                 }
                 userSwitchingLiving = false;
             } else if (entityId === "light.slaapkamer") {
                 if (!userSwitchingSleep) {
                     switchSleep.checked = isOn;
+                }
+                if (!userSlidingSleep) {
                     sliderSleep.value = brightness;
                 }
                 userSwitchingSleep = false;
             } else if (entityId === "light.ganglamp_licht") {
                 if (!userSwitchingHallway) {
                     switchHallway.checked = isOn;
+                }
+                if (!userSlidingHallway) {
                     sliderHallway.value = brightness;
                 }
                 userSwitchingHallway = false;
@@ -107,8 +117,11 @@ Item {
                         width: parent.width
 
                         onPressedChanged: {
-                            if (!pressed) {
-                                backend.setLightBrightness("light.woonkamer", value)
+                            if (pressed) {
+                                userSlidingLiving = true;
+                            } else {
+                                userSlidingLiving = false;
+                                backend.setLightBrightness("light.woonkamer", value);
                             }
                         }
                     }
@@ -166,8 +179,11 @@ Item {
                         width: parent.width
 
                         onPressedChanged: {
-                            if (!pressed) {
-                                backend.setLightBrightness("light.slaapkamer", value)
+                            if (pressed) {
+                                userSlidingSleep = true;
+                            } else {
+                                userSlidingSleep = false;
+                                backend.setLightBrightness("light.slaapkamer", value);
                             }
                         }
                     }
@@ -225,8 +241,11 @@ Item {
                         width: parent.width
 
                         onPressedChanged: {
-                            if (!pressed) {
-                                backend.setLightBrightness("light.ganglamp_licht", value)
+                            if (pressed) {
+                                userSlidingHallway = true;
+                            } else {
+                                userSlidingHallway = false;
+                                backend.setLightBrightness("light.ganglamp_licht", value);
                             }
                         }
                     }
