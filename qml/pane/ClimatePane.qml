@@ -83,12 +83,7 @@ Item {
 
                         RowLayout {
                             Layout.fillWidth: true
-                            Text {
-                                text: "\uf2c9" // thermometer icon
-                                font.family: "Font Awesome 6 Free"
-                                font.pixelSize: 18
-                                color: "#ff6b6b"
-                            }
+
                             Text {
                                 text: "Temperatuur"
                                 font.pixelSize: 16
@@ -154,12 +149,6 @@ Item {
 
                         RowLayout {
                             Layout.fillWidth: true
-                            Text {
-                                text: "💧" // water drop icon
-                                font.family: "Font Awesome 6 Free"
-                                font.pixelSize: 18
-                                color: "#4ecdc4"
-                            }
                             Text {
                                 text: "Luchtvochtigheid"
                                 font.pixelSize: 16
@@ -265,7 +254,7 @@ Item {
                                     fanPresetMode = "Auto"
                                     // Send command via WebSocket or appropriate method
                                     if (typeof backend !== 'undefined') {
-                                        backend.sendFanCommand("fan.ecofan", "Auto")
+                                        backend.setFanPresetMode("fan.ecofan", "Auto")
                                     }
                                 }
                             }
@@ -304,7 +293,7 @@ Item {
                                     fanPresetMode = "Laag"
                                     // Send command via WebSocket or appropriate method
                                     if (typeof backend !== 'undefined') {
-                                        backend.sendFanCommand("fan.ecofan", "Laag")
+                                        backend.setFanPresetMode("fan.ecofan", "Laag")
                                     }
                                 }
                             }
@@ -343,7 +332,7 @@ Item {
                                     fanPresetMode = "Hoog"
                                     // Send command via WebSocket or appropriate method
                                     if (typeof backend !== 'undefined') {
-                                        backend.sendFanCommand("fan.ecofan", "Hoog")
+                                        backend.setFanPresetMode("fan.ecofan", "Hoog")
                                     }
                                 }
                             }
