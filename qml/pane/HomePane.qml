@@ -5,7 +5,6 @@ import "../components"
 
 Item {
     id: homeItem
-    anchors.fill: parent
 
     // Keep track of user-initiated changes to avoid feedback loops
     property bool userSwitchingLiving: false

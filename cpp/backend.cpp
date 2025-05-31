@@ -33,8 +33,6 @@ void Backend::connectWebSocket() {
     connect(m_webSocket, &QWebSocket::connected, this, &Backend::onWebSocketConnected);
     connect(m_webSocket, &QWebSocket::disconnected, this, &Backend::onWebSocketDisconnected);
     connect(m_webSocket, &QWebSocket::textMessageReceived, this, &Backend::onWebSocketMessageReceived);
-    connect(m_webSocket, QOverload<QAbstractSocket::SocketError>::of(&QWebSocket::errorOccurred),
-            this, &Backend::onWebSocketError);
 
     m_webSocket->open(QUrl(m_wsUrl));
 }
@@ -54,8 +52,6 @@ void Backend::onWebSocketConnected() {
 void Backend::onWebSocketDisconnected() {
     m_authenticated = false;
     emit connectionStatusChanged(false);
-    qDebug() << "WebSocket disconnected";
-
 }
 
 void Backend::onWebSocketMessageReceived(const QString &message) {
@@ -78,9 +74,7 @@ void Backend::onWebSocketMessageReceived(const QString &message) {
     }
 }
 
-void Backend::onWebSocketError(QAbstractSocket::SocketError error) {
-    emit connectionStatusChanged(false);
-}
+
 
 void Backend::sendMessage(const QJsonObject &message) {
     if (!m_webSocket || m_webSocket->state() != QAbstractSocket::ConnectedState) {
@@ -100,7 +94,7 @@ void Backend::authenticate() {
     sendMessage(authMessage);
 }
 
-void Backend::handleAuthResult(const QJsonObject &message) {
+void Backend::handleAuthResult(const QJsonObject &) {
     m_authenticated = true;
     subscribeToStateChangeEvents();
 }

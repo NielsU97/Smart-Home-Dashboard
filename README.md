@@ -40,7 +40,13 @@ sudo apt install qt6-base-dev qt6-declarative-dev
 sudo apt-get install $(apt-cache search qml6-module | awk '{print $1}')
 ```
 
-`Command 3` - Build Your Project
+
+`Command 3` - Install Required Qt Packages
+```
+sudo apt install qt6-websockets-dev
+```
+
+`Command 4` - Build Your Project
 ```
 qmake6
 make
@@ -48,7 +54,7 @@ make
 
 I'm installed the Raspberry Pi headless with Raspbian OS lite. For running the application on my DSI display, i used eglfs
 
-`Command 4` -  Run Your Application
+`Command 5` -  Run Your Application
 ```
 ./SmartDashboard -platform eglfs
 ```

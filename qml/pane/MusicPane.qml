@@ -5,7 +5,6 @@ import '../components'
 
 Item {
     id: musicItem
-    anchors.fill: parent
 
     // Properties to bind with Home Assistant data
     property string mediaTitle: "" // Current playing media title

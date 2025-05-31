@@ -5,7 +5,6 @@ import '../components'
 
 Item {
     id: climateItem
-    anchors.fill: parent
 
     Rectangle {
         anchors.fill: parent

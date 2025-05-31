@@ -69,7 +69,6 @@ private slots:
     void onWebSocketConnected();
     void onWebSocketDisconnected();
     void onWebSocketMessageReceived(const QString &message);
-    void onWebSocketError(QAbstractSocket::SocketError error);
 
 private:
     // WebSocket connection
