@@ -35,8 +35,8 @@ public:
     Q_INVOKABLE void subscribeToAlarm();
 
     // Climate sensors
-    Q_INVOKABLE void subscribeToTemperature(const QString &entityId);
-    Q_INVOKABLE void subscribeToHumidity(const QString &entityId);
+    Q_INVOKABLE void subscribeToTemperature();
+    Q_INVOKABLE void subscribeToHumidity();
 
     // Lights
     Q_INVOKABLE void subscribeToLights();
@@ -56,6 +56,9 @@ public:
     Q_INVOKABLE void mediaSetVolume(const QString &entityId, int volume);
     Q_INVOKABLE void mediaPlayMedia(const QString &entityId, const QString &mediaUrl, const QString &mediaType);
 
+    Q_INVOKABLE void setFanPresetMode(const QString& entityId, const QString& presetMode);
+    Q_INVOKABLE void subscribeToFan(const QString& entityId);
+
 signals:
     void connectionStatusChanged(bool connected);
     void weatherUpdated(const QString &temperature, const QString &condition, const QString &humidity, const QString &icon);
@@ -64,6 +67,7 @@ signals:
     void humidityUpdated(const QString &entityId, const QString &hum);
     void lightStateUpdated(const QString &entityId, bool state, int brightness);
     void mediaPlayerStateUpdated(const QString &entityId, const QString &state, const QString &title, const QString &artist, const QString &albumArt, int volume, bool muted);
+    void fanStateUpdated(const QString& entityId, const QString& state, const QString& presetMode);
 
 private slots:
     void onWebSocketConnected();
@@ -97,6 +101,7 @@ private:
     void processAlarmState(const QJsonObject &state);
     void processLightState(const QString &entityId, const QJsonObject &state);
     void processMediaPlayerState(const QString &entityId, const QJsonObject &state);
+    void processFanState(const QString &entityId, const QJsonObject &state);
 
     void callService(const QString &domain, const QString &service, const QJsonObject &serviceData);
 };

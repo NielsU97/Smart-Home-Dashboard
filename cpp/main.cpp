@@ -45,7 +45,9 @@ int main(int argc, char *argv[])
     backend.subscribeToAlarm();
     backend.subscribeToLights();
     backend.subscribeToMediaPlayer("media_player.google_nest");
-
+    backend.subscribeToFan("fan.ecofan");
+    backend.subscribeToTemperature();
+    backend.subscribeToHumidity();
 
     QMetaObject::invokeMethod(&backend, "connectWebSocket", Qt::QueuedConnection);
 

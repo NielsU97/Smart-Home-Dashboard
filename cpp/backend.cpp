@@ -182,6 +182,8 @@ void Backend::processEntityState(const QString &entityId, const QJsonObject &sta
         processLightState(entityId, state);
     } else if (entityId.startsWith("media_player.")) {
         processMediaPlayerState(entityId, state);
+    } else if (entityId.startsWith("fan.")) {
+        processFanState(entityId, state);
     } else if (entityId.startsWith("sensor.")) {
         QString stateValue = state["state"].toString();
         if (entityId.contains("temperature")) {
@@ -271,6 +273,14 @@ void Backend::processMediaPlayerState(const QString &entityId, const QJsonObject
     emit mediaPlayerStateUpdated(entityId, stateValue, mediaTitle, mediaArtist, albumArt, volume, isMuted);
 }
 
+void Backend::processFanState(const QString &entityId, const QJsonObject &state) {
+    QString stateValue = state["state"].toString();
+    QJsonObject attributes = state["attributes"].toObject();
+    QString presetMode = attributes["preset_mode"].toString();
+
+    emit fanStateUpdated(entityId, stateValue, presetMode);
+}
+
 void Backend::callService(const QString &domain, const QString &service, const QJsonObject &serviceData) {
     QJsonObject message;
     message["id"] = static_cast<qint64>(m_messageId++);
@@ -293,6 +303,13 @@ void Backend::setLightBrightness(const QString& entityId, int brightness) {
     serviceData["entity_id"] = entityId;
     serviceData["brightness_pct"] = brightness;
     callService("light", "turn_on", serviceData);
+}
+
+void Backend::setFanPresetMode(const QString& entityId, const QString& presetMode) {
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    serviceData["preset_mode"] = presetMode;
+    callService("fan", "set_preset_mode", serviceData);
 }
 
 void Backend::mediaPlayPause(const QString& entityId) {
@@ -373,14 +390,22 @@ void Backend::subscribeToLights() {
     m_subscribedEntities.insert("light.berginglamp_licht");
 }
 
-void Backend::subscribeToTemperature(const QString &entityId) {
-    m_subscribedEntities.insert(entityId);
+void Backend::subscribeToTemperature() {
+    m_subscribedEntities.insert("sensor.klimaatsensor_1_temperature");
+    m_subscribedEntities.insert("sensor.klimaatsensor_2_temperature");
+    m_subscribedEntities.insert("sensor.klimaatsensor_3_temperature");
 }
 
-void Backend::subscribeToHumidity(const QString &entityId) {
-    m_subscribedEntities.insert(entityId);
+void Backend::subscribeToHumidity() {
+    m_subscribedEntities.insert("sensor.klimaatsensor_1_humidity");
+    m_subscribedEntities.insert("sensor.klimaatsensor_2_humidity");
+    m_subscribedEntities.insert("sensor.klimaatsensor_3_humidity");
 }
 
 void Backend::subscribeToMediaPlayer(const QString &entityId) {
+    m_subscribedEntities.insert(entityId);
+}
+
+void Backend::subscribeToFan(const QString& entityId) {
     m_subscribedEntities.insert(entityId);
 }
