@@ -61,15 +61,6 @@ Item {
             anchors.margins: 20
             spacing: 15
 
-            // Header
-            Text {
-                text: "Klimaat"
-                font.pixelSize: 24
-                font.bold: true
-                color: "white"
-                Layout.alignment: Qt.AlignHCenter
-            }
-
             // Temperature and Humidity sections
             RowLayout {
                 Layout.fillWidth: true
@@ -236,7 +227,6 @@ Item {
                     RowLayout {
                         Layout.fillWidth: true
                         Text {
-                            text: "※" // fan icon
                             font.family: "Font Awesome 6 Free"
                             font.pixelSize: 18
                             color: "#00d4aa"
