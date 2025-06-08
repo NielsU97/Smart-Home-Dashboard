@@ -8,10 +8,8 @@ Rectangle {
     // Common properties
     property string icon: ""
     property string buttonText: ""
-    property color bgColor: "#2C3E50"       // Default background
-    property color activeColor: "#34495E"   // Hover/active color
-    property color textColor: "#A0A0A0"
     property bool iconOnly: true
+    property bool isActive: false  // For toggle states like active buttons
 
     // Signal for click event
     signal clicked()
@@ -20,8 +18,8 @@ Rectangle {
     width: 80
     height: 40
 
-    // Styling
-    color: bgColor
+    // Styling - matches climate pane ventilation buttons
+    color: Qt.rgba(1, 1, 1, 0.05)
     radius: 8
 
     // Dynamic content based on iconOnly
@@ -33,16 +31,14 @@ Rectangle {
     // Icon-only centered layout
     Component {
         id: iconOnlyContent
-
         Item {
             anchors.fill: parent
-
             Text {
                 anchors.centerIn: parent
                 text: root.icon
                 font.family: "Arial"
                 font.pointSize: 14
-                color: root.textColor
+                color: textColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
             }
@@ -52,7 +48,6 @@ Rectangle {
     // Icon + text layout
     Component {
         id: iconWithTextContent
-
         RowLayout {
             anchors.centerIn: parent
             spacing: 6
@@ -62,7 +57,7 @@ Rectangle {
                 text: root.icon
                 font.family: "Arial"
                 font.pointSize: 12
-                color: root.textColor
+                color: textColor
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 visible: text !== ""
@@ -71,7 +66,7 @@ Rectangle {
 
             Text {
                 text: root.buttonText
-                color: root.textColor
+                color: textColor
                 font.pointSize: 10
                 horizontalAlignment: Text.AlignHCenter
                 visible: text !== ""
@@ -81,13 +76,18 @@ Rectangle {
         }
     }
 
-    // Mouse interaction
+    // Mouse interaction with hover effect
     MouseArea {
         anchors.fill: parent
         onClicked: root.clicked()
-
         hoverEnabled: true
-        onEntered: root.color = activeColor
-        onExited: root.color = bgColor
+
+        onEntered: {
+            root.color = Qt.rgba(1, 1, 1, 0.1)  // Slightly brighter on hover
+        }
+
+        onExited: {
+            root.color = Qt.rgba(1, 1, 1, 0.05)  // Back to default
+        }
     }
 }

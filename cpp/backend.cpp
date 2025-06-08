@@ -375,6 +375,12 @@ void Backend::mediaPlayMedia(const QString& entityId, const QString& mediaUrl, c
     callService("media_player", "play_media", serviceData);
 }
 
+void Backend::mediaTogglePower(const QString& entityId) {
+    QJsonObject serviceData;
+    serviceData["entity_id"] = entityId;
+    callService("media_player", "toggle", serviceData);
+}
+
 void Backend::subscribeToWeather() {
     m_subscribedEntities.insert("weather.forecast_thuis");
 }

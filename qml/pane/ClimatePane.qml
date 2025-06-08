@@ -49,149 +49,69 @@ Item {
         }
     }
 
-    Rectangle {
+    ColumnLayout {
         anchors.fill: parent
-        color: glassyBgColor
-        radius: 16
-        border.color: Qt.rgba(1, 1, 1, 0.1)
-        border.width: 1
+        spacing: 16
 
-        ColumnLayout {
-            anchors.fill: parent
-            anchors.margins: 20
-            spacing: 15
+        // Temperature and Humidity sections
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            spacing: 16
 
-            // Temperature and Humidity sections
-            RowLayout {
+            // Temperature Section
+            Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                spacing: 20
+                color: glassyBgColor
+                radius: 16
 
-                // Temperature Section
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    color: Qt.rgba(1, 1, 1, 0.05)
-                    radius: 12
-                    border.color: Qt.rgba(1, 1, 1, 0.1)
-                    border.width: 1
+                ColumnLayout {
+                    anchors.fill: parent
+                    anchors.margins: 20
+                    spacing: 12
 
-                    ColumnLayout {
-                        anchors.fill: parent
-                        anchors.margins: 15
-                        spacing: 10
-
-                        RowLayout {
-                            Layout.fillWidth: true
-
-                            Text {
-                                text: "Temperatuur"
-                                font.pixelSize: 16
-                                font.bold: true
-                                color: "white"
-                                Layout.fillWidth: true
-                            }
-                        }
-
-                        Repeater {
-                            model: Object.keys(climateItem.temperatureData)
-
-                            Rectangle {
-                                Layout.fillWidth: true
-                                height: 45
-                                color: Qt.rgba(1, 1, 1, 0.03)
-                                radius: 8
-
-                                RowLayout {
-                                    anchors.fill: parent
-                                    anchors.margins: 10
-                                    spacing: 10
-
-                                    Rectangle {
-                                        width: 4
-                                        height: 25
-                                        color: climateItem.temperatureData[modelData].color
-                                        radius: 2
-                                    }
-
-                                    Text {
-                                        text: climateItem.temperatureData[modelData].name
-                                        color: "white"
-                                        font.pixelSize: 14
-                                        Layout.fillWidth: true
-                                    }
-
-                                    Text {
-                                        text: climateItem.temperatureData[modelData].value + " °C"
-                                        color: "white"
-                                        font.pixelSize: 16
-                                        font.bold: true
-                                    }
-                                }
-                            }
-                        }
+                    Text {
+                        text: "Temperatuur"
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: textColor
+                        Layout.fillWidth: true
                     }
-                }
 
-                // Humidity Section
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    color: Qt.rgba(1, 1, 1, 0.05)
-                    radius: 12
-                    border.color: Qt.rgba(1, 1, 1, 0.1)
-                    border.width: 1
+                    Repeater {
+                        model: Object.keys(climateItem.temperatureData)
 
-                    ColumnLayout {
-                        anchors.fill: parent
-                        anchors.margins: 15
-                        spacing: 10
-
-                        RowLayout {
+                        Rectangle {
                             Layout.fillWidth: true
-                            Text {
-                                text: "Luchtvochtigheid"
-                                font.pixelSize: 16
-                                font.bold: true
-                                color: "white"
-                                Layout.fillWidth: true
-                            }
-                        }
+                            height: 45
+                            color: Qt.rgba(1, 1, 1, 0.05)
+                            radius: 8
 
-                        Repeater {
-                            model: Object.keys(climateItem.humidityData)
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.margins: 12
+                                spacing: 10
 
-                            Rectangle {
-                                Layout.fillWidth: true
-                                height: 45
-                                color: Qt.rgba(1, 1, 1, 0.03)
-                                radius: 8
+                                Rectangle {
+                                    width: 4
+                                    height: 25
+                                    color: climateItem.temperatureData[modelData].color
+                                    radius: 2
+                                }
 
-                                RowLayout {
-                                    anchors.fill: parent
-                                    anchors.margins: 10
-                                    spacing: 10
+                                Text {
+                                    text: climateItem.temperatureData[modelData].name
+                                    color: textColor
+                                    font.pixelSize: 14
+                                    Layout.fillWidth: true
+                                }
 
-                                    Rectangle {
-                                        width: 4
-                                        height: 25
-                                        color: climateItem.humidityData[modelData].color
-                                        radius: 2
-                                    }
-
-                                    Text {
-                                        text: climateItem.humidityData[modelData].name
-                                        color: "white"
-                                        font.pixelSize: 14
-                                        Layout.fillWidth: true
-                                    }
-
-                                    Text {
-                                        text: climateItem.humidityData[modelData].value + "%"
-                                        color: "white"
-                                        font.pixelSize: 16
-                                        font.bold: true
-                                    }
+                                Text {
+                                    text: climateItem.temperatureData[modelData].value + " °C"
+                                    color: textColor
+                                    font.pixelSize: 16
+                                    font.bold: true
                                 }
                             }
                         }
@@ -199,160 +119,215 @@ Item {
                 }
             }
 
-            // Ventilation Control Section
+            // Humidity Section
             Rectangle {
                 Layout.fillWidth: true
-                Layout.preferredHeight: 120
-                color: Qt.rgba(1, 1, 1, 0.05)
-                radius: 12
-                border.color: Qt.rgba(1, 1, 1, 0.1)
-                border.width: 1
+                Layout.fillHeight: true
+                color: glassyBgColor
+                radius: 16
 
                 ColumnLayout {
                     anchors.fill: parent
-                    anchors.margins: 15
+                    anchors.margins: 20
+                    spacing: 12
+
+                    Text {
+                        text: "Luchtvochtigheid"
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: textColor
+                        Layout.fillWidth: true
+                    }
+
+                    Repeater {
+                        model: Object.keys(climateItem.humidityData)
+
+                        Rectangle {
+                            Layout.fillWidth: true
+                            height: 45
+                            color: Qt.rgba(1, 1, 1, 0.05)
+                            radius: 8
+
+                            RowLayout {
+                                anchors.fill: parent
+                                anchors.margins: 12
+                                spacing: 10
+
+                                Rectangle {
+                                    width: 4
+                                    height: 25
+                                    color: climateItem.humidityData[modelData].color
+                                    radius: 2
+                                }
+
+                                Text {
+                                    text: climateItem.humidityData[modelData].name
+                                    color: textColor
+                                    font.pixelSize: 14
+                                    Layout.fillWidth: true
+                                }
+
+                                Text {
+                                    text: climateItem.humidityData[modelData].value + "%"
+                                    color: textColor
+                                    font.pixelSize: 16
+                                    font.bold: true
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Ventilation Control Section
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 120
+            color: glassyBgColor
+            radius: 16
+
+            ColumnLayout {
+                anchors.fill: parent
+                anchors.margins: 20
+                spacing: 12
+
+                RowLayout {
+                    Layout.fillWidth: true
+                    Text {
+                        font.family: "Font Awesome 6 Free"
+                        font.pixelSize: 18
+                        color: "#00d4aa"
+                    }
+                    Text {
+                        text: "Ventilatie"
+                        font.pixelSize: 16
+                        font.bold: true
+                        color: textColor
+                        Layout.fillWidth: true
+                    }
+                    Text {
+                        text: fanPresetMode
+                        font.pixelSize: 14
+                        color: "#00d4aa"
+                        font.bold: true
+                    }
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
                     spacing: 10
 
-                    RowLayout {
+                    // Auto Mode Button
+                    Rectangle {
                         Layout.fillWidth: true
-                        Text {
-                            font.family: "Font Awesome 6 Free"
-                            font.pixelSize: 18
-                            color: "#00d4aa"
+                        height: 50
+                        color: fanPresetMode === "Auto" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.05)
+                        radius: 8
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                fanPresetMode = "Auto"
+                                // Send command via WebSocket or appropriate method
+                                if (typeof backend !== 'undefined') {
+                                    backend.setFanPresetMode("fan.ecofan", "Auto")
+                                }
+                            }
                         }
-                        Text {
-                            text: "Ventilatie"
-                            font.pixelSize: 16
-                            font.bold: true
-                            color: "white"
-                            Layout.fillWidth: true
-                        }
-                        Text {
-                            text: fanPresetMode
-                            font.pixelSize: 14
-                            color: "#00d4aa"
-                            font.bold: true
+
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 2
+                            Text {
+                                text: "A"
+                                font.pixelSize: 16
+                                font.bold: true
+                                color: fanPresetMode === "Auto" ? "black" : textColor
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                            Text {
+                                text: "Auto"
+                                font.pixelSize: 10
+                                color: fanPresetMode === "Auto" ? "black" : textColor
+                                opacity: fanPresetMode === "Auto" ? 1.0 : 0.7
+                                Layout.alignment: Qt.AlignHCenter
+                            }
                         }
                     }
 
-                    RowLayout {
+                    // Low Mode Button
+                    Rectangle {
                         Layout.fillWidth: true
-                        spacing: 10
+                        height: 50
+                        color: fanPresetMode === "Laag" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.05)
+                        radius: 8
 
-                        // Auto Mode Button
-                        Rectangle {
-                            Layout.fillWidth: true
-                            height: 50
-                            color: fanPresetMode === "Auto" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.1)
-                            radius: 8
-                            border.width: 1
-                            border.color: fanPresetMode === "Auto" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.2)
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    fanPresetMode = "Auto"
-                                    // Send command via WebSocket or appropriate method
-                                    if (typeof backend !== 'undefined') {
-                                        backend.setFanPresetMode("fan.ecofan", "Auto")
-                                    }
-                                }
-                            }
-
-                            ColumnLayout {
-                                anchors.centerIn: parent
-                                spacing: 2
-                                Text {
-                                    text: "A"
-                                    font.pixelSize: 16
-                                    font.bold: true
-                                    color: fanPresetMode === "Auto" ? "black" : "white"
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                                Text {
-                                    text: "Auto"
-                                    font.pixelSize: 10
-                                    color: fanPresetMode === "Auto" ? "black" : "#cccccc"
-                                    Layout.alignment: Qt.AlignHCenter
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                fanPresetMode = "Laag"
+                                // Send command via WebSocket or appropriate method
+                                if (typeof backend !== 'undefined') {
+                                    backend.setFanPresetMode("fan.ecofan", "Laag")
                                 }
                             }
                         }
 
-                        // Low Mode Button
-                        Rectangle {
-                            Layout.fillWidth: true
-                            height: 50
-                            color: fanPresetMode === "Laag" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.1)
-                            radius: 8
-                            border.width: 1
-                            border.color: fanPresetMode === "Laag" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.2)
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    fanPresetMode = "Laag"
-                                    // Send command via WebSocket or appropriate method
-                                    if (typeof backend !== 'undefined') {
-                                        backend.setFanPresetMode("fan.ecofan", "Laag")
-                                    }
-                                }
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 2
+                            Text {
+                                text: "1"
+                                font.pixelSize: 16
+                                font.bold: true
+                                color: fanPresetMode === "Laag" ? "black" : textColor
+                                Layout.alignment: Qt.AlignHCenter
                             }
+                            Text {
+                                text: "Laag"
+                                font.pixelSize: 10
+                                color: fanPresetMode === "Laag" ? "black" : textColor
+                                opacity: fanPresetMode === "Laag" ? 1.0 : 0.7
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                        }
+                    }
 
-                            ColumnLayout {
-                                anchors.centerIn: parent
-                                spacing: 2
-                                Text {
-                                    text: "1"
-                                    font.pixelSize: 16
-                                    font.bold: true
-                                    color: fanPresetMode === "Laag" ? "black" : "white"
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                                Text {
-                                    text: "Laag"
-                                    font.pixelSize: 10
-                                    color: fanPresetMode === "Laag" ? "black" : "#cccccc"
-                                    Layout.alignment: Qt.AlignHCenter
+                    // High Mode Button
+                    Rectangle {
+                        Layout.fillWidth: true
+                        height: 50
+                        color: fanPresetMode === "Hoog" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.05)
+                        radius: 8
+
+                        MouseArea {
+                            anchors.fill: parent
+                            onClicked: {
+                                fanPresetMode = "Hoog"
+                                // Send command via WebSocket or appropriate method
+                                if (typeof backend !== 'undefined') {
+                                    backend.setFanPresetMode("fan.ecofan", "Hoog")
                                 }
                             }
                         }
 
-                        // High Mode Button
-                        Rectangle {
-                            Layout.fillWidth: true
-                            height: 50
-                            color: fanPresetMode === "Hoog" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.1)
-                            radius: 8
-                            border.width: 1
-                            border.color: fanPresetMode === "Hoog" ? "#00d4aa" : Qt.rgba(1, 1, 1, 0.2)
-
-                            MouseArea {
-                                anchors.fill: parent
-                                onClicked: {
-                                    fanPresetMode = "Hoog"
-                                    // Send command via WebSocket or appropriate method
-                                    if (typeof backend !== 'undefined') {
-                                        backend.setFanPresetMode("fan.ecofan", "Hoog")
-                                    }
-                                }
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 2
+                            Text {
+                                text: "2"
+                                font.pixelSize: 16
+                                font.bold: true
+                                color: fanPresetMode === "Hoog" ? "black" : textColor
+                                Layout.alignment: Qt.AlignHCenter
                             }
-
-                            ColumnLayout {
-                                anchors.centerIn: parent
-                                spacing: 2
-                                Text {
-                                    text: "2"
-                                    font.pixelSize: 16
-                                    font.bold: true
-                                    color: fanPresetMode === "Hoog" ? "black" : "white"
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
-                                Text {
-                                    text: "Hoog"
-                                    font.pixelSize: 10
-                                    color: fanPresetMode === "Hoog" ? "black" : "#cccccc"
-                                    Layout.alignment: Qt.AlignHCenter
-                                }
+                            Text {
+                                text: "Hoog"
+                                font.pixelSize: 10
+                                color: fanPresetMode === "Hoog" ? "black" : textColor
+                                opacity: fanPresetMode === "Hoog" ? 1.0 : 0.7
+                                Layout.alignment: Qt.AlignHCenter
                             }
                         }
                     }

@@ -47,6 +47,26 @@ Item {
             Layout.fillWidth: true
             Layout.preferredHeight: 250
 
+            // Power Button in top right corner
+            Button {
+                id: powerButton
+                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: 12
+                icon: "\u23FB"  // Power symbol
+                iconOnly: true
+                width: 40
+                height: 40
+
+                // Visual feedback based on player state
+                opacity: playerState === "off" ? 0.5 : 1.0
+
+                onClicked: {
+                    // Toggle the media player on/off
+                    backend.mediaTogglePower(mediaPlayerEntityId);
+               }
+            }
+
             // Album Art and Info Container
             ColumnLayout {
                 anchors.fill: parent

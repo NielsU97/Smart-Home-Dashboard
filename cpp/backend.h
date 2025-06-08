@@ -46,6 +46,7 @@ public:
     // Media player
     Q_INVOKABLE void subscribeToMediaPlayer(const QString &entityId);
     Q_INVOKABLE void mediaPlayPause(const QString &entityId);
+    Q_INVOKABLE void mediaTogglePower(const QString &entityId);
     Q_INVOKABLE void mediaPlay(const QString &entityId);
     Q_INVOKABLE void mediaPause(const QString &entityId);
     Q_INVOKABLE void mediaStop(const QString &entityId);
