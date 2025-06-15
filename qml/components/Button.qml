@@ -1,18 +1,16 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import QtQuick.Effects
 
 Rectangle {
     id: root
-
     // Common properties
     property string icon: ""           // For Unicode/text icons
     property url iconSource: ""        // For SVG/image icons
     property string buttonText: ""
     property bool iconOnly: true
     property bool isActive: false
-    property color iconColor: "white"  // Color for SVG icons - define default since textColor might not be available
+    property color iconColor: "white"  // Color for text icons
 
     // Signal for click event
     signal clicked()
@@ -37,7 +35,7 @@ Rectangle {
         Item {
             anchors.fill: parent
 
-            // SVG/Image icon
+            // SVG/Image icon - displayed as-is
             Image {
                 id: svgIcon
                 anchors.centerIn: parent
@@ -46,13 +44,6 @@ Rectangle {
                 height: Math.min(parent.height * 0.6, 24)
                 fillMode: Image.PreserveAspectFit
                 visible: root.iconSource.toString() !== ""
-
-                // For SVG color theming using Qt6 MultiEffect
-                layer.enabled: true
-                layer.effect: MultiEffect {
-                    colorization: 1.0
-                    colorizationColor: root.iconColor
-                }
             }
 
             // Fallback to text icon
@@ -77,7 +68,7 @@ Rectangle {
             spacing: 6
             width: parent.width - 12
 
-            // SVG/Image icon
+            // SVG/Image icon - displayed as-is
             Image {
                 id: svgIconWithText
                 source: root.iconSource
@@ -86,12 +77,6 @@ Rectangle {
                 fillMode: Image.PreserveAspectFit
                 visible: root.iconSource.toString() !== ""
                 Layout.alignment: Qt.AlignVCenter
-
-                layer.enabled: true
-                layer.effect: MultiEffect {
-                    colorization: 1.0
-                    colorizationColor: root.iconColor
-                }
             }
 
             // Fallback text icon
@@ -131,4 +116,3 @@ Rectangle {
         }
     }
 }
-
