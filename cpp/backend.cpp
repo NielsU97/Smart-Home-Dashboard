@@ -74,8 +74,6 @@ void Backend::onWebSocketMessageReceived(const QString &message) {
     }
 }
 
-
-
 void Backend::sendMessage(const QJsonObject &message) {
     if (!m_webSocket || m_webSocket->state() != QAbstractSocket::ConnectedState) {
         return;
@@ -194,6 +192,17 @@ void Backend::processEntityState(const QString &entityId, const QJsonObject &sta
     }
 }
 
+void Backend::callService(const QString &domain, const QString &service, const QJsonObject &serviceData) {
+    QJsonObject message;
+    message["id"] = static_cast<qint64>(m_messageId++);
+    message["type"] = "call_service";
+    message["domain"] = domain;
+    message["service"] = service;
+    message["service_data"] = serviceData;
+
+    sendMessage(message);
+}
+
 void Backend::processWeatherState(const QJsonObject &state) {
     QJsonObject attributes = state["attributes"].toObject();
     QString temperature = attributes["temperature"].toVariant().toString();
@@ -281,17 +290,6 @@ void Backend::processFanState(const QString &entityId, const QJsonObject &state)
     emit fanStateUpdated(entityId, stateValue, presetMode);
 }
 
-void Backend::callService(const QString &domain, const QString &service, const QJsonObject &serviceData) {
-    QJsonObject message;
-    message["id"] = static_cast<qint64>(m_messageId++);
-    message["type"] = "call_service";
-    message["domain"] = domain;
-    message["service"] = service;
-    message["service_data"] = serviceData;
-
-    sendMessage(message);
-}
-
 void Backend::toggleLight(const QString& entityId, bool on) {
     QJsonObject serviceData;
     serviceData["entity_id"] = entityId;
@@ -373,6 +371,12 @@ void Backend::mediaPlayMedia(const QString& entityId, const QString& mediaUrl, c
     serviceData["media_content_id"] = mediaUrl;
     serviceData["media_content_type"] = mediaType;
     callService("media_player", "play_media", serviceData);
+}
+
+void Backend::playSpotifyPlaylist(const QString& playlistId) {
+    QJsonObject serviceData;
+    serviceData["playlist_id"] = playlistId;
+    callService("script", "play_spotify_playlist", serviceData);
 }
 
 void Backend::mediaTogglePower(const QString& entityId) {

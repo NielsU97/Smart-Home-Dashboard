@@ -6,26 +6,28 @@ import '../components'
 Item {
     id: musicItem
 
-    // Properties to bind with Home Assistant data
-    property string mediaTitle: "" // Current playing media title
-    property string mediaArtist: "" // Current artist
-    property string playerState: "idle" // playing, paused, idle, off
-    property url albumArtUrl: "" // Album art URL
+    // Your existing properties...
+    property string mediaTitle: ""
+    property string mediaArtist: ""
+    property string playerState: "idle"
+    property url albumArtUrl: ""
     property int mediaVolume: 50
     property bool isMuted: false
-
-    // Entity ID for your Google Nest
     property string mediaPlayerEntityId: "media_player.google_nest"
 
+    // Spotify playlists data
+    property var spotifyPlaylists: [
+        { name: "Nederlands", id: "7mlnu1diy0G60IButOXyuq" },
+        { name: "Franstalig", id: "7hGPyd5evcDjgpviVBLJVw" },
+        { name: "Top 2000", id: "1DTzz7Nh2rJBnyFbjsH1Mh" },
+        { name: "Indie Folk", id: "2wTQSRAUo9zdqcOmvkqhWf" }
+    ]
 
-    // Connect to signals from backend
     Connections {
         target: backend
-
         function onMediaPlayerStateUpdated(entityId, state, title, artist, albumArt, volume, muted) {
             if (entityId !== mediaPlayerEntityId)
                 return;
-
             mediaTitle = title;
             mediaArtist = artist;
             playerState = state;
@@ -35,6 +37,126 @@ Item {
         }
     }
 
+    // Spotify Playlist Popup
+    QQC2.Popup {
+        id: spotifyPopup
+        anchors.centerIn: parent
+        width: 300
+        height: 400
+        modal: true
+        focus: true
+        closePolicy: QQC2.Popup.CloseOnEscape | QQC2.Popup.CloseOnPressOutside
+
+        // Ensure popup resets properly when opened
+        onOpened: {
+            listView.currentIndex = -1
+        }
+
+        background: Rectangle {
+            color: glassyBgColor
+            radius: 16
+        }
+
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: 20
+            spacing: 16
+            rotation: rotate
+
+            // Header
+            RowLayout {
+                Layout.fillWidth: true
+
+                QQC2.Label {
+                    text: "Selecteer Spotify Playlist"
+                    font.pixelSize: 18
+                    color: "white"
+                    Layout.fillWidth: true
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
+                }
+            }
+
+            // Playlist List
+            QQC2.ScrollView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                ListView {
+                    id: listView
+                    model: spotifyPlaylists
+                    spacing: 8
+                    clip: true
+
+                    delegate: Rectangle {
+                        width: ListView.view.width
+                        height: 50
+                        color: playlistMouseArea.containsMouse ? "#404040" : "transparent"
+                        radius: 8
+                        border.color: "#606060"
+                        border.width: 1
+
+                        RowLayout {
+                            anchors.fill: parent
+                            anchors.margins: 12
+                            spacing: 12
+
+                            // Spotify icon placeholder
+                            Rectangle {
+                                width: 26
+                                height: 26
+                                radius: 4
+                                color: "#1DB954" // Spotify green
+
+                                QQC2.Label {
+                                    anchors.centerIn: parent
+                                    text: "♪"
+                                    color: "white"
+                                    font.pixelSize: 14
+                                    font.bold: true
+                                }
+                            }
+
+                            // Playlist name
+                            QQC2.Label {
+                                text: modelData.name
+                                color: "white"
+                                font.pixelSize: 14
+                                Layout.fillWidth: true
+                            }
+
+                            // Play arrow
+                            QQC2.Label {
+                                text: "▶"
+                                color: "#1DB954"
+                                font.pixelSize: 16
+                            }
+                        }
+
+                        MouseArea {
+                            id: playlistMouseArea
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+
+                            onClicked: {
+                                backend.playSpotifyPlaylist(modelData.id);
+                                spotifyPopup.close();
+                            }
+                        }
+                    }
+                }
+            }
+
+            Button {
+                buttonText: "Cancel"
+                iconOnly: false
+                Layout.fillWidth: true
+                Layout.preferredHeight: 40
+                onClicked: spotifyPopup.close()
+            }
+        }
+    }
 
     ColumnLayout {
         anchors.fill: parent
@@ -53,18 +175,14 @@ Item {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.margins: 12
-                icon: "\u23FB"  // Power symbol
                 iconOnly: true
+                iconSource: "qrc:/SmartDashboard/assets/power.svg"
                 width: 40
                 height: 40
-
-                // Visual feedback based on player state
                 opacity: playerState === "off" ? 0.5 : 1.0
-
                 onClicked: {
-                    // Toggle the media player on/off
                     backend.mediaTogglePower(mediaPlayerEntityId);
-               }
+                }
             }
 
             // Album Art and Info Container
@@ -85,7 +203,7 @@ Item {
                         id: albumArtImage
                         anchors.fill: parent
                         anchors.margins: albumArtUrl != "" ? 0 : 20
-                        source: albumArtUrl != "" ? albumArtUrl : "" // Placeholder or actual album art
+                        source: albumArtUrl != "" ? albumArtUrl : ""
                         fillMode: Image.PreserveAspectCrop
                         visible: albumArtUrl != ""
                     }
@@ -154,53 +272,43 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     spacing: 10
 
-                    // Volume Down
                     Button {
-                        icon: "\u2212"  // Minus sign
+                        icon: "\u2212"
                         iconOnly: true
                         onClicked: {
-                            // Call Home Assistant service to decrease volume
                             backend.mediaVolumeDown(mediaPlayerEntityId);
                         }
                     }
 
-                    // Volume Up
                     Button {
-                        icon: "\u002B"  // Plus sign
+                        icon: "\u002B"
                         iconOnly: true
                         onClicked: {
-                            // Call Home Assistant service to increase volume
                             backend.mediaVolumeUp(mediaPlayerEntityId);
                         }
                     }
 
-                    // Previous Track
                     Button {
-                        icon: "\u25C0\u25C0"  // Double left arrow
+                        icon: "\u25C0\u25C0"
                         iconOnly: true
                         onClicked: {
-                            // Call Home Assistant service for previous track
                             backend.mediaPreviousTrack(mediaPlayerEntityId);
                         }
                     }
 
-                    // Next Track
                     Button {
-                        icon: "\u25B6\u25B6"  // Double right arrow
+                        icon: "\u25B6\u25B6"
                         iconOnly: true
                         onClicked: {
-                            // Call Home Assistant service for next track
                             backend.mediaNextTrack(mediaPlayerEntityId);
                         }
                     }
 
-                    // Play/Pause
                     Button {
                         id: playPauseButton
-                        icon: playerState === "playing" ? "\u25A0" : "\u25B6"  // Pause or Play icon
+                        icon: playerState === "playing" ? "\u25A0" : "\u25B6"
                         iconOnly: true
                         onClicked: {
-                            // Call Home Assistant service for play/pause
                             if (playerState === "playing") {
                                 backend.mediaPause(mediaPlayerEntityId);
                             } else {
@@ -216,12 +324,10 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     spacing: 10
 
-                    // NPO 2
                     Button {
                         buttonText: "NPO 2"
                         iconOnly: false
                         onClicked: {
-                            // Call Home Assistant service to play this radio station
                             backend.mediaPlayMedia(
                                 mediaPlayerEntityId,
                                 "http://icecast.omroep.nl/radio2-bb-mp3",
@@ -230,12 +336,10 @@ Item {
                         }
                     }
 
-                    // NPO 5
                     Button {
                         buttonText: "NPO 5"
                         iconOnly: false
                         onClicked: {
-                            // Call Home Assistant service to play this radio station
                             backend.mediaPlayMedia(
                                 mediaPlayerEntityId,
                                 "http://icecast.omroep.nl/radio5-bb-mp3",
@@ -244,26 +348,22 @@ Item {
                         }
                     }
 
-                    // Qmusic
                     Button {
                         buttonText: "Qmusic"
                         iconOnly: false
                         onClicked: {
-                            // Call Home Assistant service to play this radio station
                             backend.mediaPlayMedia(
                                 mediaPlayerEntityId,
-                                "https://stream.qmusic.nl/qmusic/mp3",
+                                "https://icecast-qmusicnl-cdp.triple-it.nl/Qmusic_nl_live.mp3?aw_0_1st.playerId=redirect",
                                 "music"
                             );
                         }
                     }
 
-                    // 538
                     Button {
                         buttonText: "538"
                         iconOnly: false
                         onClicked: {
-                            // Call Home Assistant service to play this radio station
                             backend.mediaPlayMedia(
                                 mediaPlayerEntityId,
                                 "http://playerservices.streamtheworld.com/api/livestream-redirect/RADIO538.mp3",
@@ -272,17 +372,12 @@ Item {
                         }
                     }
 
-                    // Spotify
+                    // Updated Spotify Button
                     Button {
                         buttonText: "Spotify"
                         iconOnly: false
                         onClicked: {
-                            // Call Home Assistant service to play this radio station
-                            backend.mediaPlayMedia(
-                                mediaPlayerEntityId,
-                                "spotify:playlist:7mlnu1diy0G60IButOXyuq",
-                                "music"
-                            );
+                            spotifyPopup.open();
                         }
                     }
                 }

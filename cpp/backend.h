@@ -56,6 +56,7 @@ public:
     Q_INVOKABLE void mediaVolumeDown(const QString &entityId);
     Q_INVOKABLE void mediaSetVolume(const QString &entityId, int volume);
     Q_INVOKABLE void mediaPlayMedia(const QString &entityId, const QString &mediaUrl, const QString &mediaType);
+    Q_INVOKABLE void playSpotifyPlaylist(const QString& playlistId);
 
     Q_INVOKABLE void setFanPresetMode(const QString& entityId, const QString& presetMode);
     Q_INVOKABLE void subscribeToFan(const QString& entityId);
